@@ -4,4 +4,5 @@ export interface StudentPrimitive {
   name: string
   email: string
   notes?: string
+  avatarUrl?: string
 }

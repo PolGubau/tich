@@ -1,11 +1,11 @@
-import { Student } from "./student"
 import { StudentId } from "./student-id"
+import { StudentPrimitive } from "./types"
 
 
 
 export interface StudentRepository {
-  findById(id: StudentId): Promise<Student | null>
-  save(student: Student): Promise<void>
+  findById(id: StudentId): Promise<StudentPrimitive | null>
+  save(student: StudentPrimitive): Promise<void>
   delete(id: StudentId): Promise<void>
-  findAll(): Promise<Student[]>
+  findAll(): Promise<StudentPrimitive[]>
 }

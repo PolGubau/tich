@@ -11,7 +11,8 @@ export class Student {
     readonly id: StudentId,
     private _name: string,
     private _email: StudentEmail,
-    private _notes?: string
+    private _notes?: string,
+    private _avatarUrl?: string
   ) {
     if (!_name.trim()) throw new Error("Name cannot be empty")
   }
@@ -28,6 +29,10 @@ export class Student {
     return this._notes
   }
 
+  get avatarUrl() {
+    return this._avatarUrl
+  }
+
   updateName(newName: string) {
     if (!newName.trim()) throw new Error("Name cannot be empty")
     this._name = newName
@@ -41,12 +46,16 @@ export class Student {
     this._notes = newNotes
   }
 
+  updateAvatarUrl(newAvatarUrl?: string) {
+    this._avatarUrl = newAvatarUrl
+  }
   toPrimitive(): StudentPrimitive {
     return {
       id: this.id.value,
       name: this._name,
       email: this._email.value,
-      notes: this._notes
+      notes: this._notes,
+      avatarUrl: this._avatarUrl
     }
   }
 }

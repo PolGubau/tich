@@ -23,7 +23,7 @@ export function StudentList({ students }: Props) {
       }
       keyExtractor={item => item.id}
       renderItem={({ item }) => (
-        <Link href={`/student/${item.id}`} asChild>
+        <Link href={{ pathname: "students/details/[id]", params: { id: item.id } }} asChild>
           <Pressable android_ripple={{ color: "#aaa" }}  >
             <View className='p-4 border-b border-gray-200 flex justify-between items-center flex-row px-8'>
               <View className='flex-row flex flex-1 items-center'>

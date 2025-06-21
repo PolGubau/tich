@@ -9,12 +9,14 @@ export const createStudent = (
   id: string,
   name: string,
   email: string,
-  notes?: string
+  notes?: string,
+  avatarUrl?: string
 ): Student => {
   return new Student(
     new StudentId(id),
     name,
     new StudentEmail(email),
-    notes
+    notes,
+    avatarUrl
   )
 }

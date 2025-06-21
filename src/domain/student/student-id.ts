@@ -3,7 +3,7 @@ export class StudentId {
     if (!value?.trim()) throw new Error("StudentId cannot be empty")
   }
 
-  equals(other: StudentId): boolean {
+  isEqual(other: StudentId): boolean {
     return this.value === other.value
   }
 }

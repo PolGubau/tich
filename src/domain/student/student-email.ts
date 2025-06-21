@@ -6,7 +6,7 @@ export class StudentEmail {
     if (!isValid) throw new Error("Invalid email format")
   }
 
-  equals(other: StudentEmail): boolean {
+  isEqual(other: StudentEmail): boolean {
     return this.value === other.value
   }
 }
