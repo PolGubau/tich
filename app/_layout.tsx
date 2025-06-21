@@ -1,10 +1,10 @@
-import { useColorScheme } from '@/src/shared/hooks/useColorScheme';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
-import "../../global.css";
+import { useColorScheme } from '~/shared/hooks/useColorScheme';
+import "~/shared/styles/global.css";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();

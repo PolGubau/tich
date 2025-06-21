@@ -7,6 +7,12 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "test": "jest ",
+    "testDebug": "jest -o --watch --coverage=false",
+    "testFinal": "jest",
+    "coverage": "jest --coverage --collectCoverageFrom='src/**/*.{js,jsx,ts,tsx}'",
+    "updateSnapshots": "jest -u --coverage=false",
+    "ci:test": "jest",
     "lint": "expo lint"
   },
   "dependencies": {
@@ -40,12 +46,24 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@testing-library/react-native": "^13.2.0",
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.0.10",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~9.2.0",
+    "eslint-plugin-testing-library": "^7.5.3",
+    "jest": "^30.0.2",
+    "jest-expo": "^53.0.7",
     "prettier-plugin-tailwindcss": "0.5.11",
+    "react-test-renderer": "19.0.0",
     "tailwindcss": "3.4.17",
-    "typescript": "~5.8.3"
+    "typescript": "~5.8.3",
+    "vitest": "^3.2.4"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/jest.setup.ts"
+    ]
   },
   "private": true
 }

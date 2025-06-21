@@ -1,18 +1,18 @@
 import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
+import { HapticTab } from '~/shared/components/HapticTab';
+import { IconSymbol } from '~/shared/components/ui/IconSymbol';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
+
 
 export default function TabLayout() {
- 
+
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
         tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
+        // tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect
