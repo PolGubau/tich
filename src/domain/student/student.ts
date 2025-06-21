@@ -2,6 +2,7 @@
 
 import { StudentEmail } from "./student-email"
 import { StudentId } from "./student-id"
+import { StudentPrimitive } from "./types"
 
 
 
@@ -40,7 +41,7 @@ export class Student {
     this._notes = newNotes
   }
 
-  toPrimitive() {
+  toPrimitive(): StudentPrimitive {
     return {
       id: this.id.value,
       name: this._name,

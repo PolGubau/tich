@@ -8,9 +8,10 @@ import { IconSymbol } from '~/shared/components/ui/IconSymbol';
 export default function TabLayout() {
 
   return (
+
     <Tabs
       screenOptions={{
-        headerShown: false,
+        // headerShown: false,
         tabBarButton: HapticTab,
         // tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
@@ -22,17 +23,20 @@ export default function TabLayout() {
         }),
       }}>
       <Tabs.Screen
-        name="index"
+        name="dashboard"
         options={{
-          title: 'Home',
+          headerShadowVisible: false,
+          headerTitle: 'Mis Clases',
+          title: 'Dashboard',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="students"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          headerShown: false,
+          title: 'Students',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person" color={color} />,
         }}
       />
     </Tabs>
