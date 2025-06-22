@@ -11,5 +11,5 @@ export type ClassPrimitive = {
   topic?: string
   packId?: string // si pertenece a un pack
   price?: number  // si no pertenece a un pack
-  notes?: string
+  notes: string
 }  

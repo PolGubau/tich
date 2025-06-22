@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Class } from "~/domain/class/class";
 import { createClass } from "~/domain/class/create-class";
-import { Id } from "~/domain/common/identifier";
+import { Id } from "~/domain/common/id";
 import { StudentPrimitive } from "~/domain/student/types";
 import { classRepository } from "../infra/repo";
 

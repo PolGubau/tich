@@ -2,38 +2,38 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { Link } from 'expo-router'
 import React from 'react'
 import { FlatList, Image, Pressable, RefreshControl, Text, View } from 'react-native'
-import { StudentPrimitive } from '~/domain/student/types'
+import { Student } from '~/domain/student/student'
 
 
 interface Props {
-  students: StudentPrimitive[]
+  students: Student[]
+  onRefresh?: () => void
+  isLoading: boolean
+
 }
-export function StudentList({ students }: Props) {
+export function StudentList({ students, onRefresh, isLoading }: Props) {
   return (
     <FlatList
       data={students}
       refreshControl={
         <RefreshControl
-          refreshing={false}
-          onRefresh={() => {
-            console.log('Refreshing...');  // Replace with actual refresh logic
-          }}
-        // colors={['#09f', '#f00']}
+          refreshing={isLoading}
+          onRefresh={onRefresh}
         />
       }
-      keyExtractor={item => item.id}
+      keyExtractor={item => item.id.value}
       renderItem={({ item }) => (
-        <Link href={{ pathname: "students/details/[id]", params: { id: item.id } }} asChild>
+        <Link href={{ pathname: "/students/[id]/details", params: { id: item.id.value } }} asChild>
           <Pressable android_ripple={{ color: "#aaa" }}  >
             <View className='p-4 border-b border-gray-200 flex justify-between items-center flex-row px-8'>
               <View className='flex-row flex flex-1 items-center'>
                 <Image
-                  source={{ uri: item.name }}
+                  source={{ uri: item.avatarUrl }}
                   className='w-12 h-12 bg-neutral-200 rounded-full mr-4'
                 />
                 <View className=''>
-                  <Text className='text-lg font-semibold'>{item.name}</Text>
-                  <Text className='text-gray-500'>{item.email}</Text>
+                  <Text className='text-lg font-semibold'>{item.name.value}</Text>
+                  <Text className='text-gray-500'>{item.email.value}</Text>
                 </View>
               </View>
 

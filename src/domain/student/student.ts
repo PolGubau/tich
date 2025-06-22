@@ -1,6 +1,7 @@
 
-import { Id } from "../common/identifier"
-import { StudentPrimitive } from "./types"
+import { Id } from "../common/id"
+import { IdGenerator } from "../common/id-generator"
+import { StudentCreatePrimitive, StudentPrimitive } from "./types"
 import { StudentEmail } from "./validators/student-email"
 import { StudentName } from "./validators/student-name"
 
@@ -56,10 +57,20 @@ export class Student {
       avatarUrl: this._avatarUrl
     }
   }
+  /** Factory que garantiza id válido y crea instancia */
 
-  static fromPrimitive(primitive: StudentPrimitive): Student {
+  static create(primitive: StudentCreatePrimitive,
+    idGen?: IdGenerator): Student {
+    const pId = primitive.id
+
+    if (!pId && !idGen) {
+      throw new Error("IdGenerator is required when id is not provided")
+    }
+
+    const id = pId ? new Id(pId) : idGen!.generate()
+
     return new Student(
-      new Id(primitive.id),
+      id,
       new StudentName(primitive.name),
       new StudentEmail(primitive.email),
       primitive.notes,

@@ -1,20 +1,30 @@
+import { Stack } from 'expo-router';
 import { Text } from 'react-native';
 import { MainLayout } from '~/shared/layouts/main-layout';
 
 export default function DashboardScreen() {
   return (
+    <>
+      <Stack.Screen
+        options={{
+          title: 'Dashboard',
+          headerShown: true,
+          headerShadowVisible: false,
+        }}
+      />
+      <MainLayout>
 
-    <MainLayout>
-      <Text> 🔹 Total alumnos
 
-        🔹 Total ganado este mes
+        <Text> 🔹 Total alumnos
 
-        🔹 Horas trabajadas esta semana
+          🔹 Total ganado este mes
 
-        🔹 Alumnos con deudas
+          🔹 Horas trabajadas esta semana
 
-        🔹 Botón rápido: “Añadir clase”</Text>
-    </MainLayout>
+          🔹 Alumnos con deudas
 
+          🔹 Botón rápido: “Añadir clase”</Text>
+      </MainLayout>
+    </>
   );
 }

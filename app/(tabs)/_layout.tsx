@@ -11,9 +11,8 @@ export default function TabLayout() {
 
     <Tabs
       screenOptions={{
-        // headerShown: false,
+        headerShown: false,
         tabBarButton: HapticTab,
-        // tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect
@@ -25,8 +24,6 @@ export default function TabLayout() {
       <Tabs.Screen
         name="dashboard"
         options={{
-          headerShadowVisible: false,
-          headerTitle: 'Mis Clases',
           title: 'Dashboard',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
         }}
@@ -34,7 +31,6 @@ export default function TabLayout() {
       <Tabs.Screen
         name="students"
         options={{
-          headerShown: false,
           title: 'Students',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="person" color={color} />,
         }}

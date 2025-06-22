@@ -1,7 +1,7 @@
 import { Stack, useLocalSearchParams } from 'expo-router'
 import React from 'react'
 import { ActivityIndicator, View } from 'react-native'
-import { useStudent } from '~/features/student/model/useStudent'
+import { useStudent } from '~/features/student/model/use-student'
 import StudentDetails from '~/features/student/ui/details/student-details'
 
 export default function DetailsScreen() {

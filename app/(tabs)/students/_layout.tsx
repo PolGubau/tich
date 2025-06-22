@@ -6,12 +6,12 @@ export default function Layout() {
 
   return (
 
-    <Stack>
-      <Stack.Screen name="list" options={{
-        headerShown: false,
+    <Stack screenOptions={{
 
-      }} />
-      <Stack.Screen name="details" />
+      headerShadowVisible: false,
+    }}>
+      <Stack.Screen name="list" options={{ headerTitle: 'Students' }} />
+      <Stack.Screen name="[id]" options={{ headerShown: false }} />
     </Stack>
 
   );

@@ -1,4 +1,4 @@
-import { Id } from "~/domain/common/identifier"
+import { Id } from "~/domain/common/id"
 import { StudentRepository } from "~/domain/student/student-repository"
 import { StudentPrimitive } from "~/domain/student/types"
 import { studentListMock } from "../__mocks__/studentList.mock"

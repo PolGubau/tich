@@ -9,6 +9,7 @@ export const classListMock: ClassPrimitive[] = [
     durationMinutes: 60,
     topic: "HTML",
     price: 19,
+    notes: "First class on HTML basics",
   },
   {
     id: "class-2",
@@ -17,6 +18,7 @@ export const classListMock: ClassPrimitive[] = [
     durationMinutes: 60,
     topic: "Python",
     price: 19,
+    notes: "hemos visto los selectores y las propiedades más comunes, no hemos dado tiempo a ver flexbox ni ha entendido a usarlo pero ha entendido el concepto de caja flexible",
   },
   {
     id: "class-3",
@@ -25,5 +27,6 @@ export const classListMock: ClassPrimitive[] = [
     durationMinutes: 30,
     topic: "CSS",
     price: 19,
+    notes: "hemos visto los selectores y las propiedades más comunes, no hemos dado tiempo a ver flexbox ni ha entendido a usarlo pero ha entendido el concepto de caja flexible",
   },
 ];

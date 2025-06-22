@@ -1,5 +1,5 @@
 import { AbstractRepository } from "../common/abstracts/repository";
-import { Id } from "../common/identifier";
+import { Id } from "../common/id";
 import { ClassPrimitive } from "./types";
 
 

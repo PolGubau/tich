@@ -1,4 +1,4 @@
-import { Id } from "../common/identifier";
+import { Id } from "../common/id";
 import { Price } from "../common/price";
 import { ClassPrimitive } from "./types";
 
@@ -8,10 +8,10 @@ export class Class {
     readonly studentId: Id,
     private _date: Date,
     private _durationMinutes: number,
+    private _notes: string,
     private _topic?: string,
     private _packId?: Id, // si pertenece a un pack
     private _price?: Price, // si no pertenece a un pack
-    private _notes?: string
   ) {
     if (!_date) throw new Error("Date cannot be empty");
     if (_durationMinutes <= 0) throw new Error("Duration must be greater than zero");
@@ -66,7 +66,7 @@ export class Class {
     this._price = newPrice;
   }
 
-  updateNotes(newNotes?: string) {
+  updateNotes(newNotes: string) {
     this._notes = newNotes;
   }
 
@@ -90,10 +90,10 @@ export class Class {
       new Id(primitive.studentId),
       new Date(primitive.date),
       primitive.durationMinutes,
+      primitive.notes,
       primitive.topic,
       primitive.packId ? new Id(primitive.packId) : undefined,
       primitive.price ? new Price(primitive.price) : undefined,
-      primitive.notes
     );
   }
 }

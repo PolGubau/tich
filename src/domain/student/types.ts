@@ -6,3 +6,4 @@ export interface StudentPrimitive {
   notes?: string
   avatarUrl?: string
 }
+export interface StudentCreatePrimitive extends Omit<StudentPrimitive, "id"> { id?: string }

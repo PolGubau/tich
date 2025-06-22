@@ -1,6 +1,6 @@
 import { CLassRepository } from "~/domain/class/class-repository"
 import { ClassPrimitive } from "~/domain/class/types"
-import { Id } from "~/domain/common/identifier"
+import { Id } from "~/domain/common/id"
 import { classListMock } from "../__mocks__/classList.mock"
 
 export const findClassByStudentId: CLassRepository["findByStudentId"] = async (studentId) => {
