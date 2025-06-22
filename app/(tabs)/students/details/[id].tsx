@@ -7,7 +7,7 @@ import StudentDetails from '~/features/student/ui/details/student-details'
 export default function DetailsScreen() {
   const { id } = useLocalSearchParams()
 
-  const { student } = useStudent(id as string)
+  const { student, classes } = useStudent(id as string)
   if (!student) {
     return (
       <View>
@@ -30,7 +30,7 @@ export default function DetailsScreen() {
           title: "Details",
         }}
       />
-      <StudentDetails student={student} />
+      <StudentDetails student={student} classes={classes} />
 
     </View>
   )
