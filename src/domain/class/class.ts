@@ -9,9 +9,11 @@ export class Class {
     private _date: Date,
     private _durationMinutes: number,
     private _notes: string,
-    private _topic?: string,
+    private _topic: string,
+    private _price: Price, // si no pertenece a un pack
     private _packId?: Id, // si pertenece a un pack
-    private _price?: Price, // si no pertenece a un pack
+    readonly createdAt?: Date,
+    readonly updatedAt?: Date,
   ) {
     if (!_date) throw new Error("Date cannot be empty");
     if (_durationMinutes <= 0) throw new Error("Duration must be greater than zero");
@@ -41,6 +43,7 @@ export class Class {
     return this._notes;
   }
 
+
   updateDate(newDate: Date) {
     if (!newDate) throw new Error("Date cannot be empty");
     this._date = newDate;
@@ -51,7 +54,7 @@ export class Class {
     this._durationMinutes = newDuration;
   }
 
-  updateTopic(newTopic?: string) {
+  updateTopic(newTopic: string) {
     this._topic = newTopic;
   }
 
@@ -59,7 +62,8 @@ export class Class {
     this._packId = newPackId;
   }
 
-  updatePrice(newPrice?: Price) {
+
+  updatePrice(newPrice: Price) {
     if (newPrice && !(newPrice instanceof Price)) {
       throw new Error("Price must be an instance of Price class");
     }
@@ -78,9 +82,11 @@ export class Class {
       date: this._date.toISOString(),
       durationMinutes: this._durationMinutes,
       topic: this._topic,
-      packId: this._packId?.value,
-      price: this._price?.value,
-      notes: this._notes
+      price: this._price.value,
+      packId: this._packId?.value || null,
+      notes: this._notes,
+      createdAt: this.createdAt || new Date(),
+      updatedAt: this.updatedAt || new Date(),
     };
   }
 
@@ -92,8 +98,9 @@ export class Class {
       primitive.durationMinutes,
       primitive.notes,
       primitive.topic,
-      primitive.packId ? new Id(primitive.packId) : undefined,
-      primitive.price ? new Price(primitive.price) : undefined,
+      new Price(primitive.price),
+      primitive.packId ? new Id(primitive.packId) : undefined, primitive.createdAt ? new Date(primitive.createdAt) : undefined,
+      primitive.updatedAt ? new Date(primitive.updatedAt) : undefined,
     );
   }
 }

@@ -1,9 +1,7 @@
 import { useNavigation } from "expo-router";
 import { useCallback, useState } from "react";
-import { createStudent } from "~/domain/student/create-student";
 import { StudentCreatePrimitive } from "~/domain/student/types";
 import { Status } from "~/shared/types/basics";
-import { UUIDGenerator } from "~/shared/utils/uuid-generator";
 import { studentRepository } from "../infra/repo";
 
 export const useCreateStudent = () => {
@@ -12,12 +10,13 @@ export const useCreateStudent = () => {
   const [newStudent, setNewStudent] = useState<StudentCreatePrimitive>({
     name: "",
     email: "",
+    avatarUrl: null,
+    notes: null,
   });
   const create = useCallback(async (newValues: StudentCreatePrimitive) => {
     setStatus("loading");
     try {
-      const student = createStudent(newValues, new UUIDGenerator()).toPrimitive();
-      const response = await studentRepository.save(student);
+      const response = await studentRepository.create(newValues);
 
       setStatus("success");
 

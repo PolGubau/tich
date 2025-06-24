@@ -9,7 +9,7 @@ export const ClassList = ({ classes }: Props) => {
   return (
     <FlatList
       data={classes}
-      keyExtractor={(item) => item.id.value}
+      keyExtractor={(item) => item.id.value.toString()}
       renderItem={({ item }) => {
         const parsedDate = item.date.toLocaleDateString("es-ES")
         return (

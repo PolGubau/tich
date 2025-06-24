@@ -9,7 +9,7 @@ import { MainLayout } from '~/shared/layouts/main-layout'
 export default function EditStudentScreen() {
   const { id } = useLocalSearchParams()
 
-  const { student, update, studentStatus } = useStudent(id as string)
+  const { student, update, studentStatus } = useStudent(Number(id))
 
   const isRefreshing = studentStatus === 'loading'
 

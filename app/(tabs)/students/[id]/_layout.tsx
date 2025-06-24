@@ -3,20 +3,17 @@ import 'react-native-reanimated';
 import "~/shared/styles/global.css";
 
 export default function Layout() {
-
   return (
-
-    <Stack>
+    <Stack screenOptions={{
+      headerShadowVisible: false
+    }}>
       <Stack.Screen name="details" options={{
-        // headerShown: false,
-        headerShadowVisible: false,
         title: 'Student Details',
       }} />
       <Stack.Screen name="edit" options={{
-        headerShadowVisible: false,
         title: 'Edit Student',
       }} />
+      <Stack.Screen name="add-class" />
     </Stack>
-
   );
 }

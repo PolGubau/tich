@@ -1,4 +1,3 @@
-import { uuid } from "~/shared/utils/uuid-generator"
 import { Student } from "./student"
 import { StudentPrimitive } from "./types"
 
@@ -15,7 +14,7 @@ export const createStudents = (
 
   for (const s of students) {
     try {
-      valid.push(Student.create(s, uuid))
+      valid.push(Student.create(s))
     } catch (e) {
       errors.push({ input: s, error: e as Error })
     }

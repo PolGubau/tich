@@ -1,3 +1,4 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Class } from "~/domain/class/class";
 import { createClass } from "~/domain/class/create-class";
@@ -12,9 +13,11 @@ export const useClassByStudent = (id: StudentPrimitive["id"]) => {
 
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+
+  const load = async (isActive: boolean) => {
     setStatus("loading");
-    classRepository.findByStudentId(new Id(id)).then((classData) => {
+    try {
+      const classData = await classRepository.findByStudentId(new Id(id));
       if (classData && classData.length > 0) {
         setClasses(classData.map((c) => {
           return createClass(c);
@@ -22,13 +25,31 @@ export const useClassByStudent = (id: StudentPrimitive["id"]) => {
       } else {
         setError("No classes found for this student");
       }
-    }).catch((err) => {
+    } catch (err) {
       setError("Failed to fetch class data");
       console.error(err);
-    }).finally(() => {
+    } finally {
       setStatus("idle");
-    });
+    }
+  }
+
+  useEffect(() => {
+    load(true);
   }, [id]);
 
+  useFocusEffect(
+    () => {
+      let isActive = true;
+      load(isActive);
+      return () => {
+        isActive = false;
+        setClasses([]);
+        setStatus("idle");
+        setError(null);
+      }
+    }
+  );
+
+
   return { classes, status, error };
-}
+} 

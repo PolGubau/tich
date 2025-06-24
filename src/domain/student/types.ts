@@ -1,9 +1,9 @@
 
 export interface StudentPrimitive {
-  id: string
+  id: number
   name: string
   email: string
-  notes?: string
-  avatarUrl?: string
+  notes: string | null
+  avatarUrl: string | null
 }
-export interface StudentCreatePrimitive extends Omit<StudentPrimitive, "id"> { id?: string }
+export interface StudentCreatePrimitive extends Omit<StudentPrimitive, "id"> { id?: number }

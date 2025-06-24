@@ -21,14 +21,14 @@ export function StudentList({ students, onRefresh, isLoading }: Props) {
           onRefresh={onRefresh}
         />
       }
-      keyExtractor={item => item.id.value}
+      keyExtractor={item => item.id.value.toString()}
       renderItem={({ item }) => (
         <Link href={{ pathname: "/students/[id]/details", params: { id: item.id.value } }} asChild>
           <Pressable android_ripple={{ color: "#aaa" }}  >
             <View className='p-4 border-b border-gray-200 flex justify-between items-center flex-row px-8'>
               <View className='flex-row flex flex-1 items-center'>
                 <Image
-                  source={{ uri: item.avatarUrl }}
+                  source={{ uri: item.avatarUrl ?? undefined }}
                   className='w-12 h-12 bg-neutral-200 rounded-full mr-4'
                 />
                 <View className=''>

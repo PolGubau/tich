@@ -36,8 +36,8 @@ export const StudentForm = ({ initialValues, onSubmit, isLoading }: Props) => {
       ...initialValues,
       name: name.trim(),
       email: email.trim(),
-      notes: notes.trim() || undefined,
-      avatarUrl: avatarUrl.trim() || undefined,
+      notes: notes.trim() || null,
+      avatarUrl: avatarUrl.trim() || null,
     }
 
     onSubmit(updated)

@@ -1,12 +1,7 @@
-import { StudentRepository } from "~/domain/student/student-repository"
-import { studentListMock } from "../__mocks__/studentList.mock"
+import { db } from "db/utils";
+import { StudentRepository } from "~/domain/student/student-repository";
 
 export const findAllStudents: StudentRepository["findAll"] = async () => {
-  // currently returns the mock in a fake async function
-
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(studentListMock)
-    }, 1000) // Simulate network delay
-  })
+  const result = await db.query["studentsTable"].findMany()
+  return result
 }

@@ -1,3 +1,4 @@
+import { useFocusEffect } from "@react-navigation/native"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { createStudents } from "~/domain/student/create-student"
 import { Student } from "~/domain/student/student"
@@ -30,6 +31,20 @@ export const useStudents = () => {
     fetchStudents()
   }, [fetchStudents])
 
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchStudents();
+      return () => {
+        setStudents([]);
+        setStatus("idle");
+        setError(null);
+        setQuery("");
+      }
+    }, [])
+  )
+
+
   const filteredStudents = useMemo(() => {
     if (!query.trim()) return students
     const lower = query.toLowerCase()
@@ -43,5 +58,6 @@ export const useStudents = () => {
     reload: fetchStudents,
     query,
     setQuery,
+    studentsAmount: filteredStudents.length,
   }
 }

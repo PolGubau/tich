@@ -1,7 +1,6 @@
 
 import { Id } from "../common/id"
-import { IdGenerator } from "../common/id-generator"
-import { StudentCreatePrimitive, StudentPrimitive } from "./types"
+import { StudentPrimitive } from "./types"
 import { StudentEmail } from "./validators/student-email"
 import { StudentName } from "./validators/student-name"
 
@@ -12,8 +11,8 @@ export class Student {
     readonly id: Id,
     private _name: StudentName,
     private _email: StudentEmail,
-    private _notes?: string,
-    private _avatarUrl?: string
+    private _notes: string | null = null,
+    private _avatarUrl: string | null = null
   ) {
   }
 
@@ -41,11 +40,11 @@ export class Student {
     this._email = newEmail
   }
 
-  updateNotes(newNotes?: string): void {
+  updateNotes(newNotes: StudentPrimitive["notes"]): void {
     this._notes = newNotes
   }
 
-  updateAvatarUrl(newAvatarUrl?: string): void {
+  updateAvatarUrl(newAvatarUrl: StudentPrimitive["avatarUrl"]): void {
     this._avatarUrl = newAvatarUrl
   }
   toPrimitive(): StudentPrimitive {
@@ -59,18 +58,13 @@ export class Student {
   }
   /** Factory que garantiza id válido y crea instancia */
 
-  static create(primitive: StudentCreatePrimitive,
-    idGen?: IdGenerator): Student {
+  static create(primitive: StudentPrimitive): Student {
     const pId = primitive.id
 
-    if (!pId && !idGen) {
-      throw new Error("IdGenerator is required when id is not provided")
-    }
 
-    const id = pId ? new Id(pId) : idGen!.generate()
 
     return new Student(
-      id,
+      new Id(pId),
       new StudentName(primitive.name),
       new StudentEmail(primitive.email),
       primitive.notes,

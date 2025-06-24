@@ -9,10 +9,15 @@ import { MainLayout } from '~/shared/layouts/main-layout';
 export default function StudentsScreen() {
   const { students, reload, status, setQuery } = useStudents();
 
+
+
+
+
   const isInitialLoading = status === 'loading' && students.length === 0
   const isRefreshing = status === 'loading' && students.length > 0
 
   const navigation = useNavigation()
+
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -39,6 +44,7 @@ export default function StudentsScreen() {
   return (
 
     <MainLayout>
+
       <Link href={{ pathname: "/students/create" }} asChild>
         <Pressable android_ripple={{ color: "#aaa" }}  >
           <View className='p-4 border-b border-gray-200 flex justify-between items-center flex-row px-8'>

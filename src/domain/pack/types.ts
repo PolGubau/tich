@@ -4,6 +4,5 @@ export interface PackPrimitive {
   purchaseDate: string // ISO
   totalClasses: number
   totalPrice: number
-  classIds: string[]
   notes?: string
 }

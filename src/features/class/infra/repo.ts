@@ -1,17 +1,19 @@
 import { CLassRepository } from "~/domain/class/class-repository"
+import { createClass } from "./create"
 import { deleteClass } from "./delete"
 import { findAllClasses } from "./find-all"
 import { findClassById } from "./find-by-id"
-import { findClassByPackId } from "./find-by-pack-id"
-import { findClassByStudentId } from "./find-by-student-id"
-import { saveClass } from "./save"
+import { findClassesByPackId } from "./find-by-pack-id"
+import { findClassesByStudentId } from "./find-by-student-id"
+import { updateClass } from "./update"
 
 
 export const classRepository: CLassRepository = {
   findAll: findAllClasses,
   findById: findClassById,
   delete: deleteClass,
-  save: saveClass,
-  findByStudentId: findClassByStudentId,
-  findByPackId: findClassByPackId
+  updateById: updateClass,
+  create: createClass,
+  findByStudentId: findClassesByStudentId,
+  findByPackId: findClassesByPackId
 }
