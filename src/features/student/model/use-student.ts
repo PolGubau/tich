@@ -6,6 +6,7 @@ import { createStudent } from "~/domain/student/create-student";
 import { Student } from "~/domain/student/student";
 import { StudentPrimitive } from "~/domain/student/types";
 import { useClassByStudent } from "~/features/class/model/useClassByStudent";
+import { abstractLoad } from "~/shared/infra/helpers/abstractLoad";
 import { Status } from "~/shared/types/basics";
 import { studentRepository } from "../infra/repo";
 
@@ -21,44 +22,42 @@ export const useStudent = (id: StudentPrimitive["id"]) => {
     status: classStatus,
     error: classError,
   } = useClassByStudent(id);
-  const load = useCallback(async (isActive: boolean) => {
-    setStatus("loading");
-    try {
-      const data = await studentRepository.findById(new Id(id));
-      if (!data) {
-        if (isActive) {
-          setError("Student not found");
-          setStatus("error");
-        }
-        return;
-      }
-      const student = createStudent(data);
-      if (isActive) {
-        setStudent(student);
-        setStatus("success");
-      }
-    } catch (e) {
-      if (isActive) {
-        setError("Failed to fetch student data");
-        setStatus("error");
-        console.error(e);
-      }
+
+
+
+
+
+  const load = useCallback(async () => {
+    const data = await abstractLoad({
+      id: new Id(id),
+      getter: studentRepository.findById,
+      setError,
+      setStatus,
+    });
+    if (!data) {
+      return;
     }
+    const student = createStudent(data);
+    setStudent(student);
+    setStatus("success");
+
   }, [id]);
+
+
   useEffect(() => {
     let isActive = true;
-    load(isActive);
-    return () => { isActive = false };
+    isActive && load();
+    return () => {
+      isActive = false;
+      setStudent(null);
+      setStatus("idle");
+      setError(null);
+    }
   }, [id]);
 
   useFocusEffect(
     useCallback(() => {
-      load(true);
-      return () => {
-        setStudent(null);
-        setStatus("idle");
-        setError(null);
-      }
+      load();
     }, [])
   )
 

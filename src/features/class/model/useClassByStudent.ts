@@ -1,54 +1,55 @@
 import { useFocusEffect } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Class } from "~/domain/class/class";
 import { createClass } from "~/domain/class/create-class";
 import { Id } from "~/domain/common/id";
 import { StudentPrimitive } from "~/domain/student/types";
+import { abstractLoad } from "~/shared/infra/helpers/abstractLoad";
+import { Status } from "~/shared/types/basics";
 import { classRepository } from "../infra/repo";
 
 export const useClassByStudent = (id: StudentPrimitive["id"]) => {
 
   const [classes, setClasses] = useState<Class[]>([]);
-  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [status, setStatus] = useState<Status>("idle");
 
   const [error, setError] = useState<string | null>(null);
 
 
-  const load = async (isActive: boolean) => {
-    setStatus("loading");
-    try {
-      const classData = await classRepository.findByStudentId(new Id(id));
-      if (classData && classData.length > 0) {
-        setClasses(classData.map((c) => {
-          return createClass(c);
-        }));
-      } else {
-        setError("No classes found for this student");
-      }
-    } catch (err) {
-      setError("Failed to fetch class data");
-      console.error(err);
-    } finally {
-      setStatus("idle");
+  const load = useCallback(async () => {
+    const data = await abstractLoad({
+      id: new Id(id),
+      getter: classRepository.findByStudentId,
+      setError,
+      setStatus,
+    });
+    if (!data?.length) {
+      setError("No classes found for this student");
+      setStatus("error");
+      return;
     }
-  }
+    setClasses(data.map((c) => {
+      return createClass(c);
+    }));
+
+  }, [id]);
 
   useEffect(() => {
-    load(true);
+    let isActive = true;
+    isActive && load();
+    return () => {
+      isActive = false;
+      setClasses([]);
+      setStatus("idle");
+      setError(null);
+    }
   }, [id]);
 
   useFocusEffect(
-    () => {
-      let isActive = true;
-      load(isActive);
-      return () => {
-        isActive = false;
-        setClasses([]);
-        setStatus("idle");
-        setError(null);
-      }
-    }
-  );
+    useCallback(() => {
+      load();
+    }, [])
+  )
 
 
   return { classes, status, error };

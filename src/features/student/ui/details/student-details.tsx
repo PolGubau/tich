@@ -40,7 +40,7 @@ export default function StudentDetails({ student, classes, onDelete }: Props) {
                 <MaterialIcons name='edit' size={14} color='#2563eb' />
 
                 <Text className='text-blue-500'>
-                  Editar
+                  Edit
                 </Text>
               </Pressable>
             </Link>
@@ -52,14 +52,14 @@ export default function StudentDetails({ student, classes, onDelete }: Props) {
 
       <View className='mt-6'>
         <View className="flex-row justify-between items-center gap-1 mb-4">
-          <Text className='text-lg font-semibold'>Clases hechas</Text>
+          <Text className='text-lg font-semibold'>Done classes</Text>
           <Link href={{
             pathname: '/students/[id]/add-class',
             params: { id: student.id.value }
           }} asChild>
             <Pressable className='flex-row items-center gap-1 pt-2'>
               <MaterialIcons name='add' size={14} color='#2563eb' />
-              <Text className='text-blue-500'>Agregar</Text>
+              <Text className='text-blue-500'>Add</Text>
             </Pressable>
           </Link>
         </View>

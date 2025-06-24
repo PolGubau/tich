@@ -75,7 +75,7 @@ export const StudentForm = ({ initialValues, onSubmit, isLoading }: Props) => {
           </Pressable>
         </View>
 
-        <Text className="font-semibold mb-1">Nombre</Text>
+        <Text className="font-semibold mb-1">Name</Text>
         <TextInput editable={!isLoading}
           value={name}
           onChangeText={setName}
@@ -93,12 +93,12 @@ export const StudentForm = ({ initialValues, onSubmit, isLoading }: Props) => {
           className="border border-neutral-500/60 px-3 py-2 text-lg rounded-lg mb-4"
         />
 
-        <Text className="font-semibold mb-1">Notas</Text>
+        <Text className="font-semibold mb-1">Notes</Text>
         <TextInput editable={!isLoading}
           value={notes}
           onChangeText={setNotes}
           textAlignVertical="top"
-          placeholder="El estudiante quiere aprender..."
+          placeholder="The student wants to learn..."
           multiline
           numberOfLines={6}
           className="border border-neutral-500/60 px-3 py-2 text-base rounded-lg mb-4 min-h-20"
@@ -108,7 +108,7 @@ export const StudentForm = ({ initialValues, onSubmit, isLoading }: Props) => {
 
 
 
-        <Button title={isLoading ? "Guardando..." : "Guardar"}
+        <Button title={isLoading ? "Saving..." : "Save"}
           onPress={handleSubmit} disabled={isLoading || !name.trim() || !email.trim()}
         />
         {error && (
