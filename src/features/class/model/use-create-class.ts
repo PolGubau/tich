@@ -10,6 +10,7 @@ export const useCreateClass = () => {
     price: 19,
     durationMinutes: 60,
     notes: "",
+    isPaid: false,
     date: new Date().toISOString(),
     packId: null,
     studentId: 0,

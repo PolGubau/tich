@@ -1,6 +1,6 @@
 import { PartialClassWithDefinedStudent } from 'app/(tabs)/students/[id]/add-class';
 import React, { useState } from 'react';
-import { ActivityIndicator, Button, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Button, KeyboardAvoidingView, Platform, ScrollView, Switch, Text, TextInput, View } from 'react-native';
 import DateInput from '~/shared/ui/date-input';
 import TimeInput from '~/shared/ui/time-input';
 
@@ -15,6 +15,7 @@ type Props = {
 export function BaseClassForm({ initialValues, onSubmit, isLoading }: Props) {
   const [topic, setTopic] = useState(initialValues.topic ?? '')
   const [notes, setNotes] = useState(initialValues.notes ?? '')
+  const [isPaid, setIsPaid] = useState(initialValues.isPaid ?? false)
   const [duration, setDuration] = useState(initialValues.durationMinutes ?? 0)
   const [price, setPrice] = useState<number>(initialValues.price ?? 0)
 
@@ -54,6 +55,7 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading }: Props) {
       date: combinedDate.toISOString(), // Combine date and time
       durationMinutes: duration,
       price: price,
+      isPaid: isPaid,
       topic: topic.trim(),
       notes: notes.trim(),
     }
@@ -68,12 +70,12 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading }: Props) {
     >
       <ScrollView>
 
-
-
         <Text className="font-semibold mb-1">Topic</Text>
         <TextInput editable={!isLoading}
           value={topic}
           onChangeText={setTopic}
+          autoCapitalize="sentences"
+          autoCorrect={false}
           placeholder="Topic of the class"
           className="border border-neutral-500/60 px-3 py-2 text-lg rounded-lg mb-4"
         />
@@ -89,6 +91,16 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading }: Props) {
           placeholder='Price of the class (per hour)'
           className="border border-neutral-500/60 px-3 py-2 text-lg rounded-lg mb-4"
         />
+
+        <View className="flex-row items-center justify-between mb-4">
+          <Text className="font-semibold mb-1">Is already paid?</Text>
+
+          <Switch
+            value={isPaid}
+            onValueChange={setIsPaid}
+          />
+        </View>
+
         <Text className="font-semibold mb-1">Duration (In minutes)</Text>
         <TextInput
           value={duration.toString()}

@@ -3,6 +3,7 @@ import { db } from "db/utils"
 import { CLassRepository } from "~/domain/class/class-repository"
 import { Id } from "~/domain/common/id"
 import { findClassById } from "./find-by-id"
+import { createClassMapper } from "./mappers/primitive-to-entity"
 
 
 
@@ -11,7 +12,8 @@ import { findClassById } from "./find-by-id"
 
 
 export const createClass: CLassRepository["create"] = async (classItem) => {
-  const newClass = await db.insert(classesTable).values(classItem)
+
+  const newClass = await db.insert(classesTable).values(createClassMapper(classItem))
   if (!newClass || !newClass.lastInsertRowId) {
     throw new Error("Failed to create class, no ID returned")
   }

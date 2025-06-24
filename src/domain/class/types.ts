@@ -12,6 +12,7 @@ export type ClassPrimitive = DefaultDates & {
   date: string // ISO
   durationMinutes: number
   topic: string
+  isPaid: boolean
   packId: PackEntity["id"] | null
   price: number
   notes: string

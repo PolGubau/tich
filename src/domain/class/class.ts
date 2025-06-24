@@ -11,6 +11,7 @@ export class Class {
     private _notes: string,
     private _topic: string,
     private _price: Price, // si no pertenece a un pack
+    private _isPaid: boolean,
     private _packId?: Id, // si pertenece a un pack
     readonly createdAt?: Date,
     readonly updatedAt?: Date,
@@ -29,6 +30,9 @@ export class Class {
 
   get topic() {
     return this._topic;
+  }
+  get isPaid() {
+    return this._isPaid;
   }
 
   get packId() {
@@ -57,6 +61,9 @@ export class Class {
   updateTopic(newTopic: string) {
     this._topic = newTopic;
   }
+  updateIsPaid(newIsPaid: boolean) {
+    this._isPaid = newIsPaid;
+  }
 
   updatePackId(newPackId?: Id) {
     this._packId = newPackId;
@@ -83,6 +90,7 @@ export class Class {
       durationMinutes: this._durationMinutes,
       topic: this._topic,
       price: this._price.value,
+      isPaid: this._isPaid,
       packId: this._packId?.value || null,
       notes: this._notes,
       createdAt: this.createdAt || new Date(),
@@ -99,6 +107,7 @@ export class Class {
       primitive.notes,
       primitive.topic,
       new Price(primitive.price),
+      primitive.isPaid,
       primitive.packId ? new Id(primitive.packId) : undefined, primitive.createdAt ? new Date(primitive.createdAt) : undefined,
       primitive.updatedAt ? new Date(primitive.updatedAt) : undefined,
     );

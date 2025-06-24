@@ -21,6 +21,7 @@ export const classesTable = sqliteTable('classes', {
   packId: integer('pack_id').references(() => packsTable.id, { onDelete: 'set null' }),
   price: integer('price').notNull(),
   notes: text('notes').notNull(),
+  isPaid: integer('is_paid').notNull().default(0), // 0 for false, 1 for true
   createdAt: integer("created_at", { mode: "timestamp" }).default(new Date()).notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" }).default(new Date()).notNull(),
 

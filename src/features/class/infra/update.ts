@@ -11,7 +11,10 @@ export const updateClass: CLassRepository["updateById"] = async (id, partial) =>
   }
 
   await db.update(classesTable)
-    .set(partial)
+    .set(({
+      ...partial,
+      isPaid: partial?.isPaid ? 1 : 0,
+    }))
     .where(eq(classesTable.id, id.value))
 
   const updated = await findClassById(id)
