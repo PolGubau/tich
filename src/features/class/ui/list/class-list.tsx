@@ -24,6 +24,13 @@ export const ClassList = ({ classes }: Props) => {
               <Text className="text-sm text-neutral-500">{parsedDate}</Text>
               <Text className="text-sm text-neutral-500">{item.durationMinutes} minutos</Text>
               <Text className="text-sm text-neutral-500">{item.price?.value}€</Text>
+              {item.isPaid ? (
+                <Text className="text-sm text-green-500">Paid</Text>
+              ) : (
+                <Text className="text-sm text-red-500">
+                  Not paid
+                </Text>
+              )}
             </View>
 
           </View>
