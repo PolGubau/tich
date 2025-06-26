@@ -11,7 +11,6 @@ export default function Layout() {
       headerShadowVisible: false,
     }}>
       <Stack.Screen name="dashboard" options={{ headerTitle: 'Dashboard' }} />
-      <Stack.Screen name="(class)/create" options={{ headerTitle: 'Create class' }} />
     </Stack>
 
   );

@@ -35,6 +35,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="person" color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="class"
+        options={{
+          title: 'Create Class',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="plus" color={color} />,
+        }}
+      />
     </Tabs>
   );
 }

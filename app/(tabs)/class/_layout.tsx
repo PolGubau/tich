@@ -7,6 +7,12 @@ export default function Layout() {
     <Stack screenOptions={{
       headerShadowVisible: false
     }}>
+      <Stack.Screen
+        name="create"
+        options={{
+          title: 'Create Class',
+        }}
+      />
 
     </Stack>
   );

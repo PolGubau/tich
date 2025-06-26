@@ -31,7 +31,6 @@ export function DeleteButton({ onDelete, alertMessages, deleteText = "Eliminar" 
     impactAsync(ImpactFeedbackStyle.Light);
   }} className='flex-row items-center gap-1 pt-2' onPress={confirmDelete}>
     <MaterialIcons name='delete' size={14} color='#ef4444' />
-    <Text className='text-red-500'>
-      {deleteText}</Text>
+    <Text className='text-red-500'>{deleteText}</Text>
   </Pressable>)
 }

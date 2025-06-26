@@ -1,6 +1,8 @@
-import { Stack, useLocalSearchParams } from 'expo-router'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons'
+import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics'
+import { Link, Stack, useLocalSearchParams } from 'expo-router'
 import React from 'react'
-import { ActivityIndicator, Text, View } from 'react-native'
+import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { useClass } from '~/features/class/model/use-class'
 import { MainLayout } from '~/shared/layouts/main-layout'
 import { DeleteButton } from '~/shared/ui/delete-button'
@@ -54,7 +56,27 @@ export default function CreateClass() {
       <Text className='text-xl'>
         Topic: {data?.topic}
       </Text>
+      <View className='flex-row items-center gap-4 pt-2'>
+        <Link href={{
+          pathname: '/class/[id]/edit',
+          params: { id: classId }
+        }} asChild>
+          <Pressable
+            onPressIn={() => {
+              impactAsync(ImpactFeedbackStyle.Light);
+            }}
+            className='flex-row items-center gap-1 pt-2'>
+            <MaterialIcons name='edit' size={14} color='#2563eb' />
 
+            <Text className='text-blue-500'>
+              Edit
+            </Text>
+          </Pressable>
+        </Link>
+        <DeleteButton onDelete={deleteClass} deleteText="Eliminar clase"
+          alertMessages={{
+            message: "¿Seguro que quieres borrar esta clase? Esta acción no se puede deshacer.",
+          }} />      </View>
 
       <Text className='text-lg mt-2'>
         Date: {data?.date.toLocaleDateString()}
@@ -89,12 +111,7 @@ export default function CreateClass() {
       </Text>
 
 
-      <View>
-        <DeleteButton onDelete={deleteClass} deleteText="Eliminar clase"
-          alertMessages={{
-            message: "¿Seguro que quieres borrar esta clase? Esta acción no se puede deshacer.",
-          }} />
-      </View>
+
 
     </MainLayout>
   </>)
