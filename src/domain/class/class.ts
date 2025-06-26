@@ -43,6 +43,8 @@ export class Class {
     return this._price;
   }
 
+
+
   get notes() {
     return this._notes;
   }

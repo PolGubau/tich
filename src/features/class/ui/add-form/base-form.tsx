@@ -1,6 +1,6 @@
-import { PartialClassWithDefinedStudent } from 'app/(tabs)/students/[id]/add-class';
 import React, { useState } from 'react';
 import { ActivityIndicator, Button, KeyboardAvoidingView, Platform, ScrollView, Switch, Text, TextInput, View } from 'react-native';
+import { PartialClassWithDefinedStudent } from "~/domain/class/types";
 import DateInput from '~/shared/ui/date-input';
 import TimeInput from '~/shared/ui/time-input';
 

@@ -28,7 +28,7 @@ export default function DashboardScreen() {
           headerShadowVisible: false,
         }}
       />
-      <MainLayout className='px-6'>
+      <MainLayout className='px-6 h-full relative'>
         <View className="flex-row flex-wrap -m-2">
           {dashboardItems.map((item, idx) => (
             <View key={idx} className="w-1/2 p-2">
@@ -41,13 +41,22 @@ export default function DashboardScreen() {
         </View>
 
 
+        <View className='absolute bottom-6 left-6 right-6'>
 
-        <Link href={"/home/create"} asChild>
-          <Pressable className='flex-row items-center gap-1 pt-2 flex-1 rounded-full bg-blue'>
-            <MaterialIcons name='add' size={14} color='#2563eb' />
-            <Text className='text-blue-500'>Add</Text>
-          </Pressable>
-        </Link>
+          <Link href={{ pathname: "/class/create" }} asChild>
+            <Pressable android_ripple={{ color: "#aaa" }}>
+              <View className='p-4 px-6 border-b border-gray-200 flex gap-2 items-center flex-row rounded-xl bg-blue-500/30'>
+
+                <MaterialIcons name="add" size={20} color="black" />
+
+                <Text className='text-lg'>New Class</Text>
+
+              </View>
+            </Pressable>
+          </Link>
+
+
+        </View>
       </MainLayout>
     </>
   );

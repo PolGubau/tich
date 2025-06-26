@@ -13,6 +13,17 @@ export class Price {
   get currency(): string {
     return this._currency;
   }
+
+  get formattedValue(): string {
+    const formatter = new Intl.NumberFormat("es-ES", {
+      style: "currency",
+      currency: this._currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    return formatter.format(this._value);
+  }
+  
   equals(other: Price): boolean {
     return this._value === other._value && this._currency === other._currency;
   }

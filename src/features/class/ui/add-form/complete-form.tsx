@@ -1,11 +1,11 @@
 import { Picker } from '@react-native-picker/picker';
-import { PartialClassWithDefinedStudent } from "app/(tabs)/students/[id]/add-class";
+ 
 import { useState } from "react";
 import { Text, View } from "react-native";
-import { ClassCreatePrimitive } from "~/domain/class/types";
+import { ClassCreatePrimitive, PartialClassWithDefinedStudent } from "~/domain/class/types";
 import { useStudents } from "~/features/student/model/use-students";
 import { BaseClassForm } from "./base-form";
-
+ 
 type Props = {
   initialValues: ClassCreatePrimitive
   onSubmit: (item: ClassCreatePrimitive) => void;

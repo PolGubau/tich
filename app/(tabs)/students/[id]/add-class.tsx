@@ -1,14 +1,12 @@
 import { Stack, useLocalSearchParams } from 'expo-router'
 import React from 'react'
 import { ActivityIndicator, View } from 'react-native'
-import { ClassCreatePrimitive } from '~/domain/class/types'
 import { useCreateClass } from '~/features/class/model/use-create-class'
 import { BaseClassForm } from '~/features/class/ui/add-form/base-form'
 import { useStudent } from '~/features/student/model/use-student'
 import { MainLayout } from '~/shared/layouts/main-layout'
+import { ClassCreatePrimitive, PartialClassWithDefinedStudent } from "~/domain/class/types"
 
-
-export type PartialClassWithDefinedStudent = Partial<Omit<ClassCreatePrimitive, "studentId">> & {}
 export default function AddClass() {
   const { id } = useLocalSearchParams()
   if (!id || typeof id !== 'string') {

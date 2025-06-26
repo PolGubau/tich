@@ -1,5 +1,6 @@
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics';
 import { Link, useNavigation } from 'expo-router';
 import { useLayoutEffect } from 'react';
 import { ActivityIndicator, NativeSyntheticEvent, Pressable, Text, TextInputChangeEventData, View } from 'react-native';
@@ -43,19 +44,18 @@ export default function StudentsScreen() {
   }
   return (
 
-    <MainLayout>
+    <MainLayout className='py-1'>
 
       <Link href={{ pathname: "/students/create" }} asChild>
-        <Pressable android_ripple={{ color: "#aaa" }}  >
-          <View className='p-4 border-b border-gray-200 flex justify-between items-center flex-row px-8'>
+        <Pressable android_ripple={{ color: "#aaa" }} onPressIn={() => {
+          impactAsync(ImpactFeedbackStyle.Light);
+        }} >
+          <View className='p-4 px-6 border-b border-gray-200 flex gap-2 items-center flex-row'>
+
+            <Text className='text-3xl'>
+              <MaterialIcons name="add" size={24} color="black" />
+            </Text>
             <Text className='text-xl'>New Student</Text>
-
-            <View>
-
-              <Text className='text-3xl'>
-                <MaterialIcons name="add" size={24} color="black" />
-              </Text>
-            </View>
 
           </View>
         </Pressable>

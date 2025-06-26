@@ -18,3 +18,6 @@ export type ClassPrimitive = DefaultDates & {
   notes: string
 }
 export interface ClassCreatePrimitive extends Omit<ClassPrimitive, "id" | "createdAt" | "updatedAt"> { id?: number }
+
+
+export type PartialClassWithDefinedStudent = Partial<Omit<ClassCreatePrimitive, "studentId">> & {}

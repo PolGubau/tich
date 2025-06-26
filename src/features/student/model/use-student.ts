@@ -5,7 +5,6 @@ import { Id } from "~/domain/common/id";
 import { createStudent } from "~/domain/student/create-student";
 import { Student } from "~/domain/student/student";
 import { StudentPrimitive } from "~/domain/student/types";
-import { useClassByStudent } from "~/features/class/model/useClassByStudent";
 import { abstractLoad } from "~/shared/infra/helpers/abstractLoad";
 import { Status } from "~/shared/types/basics";
 import { studentRepository } from "../infra/repo";
@@ -17,13 +16,6 @@ export const useStudent = (id: StudentPrimitive["id"]) => {
   const [error, setError] = useState<string | null>(null);
 
   const navigation = useNavigation()
-  const {
-    classes,
-    status: classStatus,
-    error: classError,
-  } = useClassByStudent(id);
-
-
 
 
 
@@ -58,7 +50,7 @@ export const useStudent = (id: StudentPrimitive["id"]) => {
   useFocusEffect(
     useCallback(() => {
       load();
-    }, [])
+    }, [student])
   )
 
 
@@ -95,9 +87,6 @@ export const useStudent = (id: StudentPrimitive["id"]) => {
     student,
     studentStatus: status,
     studentError: error,
-    classes,
-    classStatus,
-    classError,
     update,
     deleteStudent
   };

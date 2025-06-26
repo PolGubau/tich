@@ -45,9 +45,15 @@ export const useClassByStudent = (id: StudentPrimitive["id"]) => {
     }
   }, [id]);
 
+
   useFocusEffect(
     useCallback(() => {
       load();
+      return () => {
+        setClasses([]);
+        setStatus("idle");
+        setError(null);
+      }
     }, [])
   )
 
