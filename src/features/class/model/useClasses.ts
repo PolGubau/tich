@@ -1,40 +1,48 @@
-import { useLiveQuery } from "drizzle-orm/expo-sqlite";
-import { findAllClassesQuery } from "../infra/find-all";
-import { classEntitiesToDomainsMapper } from "../infra/mappers/entity-to-domain";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback, useEffect, useState } from "react";
+import { Class } from "~/domain/class/class";
+import { createClass } from "~/domain/class/create-class";
+import { Status } from "~/shared/types/basics";
+import { classRepository } from "../infra/repo";
 
 export const useClasses = () => {
-  // const [classes, setClasses] = useState<Class[]>([]);
-  // const [status, setStatus] = useState<Status>("idle");
-  // const [error, setError] = useState<string | null>(null);
+  const [classes, setClasses] = useState<Class[]>([]);
+  const [status, setStatus] = useState<Status>("idle");
+  const [error, setError] = useState<string | null>(null);
 
+  const fetchClasses = useCallback(async () => {
+    setStatus("loading");
+    setError(null);
+    try {
+      const fetchedClasses = await classRepository.findAll();
+      if (fetchedClasses) {
+        setClasses(fetchedClasses.map(createClass));
+        setStatus("success");
+      } else {
+        setError("No classes found");
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error("Error fetching classes:", err);
+      setError("Failed to fetch classes");
+      setStatus("error");
+    }
+  }, []);
 
+  useEffect(() => {
+    fetchClasses();
+  }, [fetchClasses]);
+  useFocusEffect(
+    useCallback(() => {
 
-  const { data: classEntities } = useLiveQuery(findAllClassesQuery);
-  const classes = classEntitiesToDomainsMapper(classEntities);
-
-  // const fetchClasses = useCallback(async () => {
-  //   setStatus("loading");
-  //   setError(null);
-  //   try {
-  //     const fetchedClasses = await classRepository.findAll();
-  //     if (fetchedClasses) {
-  //       setClasses(fetchedClasses.map(createClass));
-  //       setStatus("success");
-  //     } else {
-  //       setError("No classes found");
-  //       setStatus("error");
-  //     }
-  //   } catch (err) {
-  //     console.error("Error fetching classes:", err);
-  //     setError("Failed to fetch classes");
-  //     setStatus("error");
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   fetchClasses();
-  // }, [fetchClasses]);
-
+      fetchClasses();
+      return () => {
+        setClasses([]);
+        setStatus("idle");
+        setError(null);
+      }
+    }, [])
+  )
 
 
   const totalClasses = classes.length;
@@ -59,5 +67,5 @@ export const useClasses = () => {
   });
 
 
-  return { classes, totalClasses, totalHours, moneyEarned, formattedEarnings };
+  return { classes, status, error, reload: fetchClasses, totalClasses, totalHours, moneyEarned, formattedEarnings };
 }

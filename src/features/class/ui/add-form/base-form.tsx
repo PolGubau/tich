@@ -79,6 +79,18 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading }: Props) {
           placeholder="Topic of the class"
           className="border border-neutral-500/60 px-3 py-2 text-lg rounded-lg mb-4"
         />
+        <Text className="font-semibold mb-1">Notas</Text>
+        <TextInput editable={!isLoading}
+          value={notes}
+          onChangeText={setNotes}
+          textAlignVertical="top"
+          placeholder="In this class we have seen..."
+          multiline
+          numberOfLines={6}
+          className="border border-neutral-500/60 px-3 py-2 text-base rounded-lg mb-4 min-h-20"
+          maxLength={500}
+
+        />
         <Text className="font-semibold mb-1">Price</Text>
         <TextInput
           value={price.toString()}
@@ -124,18 +136,7 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading }: Props) {
           onDateChange={(date) => setStartingTime(date.toISOString())}
         />
 
-        <Text className="font-semibold mb-1">Notas</Text>
-        <TextInput editable={!isLoading}
-          value={notes}
-          onChangeText={setNotes}
-          textAlignVertical="top"
-          placeholder="In this class we have seen..."
-          multiline
-          numberOfLines={6}
-          className="border border-neutral-500/60 px-3 py-2 text-base rounded-lg mb-4 min-h-20"
-          maxLength={500}
 
-        />
 
 
 
