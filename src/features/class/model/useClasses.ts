@@ -45,12 +45,16 @@ export const useClasses = () => {
   const totalHours = Math.floor(totalMinutes / 60);
 
 
-  const moneyEarned = classes.reduce((total, c) => {
+  const moneyEarned:number = classes.reduce((total, c) => {
     const price = c.price;
     return total + (price ? price._value : 0);
-  }
-    , 0)
+  }, 0)
+
+  const formattedEarnings:string = moneyEarned.toLocaleString('es-ES', {
+    style: 'currency',
+    currency: 'EUR',
+  });
 
 
-  return { classes, status, error, reload: fetchClasses, totalClasses, totalHours, moneyEarned };
+  return { classes, status, error, reload: fetchClasses, totalClasses, totalHours, moneyEarned,  formattedEarnings };
 }
