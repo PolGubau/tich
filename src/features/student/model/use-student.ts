@@ -50,7 +50,7 @@ export const useStudent = (id: StudentPrimitive["id"]) => {
   useFocusEffect(
     useCallback(() => {
       load();
-    }, [student])
+    }, [id])
   )
 
 

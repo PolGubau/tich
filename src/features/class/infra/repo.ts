@@ -1,4 +1,4 @@
-import { CLassRepository } from "~/domain/class/class-repository"
+import { ClassRepository } from "~/domain/class/class-repository"
 import { createClass } from "./create"
 import { deleteClass } from "./delete"
 import { findAllClasses } from "./find-all"
@@ -8,7 +8,7 @@ import { findClassesByStudentId } from "./find-by-student-id"
 import { updateClass } from "./update"
 
 
-export const classRepository: CLassRepository = {
+export const classRepository: ClassRepository = {
   findAll: findAllClasses,
   findById: findClassById,
   delete: deleteClass,

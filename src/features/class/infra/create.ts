@@ -1,6 +1,6 @@
 import { classesTable } from "db/schema"
 import { db } from "db/utils"
-import { CLassRepository } from "~/domain/class/class-repository"
+import { ClassRepository } from "~/domain/class/class-repository"
 import { Id } from "~/domain/common/id"
 import { findClassById } from "./find-by-id"
 import { createClassMapper } from "./mappers/primitive-to-entity"
@@ -11,7 +11,7 @@ import { createClassMapper } from "./mappers/primitive-to-entity"
 
 
 
-export const createClass: CLassRepository["create"] = async (classItem) => {
+export const createClass: ClassRepository["create"] = async (classItem) => {
 
   const newClass = await db.insert(classesTable).values(createClassMapper(classItem))
   if (!newClass || !newClass.lastInsertRowId) {

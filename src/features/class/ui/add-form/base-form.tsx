@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Button, KeyboardAvoidingView, Platform, ScrollView, Switch, Text, TextInput, View } from 'react-native';
 import { PartialClassWithDefinedStudent } from "~/domain/class/types";
 import DateInput from '~/shared/ui/date-input';
@@ -17,8 +17,19 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading }: Props) {
   const [notes, setNotes] = useState(initialValues.notes ?? '')
   const [isPaid, setIsPaid] = useState(initialValues.isPaid ?? false)
   const [duration, setDuration] = useState(initialValues.durationMinutes ?? 0)
-  const [price, setPrice] = useState<number>(initialValues.price ?? 0)
+  const [price, setPrice] = useState<number>(initialValues.price?.value ?? 0)
 
+  useEffect(() => {
+    setTopic(initialValues.topic ?? '')
+    setNotes(initialValues.notes ?? '')
+    setIsPaid(initialValues.isPaid ?? false)
+    setDuration(initialValues.durationMinutes ?? 0)
+    setPrice(initialValues.price?.value ?? 0)
+    const newDate = initialValues.date ? new Date(initialValues.date) : new Date()
+    setDate(newDate.toISOString())
+    setStartingTime(newDate.toISOString())
+    setError(null)
+  }, [initialValues])
 
   // both dateFecha and startingTime should be the time and date of initialValues.date, ine input changes the date and the other the time, then they are combined to form the full date
   const completeDate = initialValues.date ? new Date(initialValues.date) : new Date();
@@ -54,7 +65,7 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading }: Props) {
       ...initialValues,
       date: combinedDate.toISOString(), // Combine date and time
       durationMinutes: duration,
-      price: price,
+      price: { value: price, currency: "EUR" }, // Assuming EUR as the currency for now
       isPaid: isPaid,
       topic: topic.trim(),
       notes: notes.trim(),

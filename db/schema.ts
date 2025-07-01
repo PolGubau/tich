@@ -19,7 +19,8 @@ export const classesTable = sqliteTable('classes', {
   durationMinutes: integer('duration_minutes').notNull(),
   topic: text('topic').notNull(),
   packId: integer('pack_id').references(() => packsTable.id, { onDelete: 'set null' }),
-  price: integer('price').notNull(),
+  priceValue: integer('price_value').notNull(),
+  priceCurrency: text('price_currency').notNull().default('EUR'),
   notes: text('notes').notNull(),
   isPaid: integer('is_paid').notNull().default(0), // 0 for false, 1 for true
   createdAt: integer("created_at", { mode: "timestamp" }).default(new Date()).notNull(),
@@ -29,6 +30,12 @@ export const classesTable = sqliteTable('classes', {
 
 // Export Class to use as an interface in your app
 export type ClassEntity = typeof classesTable.$inferSelect;
+
+export type CreateClassEntity = Omit<ClassEntity, 'id' | 'createdAt' | 'updatedAt'> & {
+  id?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+};
 
 
 export const packsTable = sqliteTable('packs', {

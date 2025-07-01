@@ -1,8 +1,8 @@
 import { db } from "db/utils"
-import { CLassRepository } from "~/domain/class/class-repository"
+import { ClassRepository } from "~/domain/class/class-repository"
 import { classEntityToPrimitiveMapper } from "./mappers/entity-to-primitive"
 
-export const findClassById: CLassRepository["findById"] = async (id) => {
+export const findClassById: ClassRepository["findById"] = async (id) => {
   const value = await db.query["classesTable"].findFirst({
     where: (s, { eq }) => eq(s.id, id.value),
   })

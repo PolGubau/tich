@@ -7,7 +7,7 @@ import { MainLayout } from '~/shared/layouts/main-layout';
 
 export default function DashboardScreen() {
   const { studentsAmount } = useStudents()
-  const { totalClasses, totalHours, formattedEarnings } = useClasses()
+  const { totalClasses, totalHours, formattedEarnings, status } = useClasses()
 
 
 
@@ -34,12 +34,18 @@ export default function DashboardScreen() {
             <View key={idx} className="w-1/2 p-2">
               <View className="bg-blue-500/20 rounded-xl p-4">
                 <Text className="text-3xl font-bold text-blue-500">{item.value}</Text>
-                <Text className='capitalize'>{item.label}</Text>
+                {status === 'loading' ? (
+                  <Text className="text-gray-500">Loading...</Text>
+                ) : (
+                  <Text className="text-gray-500 capitalize">{item.label}</Text>
+                )}
               </View>
             </View>
           ))}
         </View>
 
+
+        {/* <Button onPress={deleteAllClasses} title="Delete all classes" color="#f87171" /> */}
 
         <View className='absolute bottom-6 left-6 right-6'>
 
@@ -49,7 +55,7 @@ export default function DashboardScreen() {
 
                 <MaterialIcons name="add" size={20} color="black" />
 
-                <Text className='text-lg'>New Class</Text>
+                <Text className='text-lg'>New Class </Text>
 
               </View>
             </Pressable>

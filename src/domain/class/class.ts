@@ -2,22 +2,72 @@ import { Id } from "../common/id";
 import { Price } from "../common/price";
 import { ClassPrimitive } from "./types";
 
+type ClassParams = {
+  id: Id
+  studentId: Id
+  date: Date
+  durationMinutes: number
+  notes: string
+  topic: string
+  price: Price
+  isPaid: boolean
+  packId?: Id
+  createdAt?: Date
+  updatedAt?: Date
+}
 export class Class {
-  constructor(
-    readonly id: Id,
-    readonly studentId: Id,
-    private _date: Date,
-    private _durationMinutes: number,
-    private _notes: string,
-    private _topic: string,
-    private _price: Price, // si no pertenece a un pack
-    private _isPaid: boolean,
-    private _packId?: Id, // si pertenece a un pack
-    readonly createdAt?: Date,
-    readonly updatedAt?: Date,
-  ) {
-    if (!_date) throw new Error("Date cannot be empty");
-    if (_durationMinutes <= 0) throw new Error("Duration must be greater than zero");
+  private _date: Date
+  private _durationMinutes: number
+  private _notes: string
+  private _topic: string
+  private _price: Price
+  private _isPaid: boolean
+  private _packId?: Id
+  private _id: Id
+  private _studentId: Id
+  private _createdAt?: Date
+  private _updatedAt?: Date
+
+  constructor({
+    id,
+    studentId,
+    date,
+    durationMinutes,
+    notes,
+    topic,
+    price,
+    isPaid,
+    packId,
+    createdAt,
+    updatedAt,
+  }: ClassParams) {
+    this._id = id
+    this._studentId = studentId
+    this._date = date
+    this._durationMinutes = durationMinutes
+    this._notes = notes
+    this._topic = topic
+    this._price = price
+    this._isPaid = isPaid
+    this._packId = packId
+    this._createdAt = createdAt
+    this._updatedAt = updatedAt
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  get studentId() {
+    return this._studentId;
+  }
+
+  get createdAt() {
+    return this._createdAt;
+  }
+
+  get updatedAt() {
+    return this._updatedAt;
   }
 
   get date() {
@@ -71,6 +121,20 @@ export class Class {
     this._packId = newPackId;
   }
 
+  updateStudentId(newStudentId: Id) {
+    if (!(newStudentId instanceof Id)) {
+      throw new Error("Student ID must be an instance of Id class");
+    }
+    this._studentId = newStudentId;
+  }
+
+  updateId(newId: Id) {
+    if (!(newId instanceof Id)) {
+      throw new Error("ID must be an instance of Id class");
+    }
+    this._id = newId;
+  }
+
 
   updatePrice(newPrice: Price) {
     if (newPrice && !(newPrice instanceof Price)) {
@@ -84,34 +148,34 @@ export class Class {
   }
 
   toPrimitive(): ClassPrimitive {
-
     return {
-      id: this.id.value,
-      studentId: this.studentId.value,
+      id: this._id.value,
+      studentId: this._studentId.value,
       date: this._date.toISOString(),
       durationMinutes: this._durationMinutes,
       topic: this._topic,
-      price: this._price.value,
+      price: this._price.toPrimitive(),
       isPaid: this._isPaid,
       packId: this._packId?.value || null,
       notes: this._notes,
-      createdAt: this.createdAt || new Date(),
-      updatedAt: this.updatedAt || new Date(),
+      createdAt: this._createdAt || new Date(),
+      updatedAt: this._updatedAt || new Date(),
     };
   }
 
   static fromPrimitive(primitive: ClassPrimitive): Class {
-    return new Class(
-      new Id(primitive.id),
-      new Id(primitive.studentId),
-      new Date(primitive.date),
-      primitive.durationMinutes,
-      primitive.notes,
-      primitive.topic,
-      new Price(primitive.price),
-      primitive.isPaid,
-      primitive.packId ? new Id(primitive.packId) : undefined, primitive.createdAt ? new Date(primitive.createdAt) : undefined,
-      primitive.updatedAt ? new Date(primitive.updatedAt) : undefined,
-    );
+    return new Class({
+      id: new Id(primitive.id),
+      studentId: new Id(primitive.studentId),
+      date: new Date(primitive.date),
+      durationMinutes: primitive.durationMinutes,
+      notes: primitive.notes,
+      topic: primitive.topic,
+      price: new Price(primitive.price.value, primitive.price.currency),
+      isPaid: primitive.isPaid,
+      packId: primitive.packId ? new Id(primitive.packId) : undefined,
+      createdAt: primitive.createdAt ? new Date(primitive.createdAt) : undefined,
+      updatedAt: primitive.updatedAt ? new Date(primitive.updatedAt) : undefined,
+    });
   }
 }

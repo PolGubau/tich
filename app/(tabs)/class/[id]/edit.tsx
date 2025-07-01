@@ -1,6 +1,6 @@
 import { Stack, useLocalSearchParams } from 'expo-router'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { ActivityIndicator, Text, View } from 'react-native'
 import { ClassCreatePrimitive, ClassPrimitive } from '~/domain/class/types'
 import { useClass } from '~/features/class/model/use-class'
 import { CompleteClassForm } from '~/features/class/ui/add-form/complete-form'
@@ -9,16 +9,39 @@ import { MainLayout } from '~/shared/layouts/main-layout'
 export default function CreateClass() {
 
   const { id } = useLocalSearchParams()
-  if (!id || typeof id !== 'string') {
-    throw new Error("Invalid class ID")
+  const rawId = Array.isArray(id) ? id[0] : id
+
+  if (!rawId || typeof rawId !== 'string') {
+    console.error('Invalid class ID:', rawId)
+    return (
+      <>
+        <Stack.Screen options={{ title: 'Invalid class ID' }} />
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-red-600">Class ID is missing or invalid</Text>
+        </View>
+      </>
+    )
   }
-  const classId = Number(id)
+
+  const classId = Number(rawId)
+
+
+  if (classId === null || isNaN(classId)) {
+    return (
+      <>
+        <Stack.Screen options={{ title: "Invalid class ID" }} />
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-red-600">Class ID is missing or invalid</Text>
+        </View>
+      </>
+    )
+  }
 
 
   const {
     class: data,
-    status,
     error,
+    liveStatus: status,
     update
   } = useClass(classId)
 
@@ -29,22 +52,20 @@ export default function CreateClass() {
       <>
         <Stack.Screen
           options={{
-            title: "Ups...",
+            title: "Loading...",
           }}
         />
         <View className='flex-1 items-center mt-28'>
-          <Text className='text-red-500 text-center'>
-            {error || "Class not found"}
-          </Text>
-
+          <ActivityIndicator size="large" />
         </View>
       </>
     )
   }
 
+
   const handleUpdate = (editableValues: ClassCreatePrimitive) => {
     const updatedClass: ClassPrimitive = {
-      ...data.toPrimitive(),
+      ...data,
       ...editableValues,
       id: classId, // Ensure the ID is set correctly
     }
@@ -57,15 +78,12 @@ export default function CreateClass() {
     <Stack.Screen
       options={{
         title: "Class Details",
-        headerShadowVisible: false,
-        presentation: "pageSheet"
       }}
     />
     <MainLayout className='flex-1 px-6'>
+
       <CompleteClassForm
         onSubmit={handleUpdate}
-        initialValues={data.toPrimitive()}
-        isLoading={status === "loading"} />
-    </MainLayout>
-  </>)
+        initialValues={data} />
+    </MainLayout></>)
 }

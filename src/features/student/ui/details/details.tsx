@@ -74,7 +74,7 @@ export default function StudentDetails({ student, classes, onDelete }: Props) {
         </View>
         <ClassList classes={classes} />
 
-        <View className='px-6 py-2 bg-neutral-100 rounded-lg mt-4'>
+        <View className='px-6 py-2 mt-4'>
           <Text>{`Total ${classes.length}`}</Text>
         </View>
       </View>

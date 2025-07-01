@@ -10,7 +10,7 @@ export const classEntityToPrimitiveMapper = (entity: ClassEntity): ClassPrimitiv
     topic: entity.topic,
     isPaid: Boolean(entity.isPaid),
     packId: entity.packId ?? null,
-    price: entity.price,
+    price: { value: entity.priceValue, currency: entity.priceCurrency },
     notes: entity.notes,
     createdAt: entity.createdAt,
     updatedAt: entity.updatedAt,

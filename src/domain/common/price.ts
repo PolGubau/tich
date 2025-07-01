@@ -1,3 +1,5 @@
+import { formatCurrency } from "~/shared/utils/numbers/format-currency";
+
 export class Price {
   constructor(
     readonly _value: number,
@@ -15,15 +17,9 @@ export class Price {
   }
 
   get formattedValue(): string {
-    const formatter = new Intl.NumberFormat("es-ES", {
-      style: "currency",
-      currency: this._currency,
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
-    return formatter.format(this._value);
+    return formatCurrency(this._value, this._currency);
   }
-  
+
   equals(other: Price): boolean {
     return this._value === other._value && this._currency === other._currency;
   }

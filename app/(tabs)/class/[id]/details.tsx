@@ -4,8 +4,10 @@ import { Link, Stack, useLocalSearchParams } from 'expo-router'
 import React from 'react'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { useClass } from '~/features/class/model/use-class'
+import { ErrorBoundary } from '~/shared/components/ErrorBoundary'
 import { MainLayout } from '~/shared/layouts/main-layout'
 import { DeleteButton } from '~/shared/ui/delete-button'
+import { formatDate } from '~/shared/utils/dates/format-date'
 
 export default function CreateClass() {
 
@@ -13,21 +15,22 @@ export default function CreateClass() {
   if (!id || typeof id !== 'string') {
     throw new Error("Invalid class ID")
   }
+
+
   const classId = Number(id)
+
 
 
   const {
     class: data,
-    status,
     error,
+    liveStatus: status,
     deleteClass
   } = useClass(classId)
 
 
 
-
-
-  if (!data) {
+  if (!data && status === "loading") {
     return (
       <View>
         <Stack.Screen
@@ -42,77 +45,102 @@ export default function CreateClass() {
     )
   }
 
+  if (error) {
+    return (
+      <>
+        <Stack.Screen
+          options={{
+            title: "Ups...",
+          }}
+        />
+        <View className='flex-1 items-center mt-28'>
+          <Text className='text-red-500 text-center'>
+            {error || "Class not found"}
+          </Text>
+        </View>
+      </>
+    )
+  }
 
 
   return (<>
-    <Stack.Screen
-      options={{
-        title: "Class Details",
-        headerShadowVisible: false,
-        presentation: "pageSheet"
-      }}
-    />
-    <MainLayout className='flex-1 px-6'>
-      <Text className='text-xl'>
-        Topic: {data?.topic}
-      </Text>
-      <View className='flex-row items-center gap-4 pt-2'>
-        <Link href={{
-          pathname: '/class/[id]/edit',
-          params: { id: classId }
-        }} asChild>
-          <Pressable
-            onPressIn={() => {
-              impactAsync(ImpactFeedbackStyle.Light);
+    <ErrorBoundary>
+      <Stack.Screen
+        options={{
+          title: "Class Details",
+
+        }}
+      />
+      <MainLayout className='flex-1 px-6'>
+
+        <View className='flex-row items-center gap-2 pt-4'>
+          <Text className='opacity-80'>
+            Topic:
+          </Text>
+          <Text className='text-2xl'>
+            {data?.topic}
+          </Text>
+        </View>
+        <View className='flex-row items-center gap-4 pt-2'>
+
+          <Link
+            href={{
+              pathname: './edit',
             }}
-            className='flex-row items-center gap-1 pt-2'>
-            <MaterialIcons name='edit' size={14} color='#2563eb' />
+            asChild
+          >
+            <Pressable
+              onPressIn={() => {
+                impactAsync(ImpactFeedbackStyle.Light);
+              }}
+              className='flex-row items-center gap-1 pt-2'>
+              <MaterialIcons name='edit' size={14} color='#2563eb' />
 
-            <Text className='text-blue-500'>
-              Edit
-            </Text>
-          </Pressable>
-        </Link>
-        <DeleteButton onDelete={deleteClass} deleteText="Eliminar clase"
-          alertMessages={{
-            message: "¿Seguro que quieres borrar esta clase? Esta acción no se puede deshacer.",
-          }} />      </View>
+              <Text className='text-blue-500'>
+                Edit {classId}
+              </Text>
+            </Pressable>
+          </Link>
+          <DeleteButton onDelete={deleteClass} deleteText="Eliminar clase"
+            alertMessages={{
+              message: "¿Seguro que quieres borrar esta clase? Esta acción no se puede deshacer.",
+            }} />
+        </View>
 
-      <Text className='text-lg mt-2'>
-        Date: {data?.date.toLocaleDateString()}
-      </Text>
+        <Text className='text-lg mt-2'>
+          Date: {data?.date ? formatDate(data?.date) : "No date set"}
+        </Text>
 
-      <Text className='text-lg mt-2'>
-        Duration: {data?.durationMinutes} minutes
-      </Text>
+        <Text className='text-lg mt-2'>
+          Duration: {data?.durationMinutes} minutes
+        </Text>
 
-      <Text className='text-lg mt-2'>
-        Notes: {data?.notes}
-      </Text>
-
-      <Text className='text-lg mt-2'>
-        Student ID: {data?.studentId.value}
-      </Text>
-
-      <Text className='text-lg mt-2'>
-        Is paid: {data?.isPaid}
-      </Text>
-
-      <Text className='text-lg mt-2'>
-        Price: {data?.price.formattedValue}
-      </Text>
-
-      <Text className='text-lg mt-2'>
-        createdAt: {data?.createdAt?.toLocaleTimeString()}
-      </Text>
-
-      <Text className='text-lg mt-2'>
-        updatedAt: {data?.updatedAt?.toLocaleTimeString()}
-      </Text>
+        <Text className='text-lg mt-2'>
+          Notes: {data?.notes}
+        </Text>
 
 
 
+        <Text className='text-lg mt-2'>
+          Is paid: {data?.isPaid.toString()}
+        </Text>
 
-    </MainLayout>
+        <Text className='text-lg mt-2'>
+          Price: {data?.price.value} {data?.price.currency}
+        </Text>
+
+        <Text className='text-lg mt-2'>
+          createdAt: {data?.createdAt?.toLocaleTimeString()}
+        </Text>
+
+        <Text className='text-lg mt-2'>
+          updatedAt: {data?.updatedAt?.toLocaleTimeString()}
+        </Text>
+
+
+
+
+      </MainLayout>
+    </ErrorBoundary>
   </>)
 }

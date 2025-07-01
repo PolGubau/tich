@@ -7,7 +7,7 @@ import { classRepository } from "../infra/repo";
 export const useCreateClass = () => {
   const emptyClass: ClassCreatePrimitive = {
     topic: "",
-    price: 19,
+    price: { value: 19, currency: "EUR" },
     durationMinutes: 60,
     notes: "",
     isPaid: false,

@@ -1,28 +1,31 @@
-import { DATABASE_NAME, db } from 'db/utils';
+import { DATABASE_NAME } from 'db/utils';
+import { drizzle } from 'drizzle-orm/expo-sqlite';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
-import { useDrizzleStudio } from "expo-drizzle-studio-plugin";
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { openDatabaseSync, SQLiteProvider } from 'expo-sqlite';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import { Text } from 'react-native';
+import { Suspense, useEffect } from 'react';
+import { ActivityIndicator, Text } from 'react-native';
 import 'react-native-reanimated';
+import * as schema from "~/../db/schema";
 import migrations from '~/../drizzle/migrations';
+import { ErrorBoundary } from '~/shared/components/ErrorBoundary';
 import { MainLayout } from '~/shared/layouts/main-layout';
 import "~/shared/styles/global.css";
-
-
+ErrorUtils.setGlobalHandler((error, isFatal) => {
+  console.log('Global error handler:', error, isFatal);
+  // Aquí puedes mostrar UI alternativa o reportar a un servicio
+});
 SplashScreen.preventAutoHideAsync();
 
-const syncDB = openDatabaseSync(DATABASE_NAME);
 
+const expoDb = openDatabaseSync(DATABASE_NAME)
 export default function RootLayout() {
 
 
-
-  useDrizzleStudio(syncDB);
+  const db = drizzle(expoDb, { schema });
 
   const { success, error: dbError } = useMigrations(db, migrations);
 
@@ -31,7 +34,6 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
-  useDrizzleStudio(db);
 
   useEffect(() => {
     if (loaded || error) {
@@ -58,19 +60,23 @@ export default function RootLayout() {
     );
   }
 
-  return (
-    // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+  return (<Suspense fallback={<ActivityIndicator size={"large"} />}>
+    <ErrorBoundary>
 
-    <SQLiteProvider
-      databaseName={DATABASE_NAME}
-      options={{ enableChangeListener: true }}
-    >
-      <Stack >
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </SQLiteProvider>
+      <SQLiteProvider
+        databaseName={DATABASE_NAME}
+        useSuspense
+        options={{ enableChangeListener: true }}
+      >
 
+        <Stack >
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
+      </SQLiteProvider>
+    </ErrorBoundary>
+
+  </Suspense>
   );
 }
