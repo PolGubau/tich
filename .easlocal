@@ -1,0 +1,2 @@
+[eas-build]
+android.native.buildArgs.extraGradleProperties = sdk.dir=$HOME/Android

@@ -16,8 +16,9 @@
     "lint": "expo lint",
     "db:generate": "npx drizzle-kit generate",
     "db:push": "npx drizzle-kit push",
-    "prebuild":"npx expo prebuild",
-    "build-android": "expo export --with-app-build-config && eas build --platform android",
+    "prebuild": "npx expo prebuild",
+    "get-credentials": "eas credentials -p android",
+    "build-local": "echo sdk.dir=$HOME/Android > android/local.properties && eas build --platform android --local",
     "db:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
