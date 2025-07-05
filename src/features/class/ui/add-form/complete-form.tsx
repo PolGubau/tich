@@ -69,11 +69,6 @@ export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }:
 
       </View>
 
-
-      <Text>
-        {JSON.stringify({ initialValues, studentId }, null, 2)}
-      </Text>
-
       <BaseClassForm
         // to confirm, studentID must be a number and not null
         canSubmit={!!studentId && studentId !== "null"}
