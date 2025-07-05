@@ -16,6 +16,10 @@ export default function AddClass() {
   const { create, emptyClass, status } = useCreateClass()
 
   const handleCreate = (newValues: PartialClassWithDefinedStudent) => {
+    if (!id) {
+      console.error("Student ID is required");
+      return;
+    }
     const newCreateClass: ClassCreatePrimitive = {
       ...emptyClass,
       ...newValues,

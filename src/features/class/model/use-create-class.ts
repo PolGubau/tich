@@ -13,7 +13,7 @@ export const useCreateClass = () => {
     isPaid: false,
     date: new Date().toISOString(),
     packId: null,
-    studentId: 0,
+    studentId: null as any,
 
   }
 

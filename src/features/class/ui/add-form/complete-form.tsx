@@ -16,11 +16,7 @@ type Props = {
 export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }: Props) {
   const { students } = useStudents()
 
-  const [studentId, setStudentId] = useState<string | null>(
-    initialValues.studentId !== null ? initialValues.studentId.toString() : null
-  );
-
-
+  const [studentId, setStudentId] = useState<string | null>(initialValues.studentId !== null ? initialValues.studentId.toString() : null);
 
   const handleSubmit = (values: PartialClassWithDefinedStudent) => {
     if (!studentId) {
@@ -53,7 +49,7 @@ export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }:
             prompt='Select a student'
             mode='dropdown'
             enabled={students.length > 0}
-            selectedValue={studentId ?? "Select a student"}
+            selectedValue={studentId}
 
             onValueChange={(itemValue) =>
               setStudentId(itemValue)
@@ -74,8 +70,13 @@ export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }:
       </View>
 
 
+      <Text>
+        {JSON.stringify({ initialValues, studentId }, null, 2)}
+      </Text>
+
       <BaseClassForm
-        // canSubmit={!!studentId}
+        // to confirm, studentID must be a number and not null
+        canSubmit={!!studentId && studentId !== "null"}
         initialValues={initialValues}
         onSubmit={handleSubmit}
         isLoading={isLoading}

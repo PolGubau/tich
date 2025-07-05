@@ -11,9 +11,9 @@ type Props = {
   onSubmit: (partial: PartialClassWithDefinedStudent) => void;
   isLoading?: boolean;
   error?: string | null;
-  canSubmit?: boolean; 
+  canSubmit?: boolean;
 }
-export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit  }: Props) {
+export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit = true }: Props) {
   const [topic, setTopic] = useState(initialValues.topic ?? '')
   const [notes, setNotes] = useState(initialValues.notes ?? '')
   const [isPaid, setIsPaid] = useState(initialValues.isPaid ?? false)
@@ -153,7 +153,7 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit  }
 
 
         <Button title={isLoading ? "Saving..." : "Save"}
-          onPress={handleSubmit} disabled={isLoading || canSubmit || !topic.trim() || !notes.trim() || duration <= 0 || price <= 0 || !date || !startingTime}
+          onPress={handleSubmit} disabled={isLoading || !canSubmit || !topic.trim() || !notes.trim() || duration <= 0 || price <= 0 || !date || !startingTime}
         />
         {error && (
           <Text className="text-red-500 mt-2 text-center">
