@@ -3,16 +3,16 @@ import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics'
 import { Link } from 'expo-router'
 import React from 'react'
 import { Image, Pressable, Text, View } from 'react-native'
-import { Class } from '~/domain/class/class'
-import { Student } from '~/domain/student/student'
+import { ClassPrimitive } from '~/domain/class/types'
+import { StudentPrimitive } from '~/domain/student/types'
 import { ClassList } from '~/features/class/ui/list/class-list'
 import { MainLayout } from '~/shared/layouts/main-layout'
 import { DeleteStudentButton } from './student-delete-button'
 
 interface Props {
-  student: Student
+  student: StudentPrimitive
   onDelete: () => void
-  classes: Class[]
+  classes: ClassPrimitive[]
 }
 export default function StudentDetails({ student, classes, onDelete }: Props) {
   return (
@@ -22,20 +22,20 @@ export default function StudentDetails({ student, classes, onDelete }: Props) {
         <Image
           source={{ uri: student.avatarUrl ?? undefined }}
           className='w-20 h-20 rounded-full bg-neutral-200'
-          accessibilityLabel={`${student.name.value}'s avatar`}
+          accessibilityLabel={`${student.name}'s avatar`}
           accessibilityRole="image"
         />
         <View>
 
-          <Text className='text-xl font-bold'>{student.name.value}</Text>
-          <Text>{student.email.value}</Text>
+          <Text className='text-xl font-bold'>{student.name}</Text>
+          <Text>{student.email}</Text>
 
 
           <View className='flex-row items-center gap-4 pt-2'>
             <Link href={{
 
               pathname: '/students/[id]/edit',
-              params: { id: student.id.value }
+              params: { id: student.id }
             }} asChild>
               <Pressable
                 onPressIn={() => {
@@ -60,7 +60,7 @@ export default function StudentDetails({ student, classes, onDelete }: Props) {
           <Text className='text-lg font-semibold'>Done classes</Text>
           <Link href={{
             pathname: '/students/[id]/add-class',
-            params: { id: student.id.value }
+            params: { id: student.id }
           }} asChild>
             <Pressable
               onPressIn={() => {
@@ -72,7 +72,7 @@ export default function StudentDetails({ student, classes, onDelete }: Props) {
             </Pressable>
           </Link>
         </View>
-        <ClassList classes={classes} />
+        <ClassList classes={classes} showStudent={false} />
 
         <View className='px-6 py-2 mt-4'>
           <Text>{`Total ${classes.length}`}</Text>

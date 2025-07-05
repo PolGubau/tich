@@ -40,8 +40,6 @@ export default function CreateClass() {
 
   const {
     class: data,
-    error,
-    liveStatus: status,
     update
   } = useClass(classId)
 

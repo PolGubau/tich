@@ -10,7 +10,14 @@ import { Status } from "~/shared/types/basics";
 import { studentRepository } from "../infra/repo";
 
 
-export const useStudent = (id: StudentPrimitive["id"]) => {
+type UseStudentReturn = {
+  student: StudentPrimitive | null;
+  status: Status;
+  error: string | null;
+  update: (data: StudentPrimitive) => Promise<void>;
+  delete: () => Promise<void>;
+}
+export const useStudent = (id: StudentPrimitive["id"]): UseStudentReturn => {
   const [student, setStudent] = useState<Student | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -84,10 +91,10 @@ export const useStudent = (id: StudentPrimitive["id"]) => {
 
 
   return {
-    student,
-    studentStatus: status,
-    studentError: error,
+    student: student?.toPrimitive() || null,
+    status,
+    error,
     update,
-    deleteStudent
+    delete: deleteStudent
   };
 };

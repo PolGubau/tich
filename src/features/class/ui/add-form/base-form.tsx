@@ -11,8 +11,9 @@ type Props = {
   onSubmit: (partial: PartialClassWithDefinedStudent) => void;
   isLoading?: boolean;
   error?: string | null;
+  canSubmit?: boolean; 
 }
-export function BaseClassForm({ initialValues, onSubmit, isLoading }: Props) {
+export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit  }: Props) {
   const [topic, setTopic] = useState(initialValues.topic ?? '')
   const [notes, setNotes] = useState(initialValues.notes ?? '')
   const [isPaid, setIsPaid] = useState(initialValues.isPaid ?? false)
@@ -81,7 +82,7 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading }: Props) {
     >
       <ScrollView>
 
-        <Text className="font-semibold mb-1">Topic</Text>
+        <Text className="font-semibold mb-1">Topic *</Text>
         <TextInput editable={!isLoading}
           value={topic}
           onChangeText={setTopic}
@@ -90,7 +91,7 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading }: Props) {
           placeholder="Topic of the class"
           className="border border-neutral-500/60 px-3 py-2 text-lg rounded-lg mb-4"
         />
-        <Text className="font-semibold mb-1">Notas</Text>
+        <Text className="font-semibold mb-1">Notas *</Text>
         <TextInput editable={!isLoading}
           value={notes}
           onChangeText={setNotes}
@@ -151,8 +152,8 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading }: Props) {
 
 
 
-        <Button title={isLoading ? "Guardando..." : "Guardar"}
-          onPress={handleSubmit} disabled={isLoading || !topic.trim() || !notes.trim() || duration <= 0 || price <= 0 || !date || !startingTime}
+        <Button title={isLoading ? "Saving..." : "Save"}
+          onPress={handleSubmit} disabled={isLoading || canSubmit || !topic.trim() || !notes.trim() || duration <= 0 || price <= 0 || !date || !startingTime}
         />
         {error && (
           <Text className="text-red-500 mt-2 text-center">

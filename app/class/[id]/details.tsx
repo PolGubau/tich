@@ -4,6 +4,7 @@ import { Link, Stack, useLocalSearchParams } from 'expo-router'
 import React from 'react'
 import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { useClass } from '~/features/class/model/use-class'
+import StudentChip from '~/features/student/ui/chips/student-chip'
 import { ErrorBoundary } from '~/shared/components/ErrorBoundary'
 import { MainLayout } from '~/shared/layouts/main-layout'
 import { DeleteButton } from '~/shared/ui/delete-button'
@@ -61,6 +62,22 @@ export default function CreateClass() {
       </>
     )
   }
+  if (!data) {
+    return (
+      <>
+        <Stack.Screen
+          options={{
+            title: "This class does not exist",
+          }}
+        />
+        <View className='flex-1 items-center mt-28'>
+          <Text className='text-red-500 text-center'>
+            {error || "Class not found"}
+          </Text>
+        </View>
+      </>
+    )
+  }
 
 
   return (<>
@@ -73,15 +90,12 @@ export default function CreateClass() {
       />
       <MainLayout className='flex-1 px-6'>
 
-        <View className='flex-row items-center gap-2 pt-4'>
-          <Text className='opacity-80'>
-            Topic:
-          </Text>
+        <View className='flex-row items-center gap-2'>
           <Text className='text-2xl'>
             {data?.topic}
           </Text>
         </View>
-        <View className='flex-row items-center gap-4 pt-2'>
+        <View className='flex-row items-center gap-4 pt-2 pb-8'>
 
           <Link
             href={{
@@ -97,7 +111,7 @@ export default function CreateClass() {
               <MaterialIcons name='edit' size={14} color='#2563eb' />
 
               <Text className='text-blue-500'>
-                Edit {classId}
+                Edit
               </Text>
             </Pressable>
           </Link>
@@ -106,6 +120,9 @@ export default function CreateClass() {
               message: "¿Seguro que quieres borrar esta clase? Esta acción no se puede deshacer.",
             }} />
         </View>
+
+
+        <StudentChip studentId={data.studentId} />
 
         <Text className='text-lg mt-2'>
           Date: {data?.date ? formatDate(data?.date) : "No date set"}

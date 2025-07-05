@@ -1,28 +1,34 @@
 import { Link } from 'expo-router'
 import React from 'react'
 import { FlatList, Pressable, Text, View } from 'react-native'
-import { Class } from '~/domain/class/class'
+import { ClassPrimitive } from '~/domain/class/types'
+import StudentChip from '~/features/student/ui/chips/student-chip'
 
 type Props = {
-  classes: Class[]
+  classes: ClassPrimitive[]
+  showStudent?: boolean
 }
-export const ClassList = ({ classes }: Props) => {
+export const ClassList = ({ classes, showStudent = true }: Props) => {
+
   return (
     <FlatList
       data={classes}
-      keyExtractor={(item) => item.id.value.toString()}
+      keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => {
-        const parsedDate = item.date.toLocaleDateString("es-ES")
+        const parsedDate = new Date(item.date).toLocaleDateString("es-ES")
         return (
           <Link href={{
             pathname: '/class/[id]/details',
-            params: { id: item.id.value.toString() }
+            params: { id: item.id.toString() }
           }} asChild>
 
-            <Pressable android_ripple={{ color: "#ddd" }} className="gap-4 py-2 border-b border-neutral-200 flex-row items-center justify-between px-6">
+            <Pressable android_ripple={{ color: "#ddd" }} className="gap-4 py-2 border-b border-neutral-200 flex-row items-center justify-between px-4">
               <View className='flex-1 gap-1'>
-                <Text className="text-lg font-semibold">{item.topic}</Text>
-                <Text className='line-clamp-3'>{item.notes}</Text>
+                {showStudent && (
+                  <StudentChip studentId={item.studentId} />
+                )}
+                <Text className="text-lg font-semibold pl-0.5">{item.topic}</Text>
+                <Text className='line-clamp-3 pl-0.5'>{item.notes}</Text>
               </View>
               <View>
 

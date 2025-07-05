@@ -1,11 +1,12 @@
 import { Picker } from '@react-native-picker/picker';
- 
+
+import { Link } from 'expo-router';
 import { useState } from "react";
 import { Text, View } from "react-native";
 import { ClassCreatePrimitive, PartialClassWithDefinedStudent } from "~/domain/class/types";
 import { useStudents } from "~/features/student/model/use-students";
 import { BaseClassForm } from "./base-form";
- 
+
 type Props = {
   initialValues: ClassCreatePrimitive
   onSubmit: (item: ClassCreatePrimitive) => void;
@@ -15,7 +16,9 @@ type Props = {
 export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }: Props) {
   const { students } = useStudents()
 
-  const [studentId, setStudentId] = useState<number | null>(initialValues.studentId ?? null);
+  const [studentId, setStudentId] = useState<string | null>(
+    initialValues.studentId !== null ? initialValues.studentId.toString() : null
+  );
 
 
 
@@ -28,7 +31,7 @@ export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }:
     const updatedValues: ClassCreatePrimitive = {
       ...initialValues,
       ...values,
-      studentId: studentId,
+      studentId: Number(studentId),
     };
     onSubmit(updatedValues);
   }
@@ -38,28 +41,41 @@ export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }:
     <View className="flex-1">
 
       <Text className="font-semibold mb-1">
-        Who is this class for?
+        Who is this class for? *
       </Text>
 
 
       <View className="border border-neutral-500/60 text-lg rounded-lg mb-4"
       >
+        {students?.length > 0 ? (
+          <Picker
+            placeholder='Select a student'
+            prompt='Select a student'
+            mode='dropdown'
+            enabled={students.length > 0}
+            selectedValue={studentId ?? "Select a student"}
 
-        <Picker
-          enabled={students.length > 0}
-          selectedValue={studentId?.toString() ?? null}
-          onValueChange={(itemValue) =>
-            setStudentId(Number(itemValue))
-          }>
-          {students.map(student => (
-            <Picker.Item key={student.id.value} label={student.name.value} value={student.id.value.toString()} />
-          ))}
-        </Picker>
+            onValueChange={(itemValue) =>
+              setStudentId(itemValue)
+            }>
+            <Picker.Item enabled={false} label="Select a student..." value={null} />
+
+            {students.map(student => (
+              <Picker.Item key={student.id.value} label={student.name.value} value={student.id.value.toString()} />
+            ))}
+          </Picker>
+        ) : (
+          <Text className="text-neutral-500 text-center p-4">
+            No students available. <Link className='text-blue-400 underline' href={"/(tabs)/students/create"}>Please add a student first.
+            </Link>
+          </Text>
+        )}
 
       </View>
 
 
       <BaseClassForm
+        // canSubmit={!!studentId}
         initialValues={initialValues}
         onSubmit={handleSubmit}
         isLoading={isLoading}

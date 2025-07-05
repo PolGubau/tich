@@ -1,11 +1,11 @@
 import { Stack, useLocalSearchParams } from 'expo-router'
 import React from 'react'
 import { ActivityIndicator, View } from 'react-native'
+import { ClassCreatePrimitive, PartialClassWithDefinedStudent } from "~/domain/class/types"
 import { useCreateClass } from '~/features/class/model/use-create-class'
 import { BaseClassForm } from '~/features/class/ui/add-form/base-form'
 import { useStudent } from '~/features/student/model/use-student'
 import { MainLayout } from '~/shared/layouts/main-layout'
-import { ClassCreatePrimitive, PartialClassWithDefinedStudent } from "~/domain/class/types"
 
 export default function AddClass() {
   const { id } = useLocalSearchParams()
@@ -43,7 +43,7 @@ export default function AddClass() {
 
   return (<>
     <Stack.Screen
-      options={{ title: `Add class to ${student.name.value}` }}
+      options={{ title: `Add class to ${student.name}` }}
     />
     <MainLayout className='px-6 flex-1'>
       <BaseClassForm initialValues={emptyClass} onSubmit={handleCreate} isLoading={status === "loading"} />

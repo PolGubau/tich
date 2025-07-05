@@ -9,7 +9,7 @@ import { MainLayout } from '~/shared/layouts/main-layout'
 export default function EditStudentScreen() {
   const { id } = useLocalSearchParams()
 
-  const { student, update, studentStatus } = useStudent(Number(id))
+  const { student, update, status: studentStatus } = useStudent(Number(id))
 
   const isRefreshing = studentStatus === 'loading'
 
@@ -44,8 +44,8 @@ export default function EditStudentScreen() {
           title: "Edit",
         }}
       />
-      <StudentForm initialValues={student.toPrimitive()} onSubmit={(newValues) => {
-        handleUpdate(student.toPrimitive(), newValues)
+      <StudentForm initialValues={student} onSubmit={(newValues) => {
+        handleUpdate(student, newValues)
       }} isLoading={isRefreshing} />
     </MainLayout>
   )

@@ -2,12 +2,13 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Link, Stack } from 'expo-router';
 import { Pressable, Text, View } from 'react-native';
 import { useClasses } from '~/features/class/model/useClasses';
+import { ClassList } from '~/features/class/ui/list/class-list';
 import { useStudents } from '~/features/student/model/use-students';
 import { MainLayout } from '~/shared/layouts/main-layout';
 
 export default function DashboardScreen() {
   const { studentsAmount } = useStudents()
-  const { totalClasses, totalHours, formattedEarnings, status } = useClasses()
+  const { totalClasses, totalHours, formattedEarnings, status, classes } = useClasses()
 
 
 
@@ -28,7 +29,7 @@ export default function DashboardScreen() {
           headerShadowVisible: false,
         }}
       />
-      <MainLayout className='px-6 h-full relative'>
+      <MainLayout className='px-6 h-full relative gap-10'>
         <View className="flex-row flex-wrap -m-2">
           {dashboardItems.map((item, idx) => (
             <View key={idx} className="w-1/2 p-2">
@@ -43,6 +44,14 @@ export default function DashboardScreen() {
             </View>
           ))}
         </View>
+
+
+
+
+        {classes.length > 0 && <View className='gap-2 flex flex-col'>
+          <Text className='text-xl px-2'>Your last classes</Text>
+          <ClassList classes={classes} />
+        </View>}
 
 
         {/* <Button onPress={deleteAllClasses} title="Delete all classes" color="#f87171" /> */}

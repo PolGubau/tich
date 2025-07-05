@@ -1,5 +1,5 @@
 import { useFocusEffect } from "@react-navigation/native";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Class } from "~/domain/class/class";
 import { createClass } from "~/domain/class/create-class";
 import { Status } from "~/shared/types/basics";
@@ -66,6 +66,10 @@ export const useClasses = () => {
     currency: 'EUR',
   });
 
+  const classesPrimitives = useMemo(() => {
+    return classes.map(c => c.toPrimitive());
+  }, [classes]);
 
-  return { classes, status, error, reload: fetchClasses, totalClasses, totalHours, moneyEarned, formattedEarnings };
+
+  return { classes: classesPrimitives, status, error, reload: fetchClasses, totalClasses, totalHours, moneyEarned, formattedEarnings };
 }

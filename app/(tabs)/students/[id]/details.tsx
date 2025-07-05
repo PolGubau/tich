@@ -10,7 +10,7 @@ import StudentDetails from '~/features/student/ui/details/details'
 export default function DetailsScreen() {
   const { id } = useLocalSearchParams()
 
-  const { student, deleteStudent } = useStudent(Number(id))
+  const { student, delete: deleteStudent } = useStudent(Number(id))
   const { classes } = useClassByStudent(Number(id))
 
   if (!student) {
@@ -38,7 +38,7 @@ export default function DetailsScreen() {
               <View className='flex-row items-center gap-2 pr-2'>
                 <Link href={{
                   pathname: '/students/[id]/add-class',
-                  params: { id: student.id.value }
+                  params: { id: student.id }
                 }} asChild>
                   <Pressable onPressIn={() => {
                     impactAsync(ImpactFeedbackStyle.Light);

@@ -69,8 +69,13 @@ export default function RootLayout() {
         options={{ enableChangeListener: true }}
       >
 
-        <Stack >
+        <Stack screenOptions={{
+          presentation: 'card',
+
+          contentStyle: { backgroundColor: '#fff' },
+        }}>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="class" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
         <StatusBar style="auto" />
