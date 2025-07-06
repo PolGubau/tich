@@ -12,7 +12,7 @@ type DeleteButtonProps = {
     cancel: TranslationKeys
     confirm: TranslationKeys
   }
-  deleteText?: string
+  deleteText?: TranslationKeys
 
 }
 
@@ -37,8 +37,8 @@ export function DeleteButton({ onDelete, alertMessages = {
 
   return (<Pressable onPressIn={() => {
     impactAsync(ImpactFeedbackStyle.Light);
-  }} className='flex-row items-center gap-1 pt-2' onPress={confirmDelete}>
+  }} className='flex-row items-center gap-1' onPress={confirmDelete}>
     <MaterialIcons name='delete' size={14} color='#ef4444' />
-    <Text className='text-red-500'>{deleteText}</Text>
+    <Text className='text-red-500'>{t(deleteText)}</Text>
   </Pressable>)
 }

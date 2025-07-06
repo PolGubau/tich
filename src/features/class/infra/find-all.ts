@@ -3,7 +3,11 @@ import { ClassRepository } from "~/domain/class/class-repository"
 import { classEntitiesToPrimitivesMapper } from "./mappers/entity-to-primitive"
 
 
-export const findAllClassesQuery = db.query["classesTable"].findMany()
+export const findAllClassesQuery = db.query["classesTable"].findMany({
+  orderBy(classes, { desc }) {
+    return [desc(classes.date)]
+  },
+})
 
 
 

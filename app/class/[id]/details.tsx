@@ -2,13 +2,12 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics'
 import { Link, Stack, useLocalSearchParams } from 'expo-router'
 import React from 'react'
-import { Pressable, Text, View } from 'react-native'
+import { ActivityIndicator, Pressable, Text, View } from 'react-native'
 import { useClass } from '~/features/class/model/use-class'
 import Chip from '~/features/student/ui/chips/chip'
 import StudentChip from '~/features/student/ui/chips/student-chip'
 import { ErrorBoundary } from '~/shared/components/ErrorBoundary'
-import LoadingPage from '~/shared/components/loading-page'
-import i18n, { t } from '~/shared/i18n/i18n'
+import { t } from '~/shared/i18n/i18n'
 import { MainLayout } from '~/shared/layouts/main-layout'
 import { DeleteButton } from '~/shared/ui/delete-button'
 import { formatDate } from '~/shared/utils/dates/format-date'
@@ -29,13 +28,24 @@ export default function CreateClass() {
     class: data,
     error,
     liveStatus: status,
-    deleteClass, metadata
+    deleteClass,
+    metadata
   } = useClass(classId)
 
 
+  // console.log(data, metadata)
 
   if (!data && status === "loading") {
-    return <LoadingPage />
+    return <View>
+      <Stack.Screen
+        options={{
+          title: t("loading"),
+        }}
+      />
+      <View className='flex-1 items-center mt-28'>
+        <ActivityIndicator size="large" />
+      </View>
+    </View>
   }
 
   if (!data || error) {
@@ -61,7 +71,6 @@ export default function CreateClass() {
       <Stack.Screen
         options={{
           title: t("classDetails")
-
         }}
       />
       <MainLayout className='flex-1 px-6'>
@@ -79,11 +88,11 @@ export default function CreateClass() {
             }}
             asChild
           >
-            <Pressable
+            <Pressable android_ripple={{ color: "#aaa" }}
               onPressIn={() => {
                 impactAsync(ImpactFeedbackStyle.Light);
               }}
-              className='flex-row items-center gap-1 pt-2'>
+              className='flex-row items-center gap-1 bg-blue-50 px-3 py-1 rounded-full'>
               <MaterialIcons name='edit' size={14} color='#2563eb' />
 
               <Text className='text-blue-500'>
@@ -91,7 +100,7 @@ export default function CreateClass() {
               </Text>
             </Pressable>
           </Link>
-          <DeleteButton onDelete={deleteClass} deleteText={i18n.t("delete")} />
+          <DeleteButton onDelete={deleteClass} />
         </View>
 
         <View className='flex-row items-center gap-2 flex-wrap'>
@@ -107,14 +116,14 @@ export default function CreateClass() {
           <Chip>
             <MaterialIcons name="attach-money" size={15} color="#4b5563" />
             <Text>
-              {metadata.price}
+              {metadata?.price}
             </Text>
           </Chip>
 
           <Chip>
             <MaterialIcons name="access-time" size={15} color="#4b5563" />
             <Text>
-              {metadata.duration}
+              {metadata?.duration}
             </Text>
           </Chip>
           <Chip className={data.isPaid ? "border-green-500 bg-green-100" : "border-red-500 bg-red-100"}>
@@ -134,18 +143,20 @@ export default function CreateClass() {
         <View className='border-t border-neutral-500/30 mt-8 pt-4 flex items-center gap-2 flex-row flex-wrap'>
 
 
-          <Chip>
+          <Chip className='border-0 gap-[5px]'>
             <MaterialIcons name="create" size={15} color="#4b5563" />
             <Text className='first-letter:uppercase'>
-              {metadata.createdDaysAgo}
+              Created{` `}
+              {metadata?.createdDaysAgo}
             </Text>
           </Chip>
 
           {data.createdAt < data.updatedAt && (
-            <Chip>
+            <Chip className='border-0 gap-[5px]'>
               <MaterialIcons name="update" size={15} color="#4b5563" />
               <Text className='first-letter:uppercase'>
-                {metadata.updatedDaysAgo}
+                Updated{` `}
+                {metadata?.updatedDaysAgo}
               </Text>
             </Chip>
           )}

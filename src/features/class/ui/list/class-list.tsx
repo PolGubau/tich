@@ -1,18 +1,27 @@
 import { Link } from 'expo-router'
 import React from 'react'
-import { FlatList, Pressable, Text, View } from 'react-native'
+import { FlatList, Pressable, RefreshControl, Text, View } from 'react-native'
 import { ClassPrimitive } from '~/domain/class/types'
 import StudentChip from '~/features/student/ui/chips/student-chip'
 
 type Props = {
   classes: ClassPrimitive[]
   showStudent?: boolean
+  onReload?: () => void
+  isLoading?: boolean
 }
-export const ClassList = ({ classes, showStudent = true }: Props) => {
+export const ClassList = ({ classes, showStudent = true, onReload, isLoading = false }: Props) => {
 
   return (
     <FlatList
       data={classes}
+      refreshControl={
+        <RefreshControl
+          enabled={!!onReload}
+          refreshing={isLoading}
+          onRefresh={onReload}
+        />
+      }
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => {
         const parsedDate = new Date(item.date).toLocaleDateString("es-ES")

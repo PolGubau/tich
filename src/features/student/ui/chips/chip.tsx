@@ -4,6 +4,7 @@ import { View } from 'react-native'
 interface Props {
   children: React.ReactNode
   className?: string
+
 }
 export default function Chip({ children, className }: Props) {
   return (

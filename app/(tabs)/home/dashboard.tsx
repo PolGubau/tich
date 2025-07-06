@@ -8,7 +8,7 @@ import { MainLayout } from '~/shared/layouts/main-layout';
 
 export default function DashboardScreen() {
   const { studentsAmount } = useStudents()
-  const { totalClasses, totalHours, formattedEarnings, status, classes } = useClasses()
+  const { totalClasses, totalHours, formattedEarnings, status, classes, reload } = useClasses()
 
 
 
@@ -51,7 +51,7 @@ export default function DashboardScreen() {
         {classes.length > 0 && (
           <View className='gap-2 flex flex-col mb-48'>
             <Text className='text-xl px-2'>Your last classes</Text>
-            <ClassList classes={classes} />
+            <ClassList classes={classes} onReload={reload} isLoading={status === 'loading'} />
           </View>
         )}
 
