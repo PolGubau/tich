@@ -1,11 +1,23 @@
 import { useFocusEffect } from "@react-navigation/native";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Class } from "~/domain/class/class";
 import { createClass } from "~/domain/class/create-class";
+import { ClassPrimitive } from "~/domain/class/types";
 import { Status } from "~/shared/types/basics";
 import { classRepository } from "../infra/repo";
 
-export const useClasses = () => {
+
+type UseClassesReturn = {
+  classes: ClassPrimitive[];
+  status: Status;
+  error: string | null;
+  reload: () => Promise<void>;
+  totalClasses: number;
+  totalHours: number;
+  moneyEarned: number;
+  formattedEarnings: string;
+}
+export const useClasses = (): UseClassesReturn => {
   const [classes, setClasses] = useState<Class[]>([]);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -66,10 +78,6 @@ export const useClasses = () => {
     currency: 'EUR',
   });
 
-  const classesPrimitives = useMemo(() => {
-    return classes.map(c => c.toPrimitive());
-  }, [classes]);
 
-
-  return { classes: classesPrimitives, status, error, reload: fetchClasses, totalClasses, totalHours, moneyEarned, formattedEarnings };
+  return { classes: classes.map(c => c.toPrimitive()), status, error, reload: fetchClasses, totalClasses, totalHours, moneyEarned, formattedEarnings };
 }
