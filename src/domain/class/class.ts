@@ -164,6 +164,7 @@ export class Class {
   }
 
   static fromPrimitive(primitive: ClassPrimitive): Class {
+    console.log("primitive", primitive);
     return new Class({
       id: new Id(primitive.id),
       studentId: new Id(primitive.studentId),

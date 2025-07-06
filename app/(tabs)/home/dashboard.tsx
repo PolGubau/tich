@@ -48,15 +48,17 @@ export default function DashboardScreen() {
 
 
 
-        {classes.length > 0 && <View className='gap-2 flex flex-col'>
-          <Text className='text-xl px-2'>Your last classes</Text>
-          <ClassList classes={classes} />
-        </View>}
+        {classes.length > 0 && (
+          <View className='gap-2 flex flex-col mb-48'>
+            <Text className='text-xl px-2'>Your last classes</Text>
+            <ClassList classes={classes} />
+          </View>
+        )}
 
 
         {/* <Button onPress={deleteAllClasses} title="Delete all classes" color="#f87171" /> */}
 
-        <View className='absolute bottom-6 left-6 right-6'>
+        {classes.length === 0 && <View className='absolute bottom-6 left-6 right-6'>
 
           <Link href={{ pathname: "/class/create" }} asChild>
             <Pressable android_ripple={{ color: "#aaa" }}>
@@ -71,7 +73,7 @@ export default function DashboardScreen() {
           </Link>
 
 
-        </View>
+        </View>}
       </MainLayout>
     </>
   );

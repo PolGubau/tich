@@ -27,8 +27,10 @@ export const useClasses = (): UseClassesReturn => {
     setError(null);
     try {
       const fetchedClasses = await classRepository.findAll();
-      if (fetchedClasses) {
-        setClasses(fetchedClasses.map(createClass));
+      if (fetchedClasses.length > 0) {
+        const classesEntity = fetchedClasses.map(createClass);
+        // console.log(classesEntity, "classesEntity");
+        setClasses(classesEntity);
         setStatus("success");
       } else {
         setError("No classes found");
