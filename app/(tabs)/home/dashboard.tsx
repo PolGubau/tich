@@ -60,7 +60,7 @@ export default function DashboardScreen() {
 
         {classes.length === 0 && <View className='absolute bottom-6 left-6 right-6'>
 
-          <Link href={{ pathname: "/class/create" }} asChild>
+          <Link href={{ pathname: "/create-class" }} asChild>
             <Pressable android_ripple={{ color: "#aaa" }}>
               <View className='p-4 px-6 border-b border-gray-200 flex gap-2 items-center flex-row rounded-xl bg-blue-500/30'>
 

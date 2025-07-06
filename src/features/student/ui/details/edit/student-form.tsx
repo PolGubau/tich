@@ -4,7 +4,6 @@ import { useState } from "react";
 import {
   ActivityIndicator,
   Button,
-  Image,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -14,6 +13,7 @@ import {
   View
 } from "react-native";
 import { StudentCreatePrimitive, StudentPrimitive } from "~/domain/student/types";
+import Avatar from "~/shared/components/Avatar";
 
 interface Props {
   initialValues: StudentCreatePrimitive | StudentPrimitive
@@ -69,7 +69,7 @@ export const StudentForm = ({ initialValues, onSubmit, isLoading }: Props) => {
 
         <View className="flex items-center justify-center mb-6 relative">
 
-          <Image source={{ uri: avatarUrl }} className="w-24 h-24 rounded-full mb-4 bg-neutral-200" />
+          <Avatar avatarUrl={avatarUrl} />
           <Pressable onPress={pickImage} className="absolute -bottom-2 bg-white rounded-full p-2">
             <MaterialIcons name="edit" size={18} color="#2563eb" />
           </Pressable>

@@ -7,9 +7,10 @@
       "~/*": [
         "./src/*"
       ],
-      "@env": [
-        "./src/lib/env.js"
-      ]
+      "~shared/*": [
+        "./src/features/shared/*"
+      ],
+   
     },
     "esModuleInterop": true,
     "checkJs": true

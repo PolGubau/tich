@@ -2,10 +2,11 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics'
 import { Link } from 'expo-router'
 import React from 'react'
-import { Image, Pressable, Text, View } from 'react-native'
+import { Pressable, Text, View } from 'react-native'
 import { ClassPrimitive } from '~/domain/class/types'
 import { StudentPrimitive } from '~/domain/student/types'
 import { ClassList } from '~/features/class/ui/list/class-list'
+import Avatar from '~/shared/components/Avatar'
 import { MainLayout } from '~/shared/layouts/main-layout'
 import { DeleteStudentButton } from './student-delete-button'
 
@@ -19,12 +20,8 @@ export default function StudentDetails({ student, classes, onDelete }: Props) {
     <MainLayout className=''>
       <View accessibilityRole="header" className='px-6 flex-row items-center gap-6'>
 
-        <Image
-          source={{ uri: student.avatarUrl ?? undefined }}
-          className='w-20 h-20 rounded-full bg-neutral-200'
-          accessibilityLabel={`${student.name}'s avatar`}
-          accessibilityRole="image"
-        />
+        <Avatar avatarUrl={student.avatarUrl} className='w-[50px] h-[50px]' iconSize={30} />
+
         <View>
 
           <Text className='text-xl font-bold'>{student.name}</Text>

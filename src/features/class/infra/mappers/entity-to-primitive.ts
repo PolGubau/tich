@@ -1,5 +1,5 @@
 import { ClassEntity } from "db/schema";
-import { ClassPrimitive } from "~/domain/class/types";
+import { ClassPrimitive, CurrencyCode } from "~/domain/class/types";
 
 export const classEntityToPrimitiveMapper = (entity: ClassEntity): ClassPrimitive => {
   return {
@@ -10,7 +10,7 @@ export const classEntityToPrimitiveMapper = (entity: ClassEntity): ClassPrimitiv
     topic: entity.topic,
     isPaid: Boolean(entity.isPaid),
     packId: entity.packId ?? null,
-    price: { value: entity.priceValue, currency: entity.priceCurrency },
+    price: { value: entity.priceValue, currency: entity.priceCurrency as CurrencyCode },
     notes: entity.notes,
     createdAt: entity.createdAt,
     updatedAt: entity.updatedAt,

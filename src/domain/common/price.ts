@@ -1,9 +1,9 @@
-import { formatCurrency } from "~/shared/utils/numbers/format-currency";
+import { CurrencyCode, PricePrimitive } from "../class/types";
 
 export class Price {
   constructor(
     readonly _value: number,
-    readonly _currency: string = "EUR"
+    readonly _currency: CurrencyCode = "EUR"
 
   ) {
     if (!_value) throw new Error("Price cannot be empty");
@@ -12,18 +12,14 @@ export class Price {
   get value(): number {
     return this._value;
   }
-  get currency(): string {
+  get currency(): CurrencyCode {
     return this._currency;
-  }
-
-  get formattedValue(): string {
-    return formatCurrency(this._value, this._currency);
   }
 
   equals(other: Price): boolean {
     return this._value === other._value && this._currency === other._currency;
   }
-  toPrimitive(): { value: number; currency: string } {
+  toPrimitive(): PricePrimitive {
     return {
       value: this._value,
       currency: this._currency

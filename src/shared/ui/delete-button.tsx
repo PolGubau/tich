@@ -1,27 +1,35 @@
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons"
 import { impactAsync, ImpactFeedbackStyle } from "expo-haptics"
 import { Alert, Pressable, Text } from "react-native"
+import { t } from "../i18n/i18n"
+import { TranslationKeys } from "../i18n/i18n-types"
 
 type DeleteButtonProps = {
   onDelete: () => void
   alertMessages?: {
-    title?: string
-    message?: string
-    cancel?: string
-    confirm?: string
+    title: TranslationKeys
+    message: TranslationKeys
+    cancel: TranslationKeys
+    confirm: TranslationKeys
   }
   deleteText?: string
 
 }
 
-export function DeleteButton({ onDelete, alertMessages, deleteText = "Eliminar" }: DeleteButtonProps) {
+export function DeleteButton({ onDelete, alertMessages = {
+  title: "delete",
+  message: "delete_confirmation",
+  cancel: "cancel",
+  confirm: "delete"
+}, deleteText = "delete" }: DeleteButtonProps) {
+  const { title, message, cancel, confirm } = alertMessages
   const confirmDelete = () => {
     Alert.alert(
-      alertMessages?.title || "Confirmar eliminación",
-      alertMessages?.message || "¿Seguro que quieres borrar este estudiante? Esta acción no se puede deshacer.",
+      t(title),
+      message || "¿Seguro que quieres borrar este estudiante? Esta acción no se puede deshacer.",
       [
-        { text: alertMessages?.cancel, style: "cancel" },
-        { text: alertMessages?.confirm, style: "destructive", onPress: onDelete },
+        { text: t(cancel), style: "cancel" },
+        { text: t(confirm), style: "destructive", onPress: onDelete },
       ],
       { cancelable: true }
     )

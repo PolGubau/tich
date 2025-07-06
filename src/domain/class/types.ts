@@ -3,12 +3,14 @@ import { DefaultDates } from "~/shared/types/defaultDates"
 import { StudentPrimitive } from "../student/types"
 
 
+export type CurrencyCode = "EUR"
 
 
-type PricePrimitive = {
+export type PricePrimitive = {
   value: number
-  currency: string
+  currency: CurrencyCode
 }
+
 /**
  * ClassPrimitive type definition
  * This type represents the structure of a class object in the system.

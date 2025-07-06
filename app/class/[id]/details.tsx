@@ -2,10 +2,13 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics'
 import { Link, Stack, useLocalSearchParams } from 'expo-router'
 import React from 'react'
-import { ActivityIndicator, Pressable, Text, View } from 'react-native'
+import { Pressable, Text, View } from 'react-native'
 import { useClass } from '~/features/class/model/use-class'
+import Chip from '~/features/student/ui/chips/chip'
 import StudentChip from '~/features/student/ui/chips/student-chip'
 import { ErrorBoundary } from '~/shared/components/ErrorBoundary'
+import LoadingPage from '~/shared/components/loading-page'
+import i18n, { t } from '~/shared/i18n/i18n'
 import { MainLayout } from '~/shared/layouts/main-layout'
 import { DeleteButton } from '~/shared/ui/delete-button'
 import { formatDate } from '~/shared/utils/dates/format-date'
@@ -26,43 +29,16 @@ export default function CreateClass() {
     class: data,
     error,
     liveStatus: status,
-    deleteClass
+    deleteClass, metadata
   } = useClass(classId)
 
 
 
   if (!data && status === "loading") {
-    return (
-      <View>
-        <Stack.Screen
-          options={{
-            title: "Loading...",
-          }}
-        />
-        <View className='flex-1 items-center mt-28'>
-          <ActivityIndicator size="large" />
-        </View>
-      </View>
-    )
+    return <LoadingPage />
   }
 
-  if (error) {
-    return (
-      <>
-        <Stack.Screen
-          options={{
-            title: "Ups...",
-          }}
-        />
-        <View className='flex-1 items-center mt-28'>
-          <Text className='text-red-500 text-center'>
-            {error || "Class not found"}
-          </Text>
-        </View>
-      </>
-    )
-  }
-  if (!data) {
+  if (!data || error) {
     return (
       <>
         <Stack.Screen
@@ -84,7 +60,7 @@ export default function CreateClass() {
     <ErrorBoundary>
       <Stack.Screen
         options={{
-          title: "Class Details",
+          title: t("classDetails")
 
         }}
       />
@@ -111,48 +87,69 @@ export default function CreateClass() {
               <MaterialIcons name='edit' size={14} color='#2563eb' />
 
               <Text className='text-blue-500'>
-                Edit
+                {t("edit")}
               </Text>
             </Pressable>
           </Link>
-          <DeleteButton onDelete={deleteClass} deleteText="Eliminar clase"
-            alertMessages={{
-              message: "¿Seguro que quieres borrar esta clase? Esta acción no se puede deshacer.",
-            }} />
+          <DeleteButton onDelete={deleteClass} deleteText={i18n.t("delete")} />
+        </View>
+
+        <View className='flex-row items-center gap-2 flex-wrap'>
+
+          <StudentChip studentId={data.studentId} className='border border-neutral-500/30 p-1 rounded-full pr-2' />
+
+          <Chip>
+            <MaterialIcons name="calendar-today" size={15} color="#4b5563" />
+            <Text>
+              {data?.date ? formatDate(data?.date) : "No date set"}
+            </Text>
+          </Chip>
+          <Chip>
+            <MaterialIcons name="attach-money" size={15} color="#4b5563" />
+            <Text>
+              {metadata.price}
+            </Text>
+          </Chip>
+
+          <Chip>
+            <MaterialIcons name="access-time" size={15} color="#4b5563" />
+            <Text>
+              {metadata.duration}
+            </Text>
+          </Chip>
+          <Chip className={data.isPaid ? "border-green-500 bg-green-100" : "border-red-500 bg-red-100"}>
+            <MaterialIcons name={data.isPaid ? "check" : "do-not-disturb"} size={15} color="#4b5563" />
+            <Text>
+              {data?.isPaid ? "Paid" : "Not paid"}
+            </Text>
+          </Chip>
+
         </View>
 
 
-        <StudentChip studentId={data.studentId} />
-
-        <Text className='text-lg mt-2'>
-          Date: {data?.date ? formatDate(data?.date) : "No date set"}
+        <Text className='text-lg mt-8'>
+          {data?.notes}
         </Text>
 
-        <Text className='text-lg mt-2'>
-          Duration: {data?.durationMinutes} minutes
-        </Text>
-
-        <Text className='text-lg mt-2'>
-          Notes: {data?.notes}
-        </Text>
+        <View className='border-t border-neutral-500/30 mt-8 pt-4 flex items-center gap-2 flex-row flex-wrap'>
 
 
+          <Chip>
+            <MaterialIcons name="create" size={15} color="#4b5563" />
+            <Text className='first-letter:uppercase'>
+              {metadata.createdDaysAgo}
+            </Text>
+          </Chip>
 
-        <Text className='text-lg mt-2'>
-          Is paid: {data?.isPaid.toString()}
-        </Text>
-
-        <Text className='text-lg mt-2'>
-          Price: {data?.price.value} {data?.price.currency}
-        </Text>
-
-        <Text className='text-lg mt-2'>
-          createdAt: {data?.createdAt?.toLocaleTimeString()}
-        </Text>
-
-        <Text className='text-lg mt-2'>
-          updatedAt: {data?.updatedAt?.toLocaleTimeString()}
-        </Text>
+          {data.createdAt < data.updatedAt && (
+            <Chip>
+              <MaterialIcons name="update" size={15} color="#4b5563" />
+              <Text className='first-letter:uppercase'>
+                {metadata.updatedDaysAgo}
+              </Text>
+            </Chip>
+          )}
+        </View>
 
 
 

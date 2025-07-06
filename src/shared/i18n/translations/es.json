@@ -1,0 +1,16 @@
+{
+  "today": "hoy",
+  "yesterday": "ayer",
+  "days_ago": "hace {{count}} días",
+  "unknown": "Desconocido",
+  "minutes": "{{count}} minutos",
+  "edit": "Editar",
+  "delete": "Eliminar",
+  "delete_confirmation": "¿Seguro que quieres borrar esta clase? Esta acción no se puede deshacer.",
+  "paid": "Pagado",
+  "classDetails": "Detalles de la clase",
+  "not_paid": "No pagado",
+  "loading": "Cargando...",
+  "cancel": "Cancelar",
+  "confirm": "Confirmar"
+}
