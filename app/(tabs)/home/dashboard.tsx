@@ -1,6 +1,5 @@
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { Link, Stack } from 'expo-router';
-import { Pressable, Text, View } from 'react-native';
+import { Stack } from 'expo-router';
+import { Text, View } from 'react-native';
 import { useClasses } from '~/features/class/model/useClasses';
 import { ClassList } from '~/features/class/ui/list/class-list';
 import { useStudents } from '~/features/student/model/use-students';
@@ -57,23 +56,6 @@ export default function DashboardScreen() {
 
 
         {/* <Button onPress={deleteAllClasses} title="Delete all classes" color="#f87171" /> */}
-
-        {classes.length === 0 && <View className='absolute bottom-6 left-6 right-6'>
-
-          <Link href={{ pathname: "/create-class" }} asChild>
-            <Pressable android_ripple={{ color: "#aaa" }}>
-              <View className='p-4 px-6 border-b border-gray-200 flex gap-2 items-center flex-row rounded-xl bg-blue-500/30'>
-
-                <MaterialIcons name="add" size={20} color="black" />
-
-                <Text className='text-lg'>New Class </Text>
-
-              </View>
-            </Pressable>
-          </Link>
-
-
-        </View>}
       </MainLayout>
     </>
   );

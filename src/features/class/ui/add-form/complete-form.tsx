@@ -1,6 +1,5 @@
 import { Picker } from '@react-native-picker/picker';
 
-import { Link } from 'expo-router';
 import { useState } from "react";
 import { Text, View } from "react-native";
 import { ClassCreatePrimitive, PartialClassWithDefinedStudent } from "~/domain/class/types";
@@ -62,8 +61,8 @@ export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }:
           </Picker>
         ) : (
           <Text className="text-neutral-500 text-center p-4">
-            No students available. <Link className='text-blue-400 underline' href={"/(tabs)/students/create"}>Please add a student first.
-            </Link>
+            No students available. Please add a student first.
+
           </Text>
         )}
 
