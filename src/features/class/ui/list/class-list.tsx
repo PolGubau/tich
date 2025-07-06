@@ -28,7 +28,7 @@ export const ClassList = ({ classes, showStudent = true }: Props) => {
                   <StudentChip studentId={item.studentId} />
                 )}
                 <Text className="text-lg font-semibold pl-0.5">{item.topic}</Text>
-                <Text className='line-clamp-3 pl-0.5'>{item.notes}</Text>
+                <Text className='pl-0.5 opacity-75' numberOfLines={2}>{item.notes}</Text>
               </View>
               <View>
 

@@ -5,14 +5,18 @@ import { IconSymbol } from '~/shared/components/ui/IconSymbol';
 
 
 
+
 export default function TabLayout() {
 
+  const isLargeScreen = Platform.OS === 'web' && window.innerWidth >= 768;
   return (
 
     <Tabs
       screenOptions={{
+        animation: "fade",
         headerShown: false,
         tabBarButton: HapticTab,
+        tabBarPosition: isLargeScreen ? 'left' : 'bottom',
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect

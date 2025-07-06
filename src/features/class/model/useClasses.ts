@@ -1,5 +1,5 @@
 import { useFocusEffect } from "@react-navigation/native";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Class } from "~/domain/class/class";
 import { createClass } from "~/domain/class/create-class";
 import { ClassPrimitive } from "~/domain/class/types";
@@ -29,7 +29,6 @@ export const useClasses = (): UseClassesReturn => {
       const fetchedClasses = await classRepository.findAll();
       if (fetchedClasses.length > 0) {
         const classesEntity = fetchedClasses.map(createClass);
-        // console.log(classesEntity, "classesEntity");
         setClasses(classesEntity);
         setStatus("success");
       } else {
@@ -64,8 +63,7 @@ export const useClasses = (): UseClassesReturn => {
   const totalMinutes = classes.reduce((total, c) => {
     const duration = c.durationMinutes;
     return total + (duration ? duration : 0);
-  }
-    , 0)
+  }, 0)
 
   const totalHours = Math.floor(totalMinutes / 60);
 
@@ -80,6 +78,10 @@ export const useClasses = (): UseClassesReturn => {
     currency: 'EUR',
   });
 
+  const primitiveClasses = useMemo(() => {
+    return classes.map(c => c.toPrimitive());
+  }, [classes]);
 
-  return { classes: classes.map(c => c.toPrimitive()), status, error, reload: fetchClasses, totalClasses, totalHours, moneyEarned, formattedEarnings };
+
+  return { classes: primitiveClasses, status, error, reload: fetchClasses, totalClasses, totalHours, moneyEarned, formattedEarnings };
 }
