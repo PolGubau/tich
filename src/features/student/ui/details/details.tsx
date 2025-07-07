@@ -14,9 +14,11 @@ import { DeleteStudentButton } from './student-delete-button'
 interface Props {
   student: StudentPrimitive
   onDelete: () => void
+  onReload?: () => void
   classes: ClassPrimitive[]
+  areClassesLoading: boolean
 }
-export default function StudentDetails({ student, classes, onDelete }: Props) {
+export default function StudentDetails({ student, classes, onDelete, onReload, areClassesLoading }: Props) {
   return (
     <MainLayout className=''>
       <View accessibilityRole="header" className='px-6 flex-row items-center gap-6'>
@@ -70,11 +72,7 @@ export default function StudentDetails({ student, classes, onDelete }: Props) {
             </Pressable>
           </Link>
         </View>
-        <ClassList classes={classes} showStudent={false} />
-
-        <View className='px-6 py-2 mt-4'>
-          <Text>{`Total ${classes.length}`}</Text>
-        </View>
+        <ClassList isLoading={areClassesLoading} classes={classes} showStudent={false} onReload={onReload} />
       </View>
 
 

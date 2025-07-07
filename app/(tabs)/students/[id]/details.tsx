@@ -11,7 +11,7 @@ export default function DetailsScreen() {
   const { id } = useLocalSearchParams()
 
   const { student, delete: deleteStudent } = useStudent(Number(id))
-  const { classes } = useClassByStudent(Number(id))
+  const { classes, reload, status: classesStatus } = useClassByStudent(Number(id))
 
   if (!student) {
     return (
@@ -52,7 +52,7 @@ export default function DetailsScreen() {
           },
         }}
       />
-      <StudentDetails student={student} classes={classes} onDelete={deleteStudent} />
+      <StudentDetails onReload={reload} areClassesLoading={classesStatus==="loading"} student={student} classes={classes} onDelete={deleteStudent} />
 
     </View>
   )

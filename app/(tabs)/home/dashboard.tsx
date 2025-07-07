@@ -35,7 +35,7 @@ export default function DashboardScreen() {
           {dashboardItems.map((item, idx) => (
             <View key={idx} className="w-1/2 p-2">
               <View className="bg-blue-500/20 rounded-xl p-4">
-                <Text className="text-3xl font-bold text-blue-500" applyColor={false} type="subtitle">{item.value}</Text>
+                <Text className="text-blue-500" customColor type="subtitle">{item.value}</Text>
                 {status === 'loading' ? (
                   <Text className="text-gray-500">Loading...</Text>
                 ) : (

@@ -1,9 +1,11 @@
 import { Picker } from '@react-native-picker/picker';
 
 import { useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { ClassCreatePrimitive, PartialClassWithDefinedStudent } from "~/domain/class/types";
 import { useStudents } from "~/features/student/model/use-students";
+import { Text } from '~/shared/components/Text';
+import { useColorScheme } from '~/shared/hooks/useColorScheme';
 import { BaseClassForm } from "./base-form";
 
 type Props = {
@@ -14,6 +16,7 @@ type Props = {
 }
 export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }: Props) {
   const { students } = useStudents()
+  const theme = useColorScheme()
 
   const [studentId, setStudentId] = useState<string | null>(initialValues.studentId !== null ? initialValues.studentId.toString() : null);
 
@@ -35,18 +38,19 @@ export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }:
   return (
     <View className="flex-1">
 
-      <Text className="font-semibold mb-1">
+      <Text className="mb-1">
         Who is this class for? *
       </Text>
 
 
-      <View className="border border-neutral-500/60 text-lg rounded-lg mb-4"
+      <View className="border border-neutral-500/60 text-lg rounded-lg mb-4 "
       >
         {students?.length > 0 ? (
           <Picker
             placeholder='Select a student'
             prompt='Select a student'
-            mode='dropdown'
+            mode='dropdown' dropdownIconColor={theme === 'dark' ? '#fff' : '#000'}
+            style={{ color: theme === 'dark' ? '#fff' : '#000' }}
             enabled={students.length > 0}
             selectedValue={studentId}
 
@@ -60,9 +64,8 @@ export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }:
             ))}
           </Picker>
         ) : (
-          <Text className="text-neutral-500 text-center p-4">
+          <Text customColor className="text-neutral-500 text-center p-4">
             No students available. Please add a student first.
-
           </Text>
         )}
 

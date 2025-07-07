@@ -17,6 +17,7 @@ export const useClassByStudent = (id: StudentPrimitive["id"]) => {
 
 
   const load = useCallback(async () => {
+    setStatus("loading");
     const data = await abstractLoad({
       id: new Id(id),
       getter: classRepository.findByStudentId,
@@ -31,6 +32,7 @@ export const useClassByStudent = (id: StudentPrimitive["id"]) => {
     setClasses(data.map((c) => {
       return createClass(c);
     }));
+    setStatus("success");
 
   }, [id]);
 
@@ -61,5 +63,5 @@ export const useClassByStudent = (id: StudentPrimitive["id"]) => {
     return classes.map(c => c.toPrimitive());
   }, [classes]);
 
-  return { classes: classesPrimitives, status, error };
+  return { classes: classesPrimitives, status, error, reload: load };
 } 

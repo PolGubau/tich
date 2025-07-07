@@ -27,7 +27,7 @@ export function DeleteButton({ onDelete, alertMessages = {
   const confirmDelete = () => {
     Alert.alert(
       t(title),
-      message || "¿Seguro que quieres borrar este estudiante? Esta acción no se puede deshacer.",
+      t(message) || "¿Seguro que quieres borrar este estudiante? Esta acción no se puede deshacer.",
       [
         { text: t(cancel), style: "cancel" },
         { text: t(confirm), style: "destructive", onPress: onDelete },

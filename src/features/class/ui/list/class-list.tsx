@@ -25,6 +25,15 @@ export const ClassList = ({ classes, showStudent = true, onReload, isLoading = f
           onRefresh={onReload}
         />
       }
+      ListFooterComponent={() => (
+        isLoading ? (
+          <View className='flex-1 items-center mt-4'>
+            <MaterialIcons name="hourglass-top" size={24} color="#00000080" />
+          </View>
+        ) : <View className='px-4 py-1 mt-4'>
+          <Text>{`Total ${classes.length}`}</Text>
+        </View>
+      )}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => {
         const parsedDate = new Date(item.date).toLocaleDateString("es-ES")

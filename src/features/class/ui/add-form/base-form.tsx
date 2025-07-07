@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Button, KeyboardAvoidingView, Platform, ScrollView, Switch, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Button, KeyboardAvoidingView, Platform, ScrollView, Switch, View } from 'react-native';
 import { PartialClassWithDefinedStudent } from "~/domain/class/types";
+import { Text } from '~/shared/components/Text';
+import TextInput from '~/shared/components/ui/TextInput';
 import DateInput from '~/shared/ui/date-input';
 import TimeInput from '~/shared/ui/time-input';
 
@@ -89,7 +91,6 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit = 
           autoCapitalize="sentences"
           autoCorrect={false}
           placeholder="Topic of the class"
-          className="border border-neutral-500/60 px-3 py-2 text-lg rounded-lg mb-4"
         />
         <Text className="font-semibold mb-1">Notas *</Text>
         <TextInput editable={!isLoading}
@@ -99,7 +100,7 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit = 
           placeholder="In this class we have seen..."
           multiline
           numberOfLines={6}
-          className="border border-neutral-500/60 px-3 py-2 text-base rounded-lg mb-4 min-h-20"
+          className="min-h-20"
           maxLength={500}
 
         />
@@ -113,7 +114,6 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit = 
           }}
           keyboardType="numeric"
           placeholder='Price of the class (per hour)'
-          className="border border-neutral-500/60 px-3 py-2 text-lg rounded-lg mb-4"
         />
 
         <View className="flex-row items-center justify-between mb-4">
@@ -135,7 +135,6 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit = 
           }}
           keyboardType="numeric"
           placeholder='Duration of the class (in minutes)'
-          className="border border-neutral-500/60 px-3 py-2 text-lg rounded-lg mb-4"
         />
         <DateInput
           label="Date of the class"
