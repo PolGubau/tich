@@ -12,8 +12,11 @@ import 'react-native-reanimated';
 import * as schema from "~/../db/schema";
 import migrations from '~/../drizzle/migrations';
 import { ErrorBoundary } from '~/shared/components/ErrorBoundary';
+import { useColorScheme } from '~/shared/hooks/useColorScheme';
 import { MainLayout } from '~/shared/layouts/main-layout';
 import "~/shared/styles/global.css";
+
+
 ErrorUtils.setGlobalHandler((error, isFatal) => {
   console.log('Global error handler:', error, isFatal);
   // Aquí puedes mostrar UI alternativa o reportar a un servicio
@@ -26,6 +29,8 @@ export default function RootLayout() {
 
 
   const db = drizzle(expoDb, { schema });
+  const colorScheme = useColorScheme();
+
 
   const { success, error: dbError } = useMigrations(db, migrations);
 
@@ -68,17 +73,13 @@ export default function RootLayout() {
         useSuspense
         options={{ enableChangeListener: true }}
       >
-
-        <Stack screenOptions={{
-          presentation: 'card',
-
-          contentStyle: { backgroundColor: '#fff' },
-        }}>
+        <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="class" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
-        <StatusBar style="auto" />
+        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+
       </SQLiteProvider>
     </ErrorBoundary>
 

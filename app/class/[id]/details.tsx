@@ -70,7 +70,7 @@ export default function CreateClass() {
     <ErrorBoundary>
       <Stack.Screen
         options={{
-          title: t("classDetails")
+          title: t("class_details")
         }}
       />
       <MainLayout className='flex-1 px-6'>

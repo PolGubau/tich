@@ -1,6 +1,7 @@
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons"
 import { impactAsync, ImpactFeedbackStyle } from "expo-haptics"
-import { Alert, Pressable, Text } from "react-native"
+import { Alert, Pressable } from "react-native"
+import { Text } from "../components/Text"
 import { t } from "../i18n/i18n"
 import { TranslationKeys } from "../i18n/i18n-types"
 
@@ -39,6 +40,6 @@ export function DeleteButton({ onDelete, alertMessages = {
     impactAsync(ImpactFeedbackStyle.Light);
   }} className='flex-row items-center gap-1' onPress={confirmDelete}>
     <MaterialIcons name='delete' size={14} color='#ef4444' />
-    <Text className='text-red-500'>{t(deleteText)}</Text>
+    <Text customColor className='text-red-500'>{t(deleteText)}</Text>
   </Pressable>)
 }

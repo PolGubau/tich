@@ -3,12 +3,15 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics';
 import { Link, useNavigation } from 'expo-router';
 import { useLayoutEffect } from 'react';
-import { ActivityIndicator, NativeSyntheticEvent, Pressable, Text, TextInputChangeEventData, View } from 'react-native';
+import { ActivityIndicator, NativeSyntheticEvent, Pressable, TextInputChangeEventData, View } from 'react-native';
 import { useStudents } from '~/features/student/model/use-students';
 import { StudentList } from '~/features/student/ui/student-list/student-list';
+import { Text } from '~/shared/components/Text';
+import { useColorScheme } from '~/shared/hooks/useColorScheme';
 import { MainLayout } from '~/shared/layouts/main-layout';
 export default function StudentsScreen() {
   const { students, reload, status, setQuery } = useStudents();
+  const theme = useColorScheme();
 
 
 
@@ -47,13 +50,13 @@ export default function StudentsScreen() {
     <MainLayout className='py-1'>
 
       <Link href={{ pathname: "/students/create" }} asChild>
-        <Pressable android_ripple={{ color: "#aaa" }} onPressIn={() => {
+        <Pressable android_ripple={{ color: "#dddddd50" }} onPressIn={() => {
           impactAsync(ImpactFeedbackStyle.Light);
         }} >
-          <View className='p-4 px-6 border-b border-gray-200 flex gap-2 items-center flex-row'>
+          <View className='p-4 px-6 border-b border-gray-300/30 flex gap-2 items-center flex-row'>
 
-            <Text className='text-3xl'>
-              <MaterialIcons name="add" size={24} color="black" />
+            <Text>
+              <MaterialIcons name="add" size={24} />
             </Text>
             <Text className='text-xl'>New Student</Text>
 

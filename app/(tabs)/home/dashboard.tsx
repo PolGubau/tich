@@ -1,8 +1,10 @@
 import { Stack } from 'expo-router';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { useClasses } from '~/features/class/model/useClasses';
 import { ClassList } from '~/features/class/ui/list/class-list';
 import { useStudents } from '~/features/student/model/use-students';
+import { Text } from '~/shared/components/Text';
+import { t } from '~/shared/i18n/i18n';
 import { MainLayout } from '~/shared/layouts/main-layout';
 
 export default function DashboardScreen() {
@@ -13,27 +15,27 @@ export default function DashboardScreen() {
 
 
   const dashboardItems = [
-    { label: 'students', value: studentsAmount },
-    { label: 'classes made', value: totalClasses },
-    { label: 'hours taught', value: totalHours },
-    { label: 'earnings', value: formattedEarnings },
+    { label: t('students'), value: studentsAmount },
+    { label: t('classes_made'), value: totalClasses },
+    { label: t('hours_taught'), value: totalHours },
+    { label: t('earnings'), value: formattedEarnings },
   ]
 
   return (
     <>
       <Stack.Screen
         options={{
-          title: 'Dashboard',
+          title: t("dashboard"),
           headerShown: true,
           headerShadowVisible: false,
         }}
       />
-      <MainLayout className='px-6 h-full relative gap-10'>
-        <View className="flex-row flex-wrap -m-2">
+      <MainLayout className='px-0 h-full relative gap-6'>
+        <View className="flex-row flex-wrap -m-2 px-2">
           {dashboardItems.map((item, idx) => (
             <View key={idx} className="w-1/2 p-2">
               <View className="bg-blue-500/20 rounded-xl p-4">
-                <Text className="text-3xl font-bold text-blue-500">{item.value}</Text>
+                <Text className="text-3xl font-bold text-blue-500" applyColor={false} type="subtitle">{item.value}</Text>
                 {status === 'loading' ? (
                   <Text className="text-gray-500">Loading...</Text>
                 ) : (
@@ -49,7 +51,7 @@ export default function DashboardScreen() {
 
         {classes.length > 0 && (
           <View className='gap-2 flex flex-col mb-48'>
-            <Text className='text-xl px-2'>Your last classes</Text>
+            <Text className='text-xl px-4'>{t("last_classes")}</Text>
             <ClassList classes={classes} onReload={reload} isLoading={status === 'loading'} />
           </View>
         )}

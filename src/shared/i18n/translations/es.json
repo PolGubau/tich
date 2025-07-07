@@ -8,9 +8,16 @@
   "delete": "Eliminar",
   "delete_confirmation": "¿Seguro que quieres borrar esta clase? Esta acción no se puede deshacer.",
   "paid": "Pagado",
-  "classDetails": "Detalles de la clase",
+  "class_details": "Detalles de la clase",
   "not_paid": "No pagado",
   "loading": "Cargando...",
   "cancel": "Cancelar",
-  "confirm": "Confirmar"
+  "confirm": "Confirmar",
+  "last_classes": "Tus últimas clases",
+  "class_list": "Lista de clases",
+  "dashboard": "Panel de control",
+  "students": "Estudiantes",
+  "classes_made": "Clases realizadas",
+  "hours_taught": "Horas enseñadas",
+  "earnings": "Ganancias"
 }
