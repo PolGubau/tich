@@ -44,7 +44,7 @@ export const ClassList = ({ classes, showStudent = true, onReload, isLoading = f
             params: { id: item.id.toString() }
           }} asChild>
 
-            <Pressable android_ripple={{ color: "#dddddd50" }} className="gap-4 py-2 border-b border-neutral-400/30 flex-row items-center justify-between px-4">
+            <Pressable android_ripple={{ color: "#dddddd50" }} className="gap-4 py-3 border-b border-neutral-400/30 flex-row items-center justify-between px-4">
               <View className='flex-1 gap-1'>
                 {showStudent && (
                   <StudentChip studentId={item.studentId} />
