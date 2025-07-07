@@ -1,3 +1,4 @@
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { DATABASE_NAME } from 'db/utils';
 import { drizzle } from 'drizzle-orm/expo-sqlite';
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
@@ -73,13 +74,16 @@ export default function RootLayout() {
         useSuspense
         options={{ enableChangeListener: true }}
       >
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="class" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
 
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="class" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+          <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+
+        </ThemeProvider>
       </SQLiteProvider>
     </ErrorBoundary>
 

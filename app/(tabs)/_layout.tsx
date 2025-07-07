@@ -1,20 +1,16 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
 import { HapticTab } from '~/shared/components/HapticTab';
 import { IconSymbol } from '~/shared/components/ui/IconSymbol';
-import { useColorScheme } from '~/shared/hooks/useColorScheme';
-
+ 
 
 
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
 
   const isLargeScreen = Platform.OS === 'web' && window.innerWidth >= 768;
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-
+ 
       <Tabs
         screenOptions={{
           animation: "fade",
@@ -54,6 +50,5 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-    </ThemeProvider>
-  );
+   );
 }

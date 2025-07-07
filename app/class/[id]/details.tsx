@@ -2,11 +2,12 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics'
 import { Link, Stack, useLocalSearchParams } from 'expo-router'
 import React from 'react'
-import { ActivityIndicator, Pressable, Text, View } from 'react-native'
+import { ActivityIndicator, Pressable, View } from 'react-native'
 import { useClass } from '~/features/class/model/use-class'
 import Chip from '~/features/student/ui/chips/chip'
 import StudentChip from '~/features/student/ui/chips/student-chip'
 import { ErrorBoundary } from '~/shared/components/ErrorBoundary'
+import { Text } from '~/shared/components/Text'
 import { t } from '~/shared/i18n/i18n'
 import { MainLayout } from '~/shared/layouts/main-layout'
 import { DeleteButton } from '~/shared/ui/delete-button'
@@ -92,7 +93,7 @@ export default function CreateClass() {
               onPressIn={() => {
                 impactAsync(ImpactFeedbackStyle.Light);
               }}
-              className='flex-row items-center gap-1 bg-blue-50 px-3 py-1 rounded-full'>
+              className='flex-row items-center gap-1 bg-blue-50 dark:bg-blue-700/30 px-3 py-1 rounded-full'>
               <MaterialIcons name='edit' size={14} color='#2563eb' />
 
               <Text className='text-blue-500'>
@@ -105,7 +106,7 @@ export default function CreateClass() {
 
         <View className='flex-row items-center gap-2 flex-wrap'>
 
-          <StudentChip studentId={data.studentId} className='border border-neutral-500/30 p-1 rounded-full pr-2' />
+          <StudentChip studentId={data.studentId} className='border border-neutral-500/30 dark:border-neutral-700 p-1.5 rounded-full pr-2 ' />
 
           <Chip>
             <MaterialIcons name="calendar-today" size={15} color="#4b5563" />
@@ -126,7 +127,7 @@ export default function CreateClass() {
               {metadata?.duration}
             </Text>
           </Chip>
-          <Chip className={data.isPaid ? "border-green-500 bg-green-100" : "border-red-500 bg-red-100"}>
+          <Chip className={data.isPaid ? "border-green-500/50 bg-green-100 dark:bg-green-700/30" : "border-red-500/50 bg-red-100 dark:bg-red-700/30"}>
             <MaterialIcons name={data.isPaid ? "check" : "do-not-disturb"} size={15} color="#4b5563" />
             <Text>
               {data?.isPaid ? "Paid" : "Not paid"}
