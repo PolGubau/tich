@@ -6,6 +6,7 @@ import { ClassCreatePrimitive, PartialClassWithDefinedStudent } from "~/domain/c
 import { useStudents } from "~/features/student/model/use-students";
 import { Text } from '~/shared/components/Text';
 import { useColorScheme } from '~/shared/hooks/useColorScheme';
+import { t } from '~/shared/i18n/i18n';
 import { BaseClassForm } from "./base-form";
 
 type Props = {
@@ -39,7 +40,7 @@ export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }:
     <View className="flex-1">
 
       <Text className="mb-1">
-        Who is this class for? *
+        {t("who_is_this_class_for")} *
       </Text>
 
 
@@ -57,7 +58,7 @@ export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }:
             onValueChange={(itemValue) =>
               setStudentId(itemValue)
             }>
-            <Picker.Item enabled={false} label="Select a student..." value={null} />
+            <Picker.Item enabled={false} label={`${t("select_student")}...`} value={null} />
 
             {students.map(student => (
               <Picker.Item key={student.id.value} label={student.name.value} value={student.id.value.toString()} />
@@ -65,7 +66,7 @@ export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }:
           </Picker>
         ) : (
           <Text customColor className="text-neutral-500 text-center p-4">
-            No students available. Please add a student first.
+            {t("no_students_available")}
           </Text>
         )}
 

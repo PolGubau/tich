@@ -15,6 +15,7 @@ import { StudentCreatePrimitive, StudentPrimitive } from "~/domain/student/types
 import Avatar from "~/shared/components/Avatar";
 import { Text } from "~/shared/components/Text";
 import TextInput from "~/shared/components/ui/TextInput";
+import { t } from "~/shared/i18n/i18n";
 
 interface Props {
   initialValues: StudentCreatePrimitive | StudentPrimitive
@@ -75,28 +76,28 @@ export const StudentForm = ({ initialValues, onSubmit, isLoading }: Props) => {
           </Pressable>
         </View>
 
-        <Text className="mb-1">Name</Text>
+        <Text className="mb-1">{t("name")}</Text>
         <TextInput editable={!isLoading}
           value={name}
           onChangeText={setName}
-          placeholder="Nombre del estudiante"
+          placeholder={t("name_placeholder")}
         />
 
-        <Text className="mb-1">Email</Text>
+        <Text className="mb-1">{t("email")}</Text>
         <TextInput editable={!isLoading}
           value={email}
           onChangeText={setEmail}
-          placeholder="Email"
+          placeholder={t("email_placeholder")}
           keyboardType="email-address"
           autoCapitalize="none"
         />
 
-        <Text className="mb-1">Notes</Text>
+        <Text className="mb-1">{t("notes")}</Text>
         <TextInput editable={!isLoading}
           value={notes}
           onChangeText={setNotes}
           textAlignVertical="top"
-          placeholder="The student wants to learn..."
+          placeholder={t("student_notes_placeholder")}
           multiline
           numberOfLines={6}
           className="min-h-20"
@@ -106,7 +107,7 @@ export const StudentForm = ({ initialValues, onSubmit, isLoading }: Props) => {
 
 
 
-        <Button title={isLoading ? "Saving..." : "Save"}
+        <Button title={isLoading ? t("saving") : t("save")}
           onPress={handleSubmit} disabled={isLoading || !name.trim() || !email.trim()}
         />
         {error && (

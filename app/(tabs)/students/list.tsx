@@ -8,6 +8,7 @@ import { useStudents } from '~/features/student/model/use-students';
 import { StudentList } from '~/features/student/ui/student-list/student-list';
 import { Text } from '~/shared/components/Text';
 import { useColorScheme } from '~/shared/hooks/useColorScheme';
+import { t } from '~/shared/i18n/i18n';
 import { MainLayout } from '~/shared/layouts/main-layout';
 export default function StudentsScreen() {
   const { students, reload, status, setQuery } = useStudents();
@@ -27,7 +28,10 @@ export default function StudentsScreen() {
     navigation.setOptions({
 
       headerSearchBarOptions: {
-        placeholder: "Buscar estudiante",
+        placeholder: t("search_student"),
+        textColor: theme === 'dark' ? '#fff' : '#000',
+        headerIconColor: theme === 'dark' ? '#fff' : '#000',
+        hintTextColor: theme === 'dark' ? '#aaa' : '#555',
         onCancel: () => setQuery(""),
         onChangeText: (e: NativeSyntheticEvent<TextInputChangeEventData>) => setQuery(e.nativeEvent.text),
         hideWhenScrolling: true,
@@ -58,7 +62,7 @@ export default function StudentsScreen() {
             <Text>
               <MaterialIcons name="add" size={24} />
             </Text>
-            <Text className='text-xl'>New Student</Text>
+            <Text className='text-xl'>{t("new_student")}</Text>
 
           </View>
         </Pressable>

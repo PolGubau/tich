@@ -38,7 +38,7 @@ export default function EditStudentScreen() {
   }
 
   return (
-    <MainLayout className='px-6 flex-1'>
+    <MainLayout className='px-6'>
       <Stack.Screen
         options={{
           title: "Edit",

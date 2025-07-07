@@ -1,12 +1,11 @@
-import { getLocales } from 'expo-localization';
+import { getLocales } from "expo-localization";
 import { I18n } from "i18n-js";
 import { TranslationKeys } from './i18n-types';
 import { translations } from './translations';
 
-
-
 const i18n = new I18n(translations);
 
+// i18n.locale = "es";
 i18n.locale = getLocales()[0].languageCode ?? "en";
 i18n.enableFallback = true;
 i18n.defaultLocale = "en";

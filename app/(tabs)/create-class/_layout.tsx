@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import 'react-native-reanimated';
+import { t } from '~/shared/i18n/i18n';
 import "~/shared/styles/global.css";
 
 export default function Layout() {
@@ -10,7 +10,7 @@ export default function Layout() {
 
       headerShadowVisible: false,
     }}>
-      <Stack.Screen name="index" options={{ headerTitle: 'Create Class' }} />
+      <Stack.Screen name="index" options={{ headerTitle: t("create_class") }} />
     </Stack>
 
   );

@@ -1,4 +1,3 @@
-import { Stack } from 'expo-router';
 import { View } from 'react-native';
 import { useClasses } from '~/features/class/model/useClasses';
 import { ClassList } from '~/features/class/ui/list/class-list';
@@ -23,13 +22,7 @@ export default function DashboardScreen() {
 
   return (
     <>
-      <Stack.Screen
-        options={{
-          title: t("dashboard"),
-          headerShown: true,
-          headerShadowVisible: false,
-        }}
-      />
+
       <MainLayout className='px-0 h-full relative gap-6'>
         <View className="flex-row flex-wrap -m-2 px-2">
           {dashboardItems.map((item, idx) => (
@@ -37,7 +30,7 @@ export default function DashboardScreen() {
               <View className="bg-blue-500/20 rounded-xl p-4">
                 <Text className="text-blue-500" customColor type="subtitle">{item.value}</Text>
                 {status === 'loading' ? (
-                  <Text className="text-gray-500">Loading...</Text>
+                  <Text className="text-gray-500">{t("loading")}</Text>
                 ) : (
                   <Text className="text-gray-500 capitalize">{item.label}</Text>
                 )}

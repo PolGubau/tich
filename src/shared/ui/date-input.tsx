@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Platform, Pressable, View } from "react-native";
 import { Text } from "../components/Text";
 import { useColorScheme } from "../hooks/useColorScheme";
+import i18n from "../i18n/i18n";
 
 
 type Props = {
@@ -30,7 +31,7 @@ export default function DateInput({ initialDate, onDateChange, label = "Select a
 
       <Pressable onPress={() => setShow(true)} className="flex-row items-center gap-2 mb-4 border border-neutral-500/60 px-3 py-2 rounded-lg">
         <MaterialIcons name="calendar-today" size={18} color={theme === 'dark' ? '#fff' : '#000'} />
-        <Text>{date.toDateString()}</Text>
+        <Text>{date.toLocaleDateString(i18n.locale)}</Text>
       </Pressable>
       {show && (
         <DateTimePicker

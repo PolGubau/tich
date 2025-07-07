@@ -6,6 +6,8 @@ import { ActivityIndicator, Pressable, View } from 'react-native'
 import { useClassByStudent } from '~/features/class/model/useClassByStudent'
 import { useStudent } from '~/features/student/model/use-student'
 import StudentDetails from '~/features/student/ui/details/details'
+import { t } from '~/shared/i18n/i18n'
+import { MainLayout } from '~/shared/layouts/main-layout'
 
 export default function DetailsScreen() {
   const { id } = useLocalSearchParams()
@@ -29,10 +31,10 @@ export default function DetailsScreen() {
   }
 
   return (
-    <View>
+    <MainLayout>
       <Stack.Screen
         options={{
-          title: "Details",
+          title: t("details_of_student", { name: student.name }),
           headerRight() {
             return (
               <View className='flex-row items-center gap-2 pr-2'>
@@ -52,8 +54,8 @@ export default function DetailsScreen() {
           },
         }}
       />
-      <StudentDetails onReload={reload} areClassesLoading={classesStatus==="loading"} student={student} classes={classes} onDelete={deleteStudent} />
+      <StudentDetails onReload={reload} areClassesLoading={classesStatus === "loading"} student={student} classes={classes} onDelete={deleteStudent} />
 
-    </View>
+    </MainLayout>
   )
 }

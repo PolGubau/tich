@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Platform, Pressable, View } from "react-native";
 import { Text } from '../components/Text';
 import { useColorScheme } from '../hooks/useColorScheme';
+import i18n from '../i18n/i18n';
 
 
 type Props = {
@@ -30,22 +31,20 @@ export default function TimeInput({ initialDate, onDateChange, label = "Select a
 
       <Pressable onPress={() => setShow(true)} className="flex-row items-center gap-2 mb-4 border border-neutral-500/60 px-3 py-2 rounded-lg ">
         <MaterialCommunityIcons name="clock-outline" size={18} color={theme === 'dark' ? '#fff' : '#000'} />
-        <Text>{date.toLocaleTimeString(["es-ES"], {
+        <Text>{date.toLocaleTimeString([i18n.locale], {
           hour: '2-digit',
           minute: '2-digit',
         })}</Text>
 
       </Pressable>
-      {
-        show && (
-          <DateTimePicker
-            value={date}
-            mode={"time"}
-            display="default"
-            onChange={onChange}
-          />
-        )
-      }
+      {show && (
+        <DateTimePicker
+          value={date}
+          mode={"time"}
+          display="default"
+          onChange={onChange}
+        />
+      )}
     </View >
   )
 }

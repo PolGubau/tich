@@ -5,6 +5,7 @@ import { FlatList, Pressable, RefreshControl, View } from 'react-native'
 import { ClassPrimitive } from '~/domain/class/types'
 import StudentChip from '~/features/student/ui/chips/student-chip'
 import { Text } from '~/shared/components/Text'
+import { t } from '~/shared/i18n/i18n'
 import { getLocaleClassData } from '../../model/get-locale-class-data'
 
 type Props = {
@@ -31,12 +32,11 @@ export const ClassList = ({ classes, showStudent = true, onReload, isLoading = f
             <MaterialIcons name="hourglass-top" size={24} color="#00000080" />
           </View>
         ) : <View className='px-4 py-1 mt-4'>
-          <Text>{`Total ${classes.length}`}</Text>
+          <Text>{`${t("total")} ${classes.length}`}</Text>
         </View>
       )}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => {
-        const parsedDate = new Date(item.date).toLocaleDateString("es-ES")
         const metadata = getLocaleClassData(item);
         return (
           <Link href={{
@@ -54,7 +54,7 @@ export const ClassList = ({ classes, showStudent = true, onReload, isLoading = f
               </View>
               <View className='items-end gap-2 flex-col'>
 
-                <Text type='small'>{parsedDate}</Text>
+                <Text type='small' className='first-letter:uppercase'>{metadata.displayDate}</Text>
                 <Text type='small'>{metadata.duration}</Text>
 
 

@@ -3,6 +3,7 @@ import { ActivityIndicator, Button, KeyboardAvoidingView, Platform, ScrollView, 
 import { PartialClassWithDefinedStudent } from "~/domain/class/types";
 import { Text } from '~/shared/components/Text';
 import TextInput from '~/shared/components/ui/TextInput';
+import { t } from '~/shared/i18n/i18n';
 import DateInput from '~/shared/ui/date-input';
 import TimeInput from '~/shared/ui/time-input';
 
@@ -84,27 +85,27 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit = 
     >
       <ScrollView>
 
-        <Text className="font-semibold mb-1">Topic *</Text>
+        <Text className="font-semibold mb-1">{t("topic")} *</Text>
         <TextInput editable={!isLoading}
           value={topic}
           onChangeText={setTopic}
           autoCapitalize="sentences"
           autoCorrect={false}
-          placeholder="Topic of the class"
+          placeholder={t("topic_placeholder")}
         />
-        <Text className="font-semibold mb-1">Notas *</Text>
+        <Text className="font-semibold mb-1">{t("notes")} *</Text>
         <TextInput editable={!isLoading}
           value={notes}
           onChangeText={setNotes}
           textAlignVertical="top"
-          placeholder="In this class we have seen..."
+          placeholder={t("notes_placeholder")}
           multiline
           numberOfLines={6}
           className="min-h-20"
           maxLength={500}
 
         />
-        <Text className="font-semibold mb-1">Price</Text>
+        <Text className="font-semibold mb-1">{t("price")} *</Text>
         <TextInput
           value={price.toString()}
           onChangeText={text => {
@@ -113,11 +114,11 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit = 
             setPrice(Number(numericText))
           }}
           keyboardType="numeric"
-          placeholder='Price of the class (per hour)'
+          placeholder={t("price_placeholder")}
         />
 
         <View className="flex-row items-center justify-between mb-4">
-          <Text className="font-semibold mb-1">Is already paid?</Text>
+          <Text className="font-semibold mb-1">{t("is_already_paid")}?</Text>
 
           <Switch
             value={isPaid}
@@ -125,7 +126,7 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit = 
           />
         </View>
 
-        <Text className="font-semibold mb-1">Duration (In minutes)</Text>
+        <Text className="font-semibold mb-1">{t("duration")} </Text>
         <TextInput
           value={duration.toString()}
           onChangeText={text => {
@@ -134,15 +135,15 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit = 
             setDuration(Number(numericText))
           }}
           keyboardType="numeric"
-          placeholder='Duration of the class (in minutes)'
+          placeholder={t("duration_placeholder")}
         />
         <DateInput
-          label="Date of the class"
+          label={t("date_of_class")}
           initialDate={new Date(date)}
           onDateChange={(date) => setDate(date.toISOString())}
         />
         <TimeInput
-          label="Starting time of the class"
+          label={t("starting_time")}
           initialDate={new Date(startingTime)}
           onDateChange={(date) => setStartingTime(date.toISOString())}
         />
@@ -151,7 +152,7 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit = 
 
 
 
-        <Button title={isLoading ? "Saving..." : "Save"}
+        <Button title={isLoading ? t("saving") : t("save")}
           onPress={handleSubmit} disabled={isLoading || !canSubmit || !topic.trim() || !notes.trim() || duration <= 0 || price <= 0 || !date || !startingTime}
         />
         {error && (

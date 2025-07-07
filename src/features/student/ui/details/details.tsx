@@ -8,7 +8,7 @@ import { StudentPrimitive } from '~/domain/student/types'
 import { ClassList } from '~/features/class/ui/list/class-list'
 import Avatar from '~/shared/components/Avatar'
 import { Text } from '~/shared/components/Text'
-import { MainLayout } from '~/shared/layouts/main-layout'
+import { t } from '~/shared/i18n/i18n'
 import { DeleteStudentButton } from './student-delete-button'
 
 interface Props {
@@ -20,7 +20,7 @@ interface Props {
 }
 export default function StudentDetails({ student, classes, onDelete, onReload, areClassesLoading }: Props) {
   return (
-    <MainLayout className=''>
+    <>
       <View accessibilityRole="header" className='px-6 flex-row items-center gap-6'>
 
         <Avatar avatarUrl={student.avatarUrl} className='w-[50px] h-[50px]' iconSize={30} />
@@ -45,7 +45,7 @@ export default function StudentDetails({ student, classes, onDelete, onReload, a
                 <MaterialIcons name='edit' size={14} color='#2563eb' />
 
                 <Text customColor className='text-blue-500'>
-                  Edit
+                  {t("edit")}
                 </Text>
               </Pressable>
             </Link>
@@ -57,7 +57,7 @@ export default function StudentDetails({ student, classes, onDelete, onReload, a
 
       <View className='mt-8 mb-20'>
         <View className="px-4 flex-row justify-between items-center gap-1 mb-4">
-          <Text type='subtitle'>Done classes</Text>
+          <Text type='subtitle'>{t("last_classes_done")}</Text>
           <Link href={{
             pathname: '/students/[id]/add-class',
             params: { id: student.id }
@@ -75,7 +75,7 @@ export default function StudentDetails({ student, classes, onDelete, onReload, a
         <ClassList isLoading={areClassesLoading} classes={classes} showStudent={false} onReload={onReload} />
       </View>
 
+    </>
 
-    </MainLayout>
   )
 }

@@ -1,6 +1,5 @@
 import { Stack } from 'expo-router';
-import 'react-native-reanimated';
-import "~/shared/styles/global.css";
+import { t } from '~/shared/i18n/i18n';
 
 export default function Layout() {
 
@@ -10,7 +9,9 @@ export default function Layout() {
 
       headerShadowVisible: false,
     }}>
-      <Stack.Screen name="list" options={{ headerTitle: 'Students' }} />
+      <Stack.Screen name="list" options={{
+        headerTitle: t("students"),
+      }} />
       <Stack.Screen name="[id]" options={{ headerShown: false }} />
     </Stack>
 

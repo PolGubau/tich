@@ -74,35 +74,36 @@ export default function CreateClass() {
           title: t("class_details")
         }}
       />
-      <MainLayout className='flex-1 px-6'>
+      <MainLayout className='flex-1 px-2'>
 
-        <View className='flex-row items-center gap-2'>
-          <Text className='text-2xl'>
+        <View className='flex-row gap-2 items-center mb-8 justify-between px-2'>
+          <Text type="subtitle" numberOfLines={1}>
             {data?.topic}
           </Text>
-        </View>
-        <View className='flex-row items-center gap-4 pt-2 pb-8'>
+          <View className='flex-row items-center gap-4'>
 
-          <Link
-            href={{
-              pathname: './edit',
-            }}
-            asChild
-          >
-            <Pressable android_ripple={{ color: "#aaa" }}
-              onPressIn={() => {
-                impactAsync(ImpactFeedbackStyle.Light);
+            <Link
+              href={{
+                pathname: './edit',
               }}
-              className='flex-row items-center gap-1 bg-blue-50 dark:bg-blue-700/30 px-3 py-1 rounded-full'>
-              <MaterialIcons name='edit' size={14} color='#2563eb' />
+              asChild
+            >
+              <Pressable android_ripple={{ color: "#aaa" }}
+                onPressIn={() => {
+                  impactAsync(ImpactFeedbackStyle.Light);
+                }}
+                className='flex-row items-center gap-1 bg-blue-50 dark:bg-blue-700/30 px-3 py-1 rounded-full'>
+                <MaterialIcons name='edit' size={14} color='#2563eb' />
 
-              <Text className='text-blue-500'>
-                {t("edit")}
-              </Text>
-            </Pressable>
-          </Link>
-          <DeleteButton onDelete={deleteClass} />
+                <Text className='text-blue-500'>
+                  {t("edit")}
+                </Text>
+              </Pressable>
+            </Link>
+            <DeleteButton onDelete={deleteClass} />
+          </View>
         </View>
+
 
         <View className='flex-row items-center gap-2 flex-wrap'>
 
@@ -111,7 +112,10 @@ export default function CreateClass() {
           <Chip>
             <MaterialIcons name="calendar-today" size={15} color="#4b5563" />
             <Text>
-              {data?.date ? formatDate(data?.date) : "No date set"}
+              {data?.date ? formatDate(data?.date, {
+                hour: "2-digit",
+                minute: "2-digit",
+              }) : "No date set"}
             </Text>
           </Chip>
           <Chip>
@@ -147,7 +151,7 @@ export default function CreateClass() {
           <Chip className='border-0 gap-[5px]'>
             <MaterialIcons name="create" size={15} color="#4b5563" />
             <Text className='first-letter:uppercase'>
-              Created{` `}
+              {t("created")}{` `}
               {metadata?.createdDaysAgo}
             </Text>
           </Chip>
@@ -156,7 +160,7 @@ export default function CreateClass() {
             <Chip className='border-0 gap-[5px]'>
               <MaterialIcons name="update" size={15} color="#4b5563" />
               <Text className='first-letter:uppercase'>
-                Updated{` `}
+                {t("updated")}{` `}
                 {metadata?.updatedDaysAgo}
               </Text>
             </Chip>

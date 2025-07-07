@@ -44,7 +44,7 @@ export function StudentList({ students, onRefresh, isLoading }: Props) {
               <View>
 
                 <Text className='text-3xl'>
-                  <MaterialIcons name="arrow-forward" size={24} color="black" />
+                  <MaterialIcons name="arrow-forward" size={24} color={theme === 'dark' ? '#fff' : '#000'} />
                 </Text>
               </View>
 
