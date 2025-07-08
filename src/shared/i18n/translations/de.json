@@ -13,7 +13,7 @@
   "days_ago": "vor {{count}} Tagen",
   "delete_confirmation": "Sind Sie sicher, dass Sie diese Klasse löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
   "delete": "Löschen",
-  "details_of_student": "Details von {{name}}",
+  "details_of_student": "Details von dem Schüler",
   "duration_placeholder": "Dauer der Klasse (in Minuten)",
   "duration": "Dauer (in Minuten)",
   "earnings": "Einnahmen",
@@ -54,5 +54,8 @@
   "unknown": "Unbekannt",
   "updated": "Aktualisiert",
   "who_is_this_class_for": "Für wen ist diese Klasse?",
-  "yesterday": "gestern"
+  "yesterday": "gestern",
+  "add_to_calendar": "Zum Kalender hinzufügen",
+  "class_added_to_calendar": "Klasse erfolgreich zum Kalender hinzugefügt",
+  "success": "Erfolg"
 }

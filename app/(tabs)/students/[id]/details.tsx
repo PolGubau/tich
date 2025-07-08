@@ -6,12 +6,13 @@ import { ActivityIndicator, Pressable, View } from 'react-native'
 import { useClassByStudent } from '~/features/class/model/useClassByStudent'
 import { useStudent } from '~/features/student/model/use-student'
 import StudentDetails from '~/features/student/ui/details/details'
+import { useColorScheme } from '~/shared/hooks/useColorScheme'
 import { t } from '~/shared/i18n/i18n'
 import { MainLayout } from '~/shared/layouts/main-layout'
 
 export default function DetailsScreen() {
   const { id } = useLocalSearchParams()
-
+  const theme = useColorScheme()
   const { student, delete: deleteStudent } = useStudent(Number(id))
   const { classes, reload, status: classesStatus } = useClassByStudent(Number(id))
 
@@ -20,7 +21,7 @@ export default function DetailsScreen() {
       <View>
         <Stack.Screen
           options={{
-            title: "Loading...",
+            title: t("loading"),
           }}
         />
         <View className='flex-1 items-center mt-28'>
@@ -34,7 +35,7 @@ export default function DetailsScreen() {
     <MainLayout>
       <Stack.Screen
         options={{
-          title: t("details_of_student", { name: student.name }),
+          title: t("details_of_student"),
           headerRight() {
             return (
               <View className='flex-row items-center gap-2 pr-2'>
@@ -46,7 +47,7 @@ export default function DetailsScreen() {
                     impactAsync(ImpactFeedbackStyle.Light);
                   }}
                     className='flex-row items-center gap-1'>
-                    <MaterialIcons name='add' size={24} />
+                    <MaterialIcons name='add' size={24} color={theme === 'dark' ? '#fff' : '#000'} />
                   </Pressable>
                 </Link>
               </View>

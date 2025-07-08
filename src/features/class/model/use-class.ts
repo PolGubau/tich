@@ -99,6 +99,8 @@ export const useClass = (id: ClassPrimitive["id"]): UseClassReturn => {
   }
 
 
+
+
   return {
     class: classPrimitive,
     liveStatus: status,

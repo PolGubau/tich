@@ -13,7 +13,7 @@
   "days_ago": "fa {{count}} dies",
   "delete_confirmation": "Esteu segur que voleu eliminar aquesta classe? Aquesta acció no es pot desfer.",
   "delete": "Eliminar",
-  "details_of_student": "Detalls de {{name}}",
+  "details_of_student": "Detalls de l'estudiant",
   "duration_placeholder": "Durada de la classe (en minuts)",
   "duration": "Durada (en minuts)",
   "earnings": "Guanys",
@@ -54,5 +54,8 @@
   "unknown": "Desconegut",
   "updated": "Actualitzat",
   "who_is_this_class_for": "Per a qui és aquesta classe?",
-  "yesterday": "ahir"
+  "yesterday": "ahir",
+  "add_to_calendar": "Afegeix al calendari",
+  "class_added_to_calendar": "Classe afegida al calendari amb èxit",
+  "success": "Èxit"
 }

@@ -4,6 +4,7 @@ import { ActivityIndicator, Text, View } from 'react-native'
 import { ClassCreatePrimitive, ClassPrimitive } from '~/domain/class/types'
 import { useClass } from '~/features/class/model/use-class'
 import { CompleteClassForm } from '~/features/class/ui/add-form/complete-form'
+import { t } from '~/shared/i18n/i18n'
 import { MainLayout } from '~/shared/layouts/main-layout'
 
 export default function CreateClass() {
@@ -50,7 +51,7 @@ export default function CreateClass() {
       <>
         <Stack.Screen
           options={{
-            title: "Loading...",
+            title: t("loading")
           }}
         />
         <View className='flex-1 items-center mt-28'>
@@ -75,7 +76,7 @@ export default function CreateClass() {
   return (<>
     <Stack.Screen
       options={{
-        title: "Class Details",
+        title: t("class_details")
       }}
     />
     <MainLayout className='flex-1 px-6'>

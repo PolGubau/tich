@@ -18,10 +18,10 @@ export const translations = {
   },
   ca: {
     ...customCa,
-    ...genericCa,
+    ...genericCa.ca,
   },
   de: {
     ...customDe,
-    ...genericDE,
+    ...genericDE.de,
   }
 } 

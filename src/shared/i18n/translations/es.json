@@ -13,7 +13,7 @@
   "days_ago": "hace {{count}} días",
   "delete_confirmation": "¿Seguro que quieres borrar esta clase? Esta acción no se puede deshacer.",
   "delete": "Eliminar",
-  "details_of_student": "Detalles de {{name}}",
+  "details_of_student": "Detalles del estudiante",
   "duration_placeholder": "Duración de la clase (en minutos)",
   "duration": "Duración (en minutos)",
   "earnings": "Ganancias",
@@ -54,5 +54,8 @@
   "unknown": "Desconocido",
   "updated": "Actualizado",
   "who_is_this_class_for": "¿Para quién es esta clase?",
-  "yesterday": "ayer"
+  "yesterday": "ayer",
+  "add_to_calendar": "Añadir al calendario",
+  "class_added_to_calendar": "Clase añadida al calendario con éxito",
+  "success": "Éxito"
 }

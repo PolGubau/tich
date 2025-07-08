@@ -57,7 +57,7 @@ export default function StudentDetails({ student, classes, onDelete, onReload, a
 
       <View className='mt-8 mb-20'>
         <View className="px-4 flex-row justify-between items-center gap-1 mb-4">
-          <Text type='subtitle'>{t("last_classes_done")}</Text>
+          <Text type="defaultSemiBold">{t("last_classes_done")}</Text>
           <Link href={{
             pathname: '/students/[id]/add-class',
             params: { id: student.id }
@@ -68,7 +68,7 @@ export default function StudentDetails({ student, classes, onDelete, onReload, a
               }}
               className='flex-row items-center gap-1 pt-2'>
               <MaterialIcons name='add' size={14} color='#2563eb' />
-              <Text className='text-blue-500'>Add</Text>
+              <Text className='text-blue-500'>{t("create_class")}</Text>
             </Pressable>
           </Link>
         </View>

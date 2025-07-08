@@ -13,7 +13,7 @@
   "days_ago": "{{count}} days ago",
   "delete_confirmation": "Are you sure you want to delete this class? This action cannot be undone.",
   "delete": "Delete",
-  "details_of_student": "Details of {{name}}",
+  "details_of_student": "Details of the student",
   "duration_placeholder": "Duration of the class (in minutes)",
   "duration": "Duration (In minutes)",
   "earnings": "Earnings",
@@ -54,5 +54,8 @@
   "unknown": "Unknown",
   "updated": "Updated",
   "who_is_this_class_for": "Who is this class for?",
-  "yesterday": "yesterday"
+  "yesterday": "yesterday",
+  "add_to_calendar": "Add to calendar",
+  "class_added_to_calendar": "Class successfully added to calendar",
+  "success": "Success"
 }

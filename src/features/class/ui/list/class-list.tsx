@@ -3,7 +3,7 @@ import { Link } from 'expo-router'
 import React from 'react'
 import { FlatList, Pressable, RefreshControl, View } from 'react-native'
 import { ClassPrimitive } from '~/domain/class/types'
-import StudentChip from '~/features/student/ui/chips/student-chip'
+import { StudentChipLink } from '~/features/student/ui/chips/student-chip'
 import { Text } from '~/shared/components/Text'
 import { t } from '~/shared/i18n/i18n'
 import { getLocaleClassData } from '../../model/get-locale-class-data'
@@ -47,7 +47,9 @@ export const ClassList = ({ classes, showStudent = true, onReload, isLoading = f
             <Pressable android_ripple={{ color: "#dddddd50" }} className="gap-4 py-3 border-b border-neutral-400/30 flex-row items-center justify-between px-4">
               <View className='flex-1 gap-1'>
                 {showStudent && (
-                  <StudentChip studentId={item.studentId} />
+                  <View className='flex-row items-center gap-2'>
+                    <StudentChipLink studentId={item.studentId} />
+                  </View>
                 )}
                 <Text className="pl-0.5" type="defaultSemiBold" numberOfLines={1}>{item.topic}</Text>
                 <Text className='pl-0.5 opacity-75' numberOfLines={2}>{item.notes}</Text>
