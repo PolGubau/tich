@@ -62,6 +62,12 @@ export const useClassByStudent = (id: StudentPrimitive["id"]) => {
   const classesPrimitives = useMemo(() => {
     return classes.map(c => c.toPrimitive());
   }, [classes]);
+  const classesAmount = useMemo(() => {
+    return classes.length;
+  }, [classes]);
 
-  return { classes: classesPrimitives, status, error, reload: load };
+
+  
+
+  return { classes: classesPrimitives, status, error, reload: load, classesAmount };
 } 

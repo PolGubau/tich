@@ -1,7 +1,7 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { Link } from 'expo-router'
 import React from 'react'
-import { FlatList, Pressable, RefreshControl, View } from 'react-native'
+import { FlatList, Pressable, View } from 'react-native'
 import { ClassPrimitive } from '~/domain/class/types'
 import { StudentChipLink } from '~/features/student/ui/chips/student-chip'
 import { Text } from '~/shared/components/Text'
@@ -19,13 +19,9 @@ export const ClassList = ({ classes, showStudent = true, onReload, isLoading = f
   return (
     <FlatList
       data={classes}
-      refreshControl={
-        <RefreshControl
-          enabled={!!onReload}
-          refreshing={isLoading}
-          onRefresh={onReload}
-        />
-      }
+      onRefresh={onReload}
+
+      refreshing={isLoading}
       ListFooterComponent={() => (
         isLoading ? (
           <View className='flex-1 items-center mt-4'>
@@ -33,6 +29,11 @@ export const ClassList = ({ classes, showStudent = true, onReload, isLoading = f
           </View>
         ) : <View className='px-4 py-1 mt-4'>
           <Text>{`${t("total")} ${classes.length}`}</Text>
+        </View>
+      )}
+      StickyHeaderComponent={() => (
+        <View className='px-4 py-2 bg-white dark:bg-neutral-900'>
+          <Text type="defaultSemiBold">{t("last_classes")}</Text>
         </View>
       )}
       keyExtractor={(item) => item.id.toString()}

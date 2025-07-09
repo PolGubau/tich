@@ -61,7 +61,7 @@ export function CompleteClassForm({ initialValues, onSubmit, isLoading, error }:
             <Picker.Item enabled={false} label={`${t("select_student")}...`} value={null} />
 
             {students.map(student => (
-              <Picker.Item key={student.id.value} label={student.name.value} value={student.id.value.toString()} />
+              <Picker.Item key={student.id} label={student.name} value={student.id.toString()} />
             ))}
           </Picker>
         ) : (

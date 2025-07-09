@@ -76,7 +76,9 @@ export default function RootLayout() {
       >
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
 
-          <Stack>
+          <Stack screenOptions={{
+            animation: "fade"
+          }}>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen name="class" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" />

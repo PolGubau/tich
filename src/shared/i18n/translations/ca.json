@@ -19,6 +19,12 @@
   "earnings": "Guanys",
   "edit": "Editar",
   "email_placeholder": "Correu electrònic",
+  "classes_done_amount": {
+    "zero": "No s'han fet classes",
+    "one": "{{count}} classe feta",
+    "other": "{{count}} classes fetes"
+  },
+  "class_calendar_title": "Classe de {{topic}} per a {{student}}",
   "email": "Correu electrònic",
   "hours_taught": "Hores d'ensenyament",
   "in": "en",
@@ -27,7 +33,7 @@
   "last_classes": "Les teves últimes classes",
   "loading": "Carregant...",
   "minutes": "{{count}} minuts",
-  "name_placeholder": "Nom de l’estudiant",
+  "name_placeholder": "Nom de l'estudiant",
   "name": "Nom",
   "new_student": "Nou estudiant",
   "no_students_available": "No hi ha estudiants disponibles. Si us plau, afegeix-ne un primer.",
@@ -57,5 +63,9 @@
   "yesterday": "ahir",
   "add_to_calendar": "Afegeix al calendari",
   "class_added_to_calendar": "Classe afegida al calendari amb èxit",
-  "success": "Èxit"
+  "success": "Èxit",
+  "error": "Error",
+  "calendar_permission_denied": "Permís de calendari denegat. Si us plau, habilita els permisos de calendari a la configuració del teu dispositiu per afegir classes al calendari.",
+  "calendar_not_found": "Calendari no trobat. Si us plau, assegura't que tens una aplicació de calendari instal·lada al teu dispositiu per afegir classes al calendari.",
+  "calendar_add_failed": "No s'ha pogut afegir la classe al calendari. Si us plau, intenta-ho de nou més tard."
 }

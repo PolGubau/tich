@@ -19,6 +19,11 @@
   "earnings": "Einnahmen",
   "edit": "Bearbeiten",
   "email_placeholder": "E-Mail",
+  "classes_done_amount": {
+    "zero": "Keine Klassen abgehalten",
+    "one": "{{count}} Klasse abgehalten",
+    "other": "{{count}} Klassen abgehalten"
+  },
   "email": "E-Mail",
   "hours_taught": "Unterrichtsstunden",
   "in": "in",
@@ -57,5 +62,10 @@
   "yesterday": "gestern",
   "add_to_calendar": "Zum Kalender hinzufügen",
   "class_added_to_calendar": "Klasse erfolgreich zum Kalender hinzugefügt",
-  "success": "Erfolg"
+  "success": "Erfolg",
+  "error": "Fehler",
+  "calendar_permission_denied": "Kalenderberechtigung verweigert. Bitte aktivieren Sie die Kalenderberechtigungen in den Einstellungen Ihres Geräts, um Klassen zum Kalender hinzuzufügen.",
+  "calendar_not_found": "Kalender nicht gefunden. Bitte stellen Sie sicher, dass Sie eine Kalender-App auf Ihrem Gerät installiert haben, um Klassen zum Kalender hinzuzufügen.",
+  "calendar_add_failed": "Die Klasse konnte nicht zum Kalender hinzugefügt werden. Bitte versuchen Sie es später erneut.",
+  "class_calendar_title": "{{topic}} Klasse für {{student}}"
 }

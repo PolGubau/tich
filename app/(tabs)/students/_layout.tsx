@@ -6,7 +6,7 @@ export default function Layout() {
   return (
 
     <Stack screenOptions={{
-
+      animation: "fade",
       headerShadowVisible: false,
     }}>
       <Stack.Screen name="list" options={{

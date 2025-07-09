@@ -18,6 +18,12 @@
   "duration": "Duración (en minutos)",
   "earnings": "Ganancias",
   "edit": "Editar",
+  "classes_done_amount": {
+    "zero": "No se han realizado clases",
+    "one": "{{count}} clase realizada",
+    "other": "{{count}} clases realizadas"
+  },
+  "class_calendar_title": "Clase de {{topic}} para {{student}}",
   "email_placeholder": "Correo electrónico",
   "email": "Correo electrónico",
   "hours_taught": "Horas enseñadas",
@@ -57,5 +63,9 @@
   "yesterday": "ayer",
   "add_to_calendar": "Añadir al calendario",
   "class_added_to_calendar": "Clase añadida al calendario con éxito",
-  "success": "Éxito"
+  "success": "Éxito",
+  "error": "Error",
+  "calendar_permission_denied": "Permiso de calendario denegado. Por favor,habilita los permisos de calendario en la configuración de tu dispositivo para añadir clases al calendario.",
+  "calendar_not_found": "Calendario no encontrado. Por favor, asegúrate de tener una aplicación de calendario instalada en tu dispositivo para añadir clases al calendario.",
+  "calendar_add_failed": "No se pudo añadir la clase al calendario. Por favor, inténtalo de nuevo más tarde."
 }
