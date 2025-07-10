@@ -11,9 +11,12 @@ export default function DashboardScreen() {
   const { totalClasses, totalHours, formattedEarnings, status, classes, reload } = useClasses()
 
 
+  type DashboardItem = {
+    label: string;
+    value: string | number;
+  };
 
-
-  const dashboardItems = [
+  const dashboardItems: DashboardItem[] = [
     { label: t('students'), value: studentsAmount },
     { label: t('classes_made'), value: totalClasses },
     { label: t('hours_taught'), value: totalHours },

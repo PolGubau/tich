@@ -30,10 +30,9 @@ export function AddCalendarButton({ class: classData }: Props) {
     })
   }
 
-
   return (
     <Pressable onPress={addClassToCalendar} className='flex-row items-center gap-2 bg-blue-400/50 dark:bg-blue-700/30 px-3 py-1 rounded-full w-fit '>
-      <MaterialIcons name="add" size={15} color={theme === 'dark' ? '#4b5563' : '#4b5563'} />
+      <MaterialIcons name="add" size={15} color={theme === 'dark' ? '#aaa' : '#4b5563'} />
       <Text>{t("add_to_calendar")}</Text>
     </Pressable>
   )
