@@ -38,7 +38,6 @@ export default function CreateClass() {
 
 
 
-  // console.log(data, metadata)
 
   if (!data && status === "loading") {
     return <View>

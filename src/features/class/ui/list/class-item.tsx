@@ -1,10 +1,12 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { Link } from 'expo-router';
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import { ClassPrimitive } from '~/domain/class/types';
 import { StudentChipLink } from '~/features/student/ui/chips/student-chip';
 import { Text } from '~/shared/components/Text';
+import { useColorScheme } from '~/shared/hooks/useColorScheme';
 import { getLocaleClassData } from '../../model/get-locale-class-data';
 
 type Props = {
@@ -13,13 +15,15 @@ type Props = {
 };
 export default function ClassItem({ classData, showStudent }: Props) {
   const metadata = getLocaleClassData(classData);
+  const colorScheme = useColorScheme();
+
   return (
     <Link href={{
       pathname: '/class/[id]/details',
       params: { id: classData.id.toString() }
     }} asChild>
 
-      <Pressable android_ripple={{ color: "#dddddd50" }} className="gap-4 py-3 border-b border-neutral-400/30 flex-row items-center justify-between px-4">
+      <Pressable style={{ backgroundColor: colorScheme === 'dark' ? DarkTheme.colors.background : DefaultTheme.colors.background }} android_ripple={{ color: "#dddddd50" }} className="gap-4 py-3 flex-row items-center justify-between px-4">
         <View className='flex-1 gap-1'>
           {showStudent && (
             <View className='flex-row items-center gap-2'>

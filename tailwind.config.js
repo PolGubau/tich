@@ -5,6 +5,12 @@ module.exports = {
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
+      colors: {
+        background: {
+          DEFAULT: '#ffffff',
+          dark: '#000000',
+        }
+      },
       fontFamily: {
         "mono": ["SpaceMono", "sans-serif"],
       },

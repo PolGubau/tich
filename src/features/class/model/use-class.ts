@@ -15,9 +15,11 @@ type UseClassReturn = {
   mutationStatus: Status // para update/delete
   error: string | null
   update: (data: ClassPrimitive) => Promise<void>
+  toggleIsPaid: () => Promise<void>
   deleteClass: () => Promise<void>
   updatedAt?: Date
   metadata: LocaleClassData
+  reload: () => void
 }
 
 export const useClass = (id: ClassPrimitive["id"]): UseClassReturn => {
@@ -81,6 +83,28 @@ export const useClass = (id: ClassPrimitive["id"]): UseClassReturn => {
       }
     }
   }
+  const toggleIsPaid = async () => {
+    if (!classPrimitive) return
+    const updatedClass = {
+      ...classPrimitive,
+      isPaid: !classPrimitive.isPaid,
+    }
+    setMutationStatus("loading")
+    try {
+      await classRepository.updateById(new Id(classPrimitive.id), updatedClass)
+      if (isMounted.current) {
+        setMutationStatus("success")
+        setClassData(createClass(updatedClass))
+
+      }
+    } catch (e) {
+      if (isMounted.current) {
+        setMutationStatus("error")
+        console.error("toggleIsPaid() error in useClass", e)
+      }
+    }
+  }
+
 
   const deleteClass = async () => {
     setMutationStatus("loading")
@@ -109,5 +133,7 @@ export const useClass = (id: ClassPrimitive["id"]): UseClassReturn => {
     update,
     deleteClass,
     metadata: getLocaleClassData(classPrimitive),
+    toggleIsPaid,
+    reload: fetchClass
   }
 }

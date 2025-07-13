@@ -5,7 +5,6 @@ import { ClassPrimitive } from '~/domain/class/types'
 import { Text } from '~/shared/components/Text'
 import { t } from '~/shared/i18n/i18n'
 import { ClassDraggableItem } from './class-draggable-item'
-import ClassItem from './class-item'
 
 type Props = {
   classes: ClassPrimitive[]
@@ -19,7 +18,6 @@ export const ClassList = ({ classes, showStudent = true, onReload, isLoading = f
     <FlatList
       data={classes}
       onRefresh={onReload}
-
       refreshing={isLoading}
       ListFooterComponent={() => (
         isLoading ? (
@@ -36,10 +34,13 @@ export const ClassList = ({ classes, showStudent = true, onReload, isLoading = f
         </View>
       )}
       keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => <ClassDraggableItem isPaid={item.isPaid} onSwipeRight={() => console.log('Swiped right:', item.id)}>
-        <ClassItem classData={item} showStudent={showStudent} />
-      </ClassDraggableItem>}
-
+      renderItem={({ item }) => (
+        <ClassDraggableItem
+          classOptions={{ showStudent }}
+          isPaid={item.isPaid}
+          classData={item}
+          onReload={onReload} />
+      )}
     />
   )
 }

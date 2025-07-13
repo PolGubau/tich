@@ -48,9 +48,9 @@ export const addEventToCalendar = async (props: EventProps) => {
       }],
       url: `tich://${url}`
     }
-    console.log('eventConfig:', eventConfig)
+    // console.log('eventConfig:', eventConfig)
     const eventId = await createEventAsync(defaultCalendar.id, eventConfig)
-    console.log(eventId)
+    // console.log(eventId)
     Alert.alert(t("success"), t("class_added_to_calendar"))
 
 
