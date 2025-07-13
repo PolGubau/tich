@@ -1,9 +1,10 @@
 import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { HapticTab } from '~/shared/components/HapticTab';
 import { IconSymbol } from '~/shared/components/ui/IconSymbol';
 import { t } from '~/shared/i18n/i18n';
- 
+
 
 
 
@@ -11,7 +12,8 @@ export default function TabLayout() {
 
   const isLargeScreen = Platform.OS === 'web' && window.innerWidth >= 768;
   return (
- 
+    <GestureHandlerRootView style={{ flex: 1 }}>
+
       <Tabs
         screenOptions={{
           animation: "fade",
@@ -51,5 +53,6 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-   );
+    </GestureHandlerRootView>
+  );
 }

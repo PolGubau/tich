@@ -9,6 +9,7 @@ import { openDatabaseSync, SQLiteProvider } from 'expo-sqlite';
 import { StatusBar } from 'expo-status-bar';
 import { Suspense, useEffect } from 'react';
 import { ActivityIndicator, Text } from 'react-native';
+import 'react-native-gesture-handler';
 import 'react-native-reanimated';
 import * as schema from "~/../db/schema";
 import migrations from '~/../drizzle/migrations';

@@ -1,12 +1,11 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
-import { Link } from 'expo-router'
 import React from 'react'
-import { FlatList, Pressable, View } from 'react-native'
+import { FlatList, View } from 'react-native'
 import { ClassPrimitive } from '~/domain/class/types'
-import { StudentChipLink } from '~/features/student/ui/chips/student-chip'
 import { Text } from '~/shared/components/Text'
 import { t } from '~/shared/i18n/i18n'
-import { getLocaleClassData } from '../../model/get-locale-class-data'
+import { ClassDraggableItem } from './class-draggable-item'
+import ClassItem from './class-item'
 
 type Props = {
   classes: ClassPrimitive[]
@@ -37,46 +36,10 @@ export const ClassList = ({ classes, showStudent = true, onReload, isLoading = f
         </View>
       )}
       keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => {
-        const metadata = getLocaleClassData(item);
-        return (
-          <Link href={{
-            pathname: '/class/[id]/details',
-            params: { id: item.id.toString() }
-          }} asChild>
+      renderItem={({ item }) => <ClassDraggableItem isPaid={item.isPaid} onSwipeRight={() => console.log('Swiped right:', item.id)}>
+        <ClassItem classData={item} showStudent={showStudent} />
+      </ClassDraggableItem>}
 
-            <Pressable android_ripple={{ color: "#dddddd50" }} className="gap-4 py-3 border-b border-neutral-400/30 flex-row items-center justify-between px-4">
-              <View className='flex-1 gap-1'>
-                {showStudent && (
-                  <View className='flex-row items-center gap-2'>
-                    <StudentChipLink studentId={item.studentId} />
-                  </View>
-                )}
-                <Text className="pl-0.5" type="defaultSemiBold" numberOfLines={1}>{item.topic}</Text>
-                <Text className='pl-0.5 opacity-75' numberOfLines={2}>{item.notes}</Text>
-              </View>
-              <View className='items-end gap-2 flex-col'>
-
-                <Text type='small' className='first-letter:uppercase'>{metadata.displayDate}</Text>
-                <Text type='small'>{metadata.duration}</Text>
-
-
-                <View className='flex-row items-center gap-1'>
-
-                  <Text type='small'>{metadata.price}</Text>
-                  {item.isPaid ? (
-                    <MaterialIcons name="check-circle" size={16} color="#00ff0080" />
-                  ) : (
-                    <MaterialIcons name="cancel" size={16} color="#ff000080" />
-                  )}
-                </View>
-
-              </View>
-            </Pressable>
-
-          </Link>
-        )
-      }}
     />
   )
 }
