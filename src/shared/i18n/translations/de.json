@@ -61,11 +61,13 @@
   "who_is_this_class_for": "Für wen ist diese Klasse?",
   "yesterday": "gestern",
   "add_to_calendar": "Zum Kalender hinzufügen",
-  "class_added_to_calendar": "Klasse erfolgreich zum Kalender hinzugefügt",
+  "class_added_to_calendar": "Klasse erfolgreich  zu Ihrem Hauptkalender hinzugefügt",
   "success": "Erfolg",
   "error": "Fehler",
   "calendar_permission_denied": "Kalenderberechtigung verweigert. Bitte aktivieren Sie die Kalenderberechtigungen in den Einstellungen Ihres Geräts, um Klassen zum Kalender hinzuzufügen.",
   "calendar_not_found": "Kalender nicht gefunden. Bitte stellen Sie sicher, dass Sie eine Kalender-App auf Ihrem Gerät installiert haben, um Klassen zum Kalender hinzuzufügen.",
   "calendar_add_failed": "Die Klasse konnte nicht zum Kalender hinzugefügt werden. Bitte versuchen Sie es später erneut.",
-  "class_calendar_title": "{{topic}} Klasse für {{student}}"
+  "class_calendar_title": "{{topic}} Klasse für {{student}}",
+  "set_to_paid": "Als bezahlt markieren",
+  "set_to_not_paid": "Als nicht bezahlt markieren"
 }

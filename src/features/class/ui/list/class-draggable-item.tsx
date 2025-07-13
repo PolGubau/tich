@@ -96,11 +96,14 @@ export const ClassDraggableItem = ({ isPaid, classData, onReload, classOptions }
       [0, -SWIPE_THRESHOLD],
       [0, 1],
     )
+
     const max = Math.min(opacity, 1)
 
     return {
       opacity,
-      transform: [{ scale: max }],
+      transform: [{
+        scale: max,
+      }],
       right: 20,
     }
   })
@@ -145,7 +148,7 @@ export const ClassDraggableItem = ({ isPaid, classData, onReload, classOptions }
         <Animated.View style={[styles.cornerContent, rightIconStyle]}>
           <Feather name={isPaid ? 'x' : 'check'} size={17} color={isDark ? "#ffffff80" : "#00000080"} />
 
-          <Text>{isPaid ? 'Set to unpaid' : 'Set to paid'}</Text>
+          <Text>{isPaid ? t("set_to_not_paid") : t("set_to_paid")}</Text>
 
         </Animated.View>
       </Animated.View>

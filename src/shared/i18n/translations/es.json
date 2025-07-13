@@ -62,10 +62,12 @@
   "who_is_this_class_for": "¿Para quién es esta clase?",
   "yesterday": "ayer",
   "add_to_calendar": "Añadir al calendario",
-  "class_added_to_calendar": "Clase añadida al calendario con éxito",
+  "class_added_to_calendar": "Clase añadida con éxito a tu calendario principal.",
   "success": "Éxito",
   "error": "Error",
   "calendar_permission_denied": "Permiso de calendario denegado. Por favor,habilita los permisos de calendario en la configuración de tu dispositivo para añadir clases al calendario.",
   "calendar_not_found": "Calendario no encontrado. Por favor, asegúrate de tener una aplicación de calendario instalada en tu dispositivo para añadir clases al calendario.",
-  "calendar_add_failed": "No se pudo añadir la clase al calendario. Por favor, inténtalo de nuevo más tarde."
+  "calendar_add_failed": "No se pudo añadir la clase al calendario. Por favor, inténtalo de nuevo más tarde.",
+  "set_to_paid": "Marcar como pagado",
+  "set_to_not_paid": "Marcar como no pagado"
 }

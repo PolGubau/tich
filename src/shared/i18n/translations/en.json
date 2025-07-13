@@ -60,13 +60,15 @@
   "who_is_this_class_for": "Who is this class for?",
   "yesterday": "yesterday",
   "add_to_calendar": "Add to calendar",
-  "class_added_to_calendar": "Class successfully added to calendar",
+  "class_added_to_calendar": "Class successfully added to your main calendar",
   "success": "Success",
   "classes_done_amount": {
     "zero": "No classes made",
     "one": "{{count}} class made",
     "other": "{{count}} classes made"
   },
-  "class_calendar_title": "{{topic}} class for {{student}}"
-  
+  "class_calendar_title": "{{topic}} class for {{student}}",
+  "set_to_paid": "Set to paid",
+  "set_to_not_paid": "Set to not paid"
+
 }

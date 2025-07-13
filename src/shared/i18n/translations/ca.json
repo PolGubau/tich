@@ -62,10 +62,12 @@
   "who_is_this_class_for": "Per a qui és aquesta classe?",
   "yesterday": "ahir",
   "add_to_calendar": "Afegeix al calendari",
-  "class_added_to_calendar": "Classe afegida al calendari amb èxit",
+  "class_added_to_calendar": "Classe afegida amb èxit al calendari principal.",
   "success": "Èxit",
   "error": "Error",
   "calendar_permission_denied": "Permís de calendari denegat. Si us plau, habilita els permisos de calendari a la configuració del teu dispositiu per afegir classes al calendari.",
   "calendar_not_found": "Calendari no trobat. Si us plau, assegura't que tens una aplicació de calendari instal·lada al teu dispositiu per afegir classes al calendari.",
-  "calendar_add_failed": "No s'ha pogut afegir la classe al calendari. Si us plau, intenta-ho de nou més tard."
+  "calendar_add_failed": "No s'ha pogut afegir la classe al calendari. Si us plau, intenta-ho de nou més tard.",
+  "set_to_paid": "Marcar com pagat",
+  "set_to_not_paid": "Marcar com no pagat"
 }
