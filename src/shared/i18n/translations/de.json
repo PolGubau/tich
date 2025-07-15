@@ -69,5 +69,7 @@
   "calendar_add_failed": "Die Klasse konnte nicht zum Kalender hinzugefügt werden. Bitte versuchen Sie es später erneut.",
   "class_calendar_title": "{{topic}} Klasse für {{student}}",
   "set_to_paid": "Als bezahlt markieren",
-  "set_to_not_paid": "Als nicht bezahlt markieren"
+  "set_to_not_paid": "Als nicht bezahlt markieren",
+  "authenticate_to_delete": "Authentifizieren zum Löschen",
+  "use_passcode": "Verwende den Passcode"
 }

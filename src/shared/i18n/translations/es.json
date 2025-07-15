@@ -69,5 +69,7 @@
   "calendar_not_found": "Calendario no encontrado. Por favor, asegúrate de tener una aplicación de calendario instalada en tu dispositivo para añadir clases al calendario.",
   "calendar_add_failed": "No se pudo añadir la clase al calendario. Por favor, inténtalo de nuevo más tarde.",
   "set_to_paid": "Marcar como pagado",
-  "set_to_not_paid": "Marcar como no pagado"
+  "set_to_not_paid": "Marcar como no pagado",
+  "authenticate_to_delete": "Verifica tu identidad para poder eliminar",
+  "use_passcode": "Usar código de acceso"
 }

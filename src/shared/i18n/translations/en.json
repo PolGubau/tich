@@ -69,6 +69,7 @@
   },
   "class_calendar_title": "{{topic}} class for {{student}}",
   "set_to_paid": "Set to paid",
-  "set_to_not_paid": "Set to not paid"
-
+  "set_to_not_paid": "Set to not paid",
+  "authenticate_to_delete": "Authenticate to delete",
+  "use_passcode": "Use passcode"
 }

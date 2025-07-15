@@ -38,6 +38,12 @@
           "calendarPermission": "Can we add your classes to your calendar? This is optional, but it helps you keep track of your classes."
         }
       ],
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow $(PRODUCT_NAME) to use Face ID to confirm your actions? This is optional, but it helps you keep your data secure."
+        }
+      ],
       "expo-localization",
       [
         "expo-image-picker",

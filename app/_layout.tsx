@@ -1,95 +1,77 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { DATABASE_NAME } from 'db/utils';
-import { drizzle } from 'drizzle-orm/expo-sqlite';
-import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { openDatabaseSync, SQLiteProvider } from 'expo-sqlite';
-import { StatusBar } from 'expo-status-bar';
-import { Suspense, useEffect } from 'react';
-import { ActivityIndicator, Text } from 'react-native';
-import 'react-native-gesture-handler';
-import 'react-native-reanimated';
-import * as schema from "~/../db/schema";
-import migrations from '~/../drizzle/migrations';
-import { ErrorBoundary } from '~/shared/components/ErrorBoundary';
-import { useColorScheme } from '~/shared/hooks/useColorScheme';
-import { MainLayout } from '~/shared/layouts/main-layout';
-import "~/shared/styles/global.css";
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
+import { DATABASE_NAME } from 'db/utils'
+import { drizzle } from 'drizzle-orm/expo-sqlite'
+import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
+import { useFonts } from 'expo-font'
+import { Stack } from 'expo-router'
+import * as SplashScreen from 'expo-splash-screen'
+import { openDatabaseSync, SQLiteProvider } from 'expo-sqlite'
+import { StatusBar } from 'expo-status-bar'
+import { Suspense, useEffect } from 'react'
+import { ActivityIndicator, View } from 'react-native'
+import 'react-native-gesture-handler'
+import 'react-native-reanimated'
 
+import * as schema from '~/../db/schema'
+import migrations from '~/../drizzle/migrations'
+import { ErrorBoundary } from '~/shared/components/ErrorBoundary'
+import { Text } from '~/shared/components/Text'
+import { useColorScheme } from '~/shared/hooks/useColorScheme'
+import { MainLayout } from '~/shared/layouts/main-layout'
+import '~/shared/styles/global.css'
 
-ErrorUtils.setGlobalHandler((error, isFatal) => {
-  console.log('Global error handler:', error, isFatal);
-  // Aquí puedes mostrar UI alternativa o reportar a un servicio
-});
-SplashScreen.preventAutoHideAsync();
-
+// Splash control
+SplashScreen.preventAutoHideAsync()
 
 const expoDb = openDatabaseSync(DATABASE_NAME)
+const db = drizzle(expoDb, { schema })
+
 export default function RootLayout() {
+  const colorScheme = useColorScheme()
+  const theme = colorScheme === 'dark' ? DarkTheme : DefaultTheme
 
+  const [fontsLoaded, fontError] = useFonts({
+    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf')
+  })
 
-  const db = drizzle(expoDb, { schema });
-  const colorScheme = useColorScheme();
-
-
-  const { success, error: dbError } = useMigrations(db, migrations);
-
-
-  // const colorScheme = useColorScheme();
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+  const { success, error: dbError } = useMigrations(db, migrations)
 
   useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
+    if (fontsLoaded || fontError) {
+      SplashScreen.hideAsync()
     }
-  }, [loaded, error]);
+  }, [fontsLoaded, fontError])
 
-  if (!loaded && !error) {
-    return null;
-  }
+  const FullScreenLoader = (
+    <View className="flex-1 items-center justify-center bg-background dark:bg-background-dark pt-20">
+      <ActivityIndicator size="large" />
+    </View>
+  )
 
-  if (dbError) {
-    return (
-      <MainLayout>
-        <Text>Migration error: {dbError.message}</Text>
-      </MainLayout>
-    );
-  }
-  if (!success) {
-    return (
-      <MainLayout>
-        <Text>Migration is in progress...</Text>
-      </MainLayout>
-    );
-  }
+  if (!fontsLoaded && !fontError) return FullScreenLoader
+  if (dbError) return <MainLayout><Text>Migration error: {dbError.message}</Text></MainLayout>
+  if (!success) return <MainLayout><Text>Migration is in progress...</Text></MainLayout>
 
-  return (<Suspense fallback={<ActivityIndicator size={"large"} />}>
-    <ErrorBoundary>
-
-      <SQLiteProvider
-        databaseName={DATABASE_NAME}
-        useSuspense
-        options={{ enableChangeListener: true }}
-      >
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-
-          <Stack screenOptions={{
-            animation: "fade"
-          }}>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="class" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-          <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-
-        </ThemeProvider>
-      </SQLiteProvider>
-    </ErrorBoundary>
-
-  </Suspense>
-  );
+  return (
+    <Suspense fallback={FullScreenLoader}>
+      <ErrorBoundary>
+        <SQLiteProvider
+          databaseName={DATABASE_NAME}
+          useSuspense
+          options={{ enableChangeListener: true }}
+        >
+          <ThemeProvider value={theme}>
+            <View className="flex-1 bg-background dark:bg-background-dark">
+              <Stack screenOptions={{ animation: 'fade' }}>
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen name="class" options={{ headerShown: false }} />
+                <Stack.Screen name="+not-found" />
+              </Stack>
+              <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+            </View>
+          </ThemeProvider>
+        </SQLiteProvider>
+      </ErrorBoundary>
+    </Suspense>
+  )
 }

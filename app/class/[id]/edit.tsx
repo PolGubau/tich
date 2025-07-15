@@ -47,19 +47,12 @@ export default function CreateClass() {
 
 
   if (!data) {
-    return (
-      <>
-        <Stack.Screen
-          options={{
-            title: t("loading")
-          }}
-        />
-        <View className='flex-1 items-center mt-28'>
-          <ActivityIndicator size="large" />
-        </View>
-      </>
-    )
+    return (<View className="flex-1 items-center justify-center bg-background dark:bg-background-dark">
+      <Stack.Screen options={{ title: t("loading") }} />
+      <ActivityIndicator size="large" />
+    </View>)
   }
+
 
 
   const handleUpdate = (editableValues: ClassCreatePrimitive) => {

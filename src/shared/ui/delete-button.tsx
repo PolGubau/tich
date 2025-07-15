@@ -1,9 +1,11 @@
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons"
 import { impactAsync, ImpactFeedbackStyle } from "expo-haptics"
+import * as LocalAuthentication from 'expo-local-authentication'
 import { Alert, Pressable } from "react-native"
 import { Text } from "../components/Text"
 import { t } from "../i18n/i18n"
 import { TranslationKeys } from "../i18n/i18n-types"
+
 
 type DeleteButtonProps = {
   onDelete: () => void
@@ -27,10 +29,33 @@ export function DeleteButton({ onDelete, alertMessages = {
   const confirmDelete = () => {
     Alert.alert(
       t(title),
-      t(message) || "¿Seguro que quieres borrar este estudiante? Esta acción no se puede deshacer.",
+      t(message),
       [
         { text: t(cancel), style: "cancel" },
-        { text: t(confirm), style: "destructive", onPress: onDelete },
+        {
+          text: t(confirm),
+          style: "destructive",
+          onPress: async () => {
+            const hasHardware = await LocalAuthentication.hasHardwareAsync()
+            const isEnrolled = await LocalAuthentication.isEnrolledAsync()
+
+            if (!hasHardware || !isEnrolled) {
+              onDelete()
+            }
+
+            const result = await LocalAuthentication.authenticateAsync({
+              promptMessage: t("authenticate_to_delete"),
+              cancelLabel: t("cancel"),
+              fallbackLabel: t("use_passcode"),
+              disableDeviceFallback: false,
+              requireConfirmation: true
+            })
+
+            if (result.success) {
+              onDelete()
+            }
+          }
+        }
       ],
       { cancelable: true }
     )

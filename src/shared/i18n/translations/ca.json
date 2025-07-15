@@ -69,5 +69,7 @@
   "calendar_not_found": "Calendari no trobat. Si us plau, assegura't que tens una aplicació de calendari instal·lada al teu dispositiu per afegir classes al calendari.",
   "calendar_add_failed": "No s'ha pogut afegir la classe al calendari. Si us plau, intenta-ho de nou més tard.",
   "set_to_paid": "Marcar com pagat",
-  "set_to_not_paid": "Marcar com no pagat"
+  "set_to_not_paid": "Marcar com no pagat",
+  "authenticate_to_delete": "Verifica la teva identitat per eliminar",
+  "use_passcode": "Utilitza el codi d'accés"
 }

@@ -9,7 +9,6 @@ import Chip from '~/features/student/ui/chips/chip'
 import { StudentChipLink } from '~/features/student/ui/chips/student-chip'
 import { ErrorBoundary } from '~/shared/components/ErrorBoundary'
 import { Text } from '~/shared/components/Text'
-import { useColorScheme } from '~/shared/hooks/useColorScheme'
 import { t } from '~/shared/i18n/i18n'
 import { MainLayout } from '~/shared/layouts/main-layout'
 import { DeleteButton } from '~/shared/ui/delete-button'
@@ -22,7 +21,6 @@ export default function CreateClass() {
     throw new Error("Invalid class ID")
   }
 
-  const theme = useColorScheme()
 
   const classId = Number(id)
 
@@ -40,16 +38,10 @@ export default function CreateClass() {
 
 
   if (!data && status === "loading") {
-    return <View>
-      <Stack.Screen
-        options={{
-          title: t("loading"),
-        }}
-      />
-      <View className='flex-1 items-center mt-28'>
-        <ActivityIndicator size="large" />
-      </View>
-    </View>
+    return (<View className="flex-1 items-center justify-center bg-background dark:bg-background-dark">
+      <Stack.Screen options={{ title: t("loading") }} />
+      <ActivityIndicator size="large" />
+    </View>)
   }
 
   if (!data || error) {

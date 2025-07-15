@@ -94,6 +94,8 @@ Includes a date-time selector for easy scheduling.
 
 ![Date Select](./assets/images/date_select.webp)
 
+From the class details screen, you can also add the class to your device calendar.
+
  
 ---
 
@@ -105,14 +107,6 @@ Includes a date-time selector for easy scheduling.
 - i18n with auto-detection
 - Native dark mode support
 
----
-
-## 🚀 Roadmap
-
-- Calendar integration (iOS/Android)
-- Payment tracking and reminders
-- CSV export
-- Desktop/web companion
 
 ---
 
@@ -122,6 +116,11 @@ MIT
 
 
 ### Developer notes
+
+This project is built with Expo and React Native.
+It uses nativewind for styling, has dark mode support, and includes i18n for multiple languages (es, ca, de, en).
+
+
 
 Prod builds guide: https://docs.expo.dev/guides/local-app-production/
 Eas submit android: https://github.com/expo/fyi/blob/main/creating-google-service-account.md
