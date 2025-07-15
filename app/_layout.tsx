@@ -24,9 +24,9 @@ import '~/shared/styles/global.css'
 SplashScreen.preventAutoHideAsync()
 
 const expoDb = openDatabaseSync(DATABASE_NAME)
-const db = drizzle(expoDb, { schema })
 
 export default function RootLayout() {
+  const db = drizzle(expoDb, { schema })
   const colorScheme = useColorScheme()
   const theme = colorScheme === 'dark' ? DarkTheme : DefaultTheme
 
