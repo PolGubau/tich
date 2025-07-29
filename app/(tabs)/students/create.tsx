@@ -37,16 +37,16 @@ export default function CreateStudentScreen() {
         }}
       />
 
-      <View className='flex flex-row items-center gap-2 my-4'>
-      <Link asChild href="./modal" className=''>
+
+      <StudentForm initialValues={initialData} onSubmit={create} isLoading={status === 'loading'} />
+      <View className='flex flex-row items-center gap-2 my-4 border-t pt-4 border-neutral-500/50 justify-center'>
+      <Link asChild href="./modal" className='' replace>
         <Pressable android_ripple={{ color: "#dddddd50" }} className='p-3 px-4 bg-neutral-500/30 flex gap-2 items-center flex-row rounded-xl w-fit'>
               <MaterialIcons name="people" size={18} color={theme === 'dark' ? 'white' : 'black'} />
             <Text>{t("prefill_with_contact")}</Text>
         </Pressable>
       </Link>
       </View> 
-
-      <StudentForm initialValues={initialData} onSubmit={create} isLoading={status === 'loading'} />
     </MainLayout>
   )
 }

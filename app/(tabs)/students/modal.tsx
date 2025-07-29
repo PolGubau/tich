@@ -1,5 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { Link, useNavigation } from 'expo-router';
+import { Link } from 'expo-router';
 import { Pressable, StyleSheet } from 'react-native';
 import Animated, { FadeIn, SlideInDown } from 'react-native-reanimated';
 import ContactList from '~/features/student/ui/contact-list/contact-list';
@@ -17,7 +17,7 @@ export default function Modal() {
         alignItems: 'center',
       }}
     >
-         <Link href={'./create'} asChild>
+         <Link href={'./create'} asChild replace>
       <Pressable style={StyleSheet.absoluteFill} />
       </Link>
       <Animated.View
