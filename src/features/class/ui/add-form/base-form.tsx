@@ -105,17 +105,35 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit = 
           maxLength={500}
 
         />
-        <Text className="font-semibold mb-1">{t("price")} *</Text>
-        <TextInput
-          value={price.toString()}
-          onChangeText={text => {
-            // Opcional: filtrar solo dígitos
-            const numericText = text.replace(/[^0-9]/g, "")
-            setPrice(Number(numericText))
-          }}
-          keyboardType="numeric"
-          placeholder={t("price_placeholder")}
-        />
+        <View className='flex-row items-center mb-4 gap-4'>
+          <View className='flex flex-col flex-1'>
+            <Text type='defaultSemiBold'>{t("price")} *</Text>
+            <TextInput className='w-full'
+              value={price.toString()}
+              onChangeText={text => {
+                // Opcional: filtrar solo dígitos
+                const numericText = text.replace(/[^0-9]/g, "")
+                setPrice(Number(numericText))
+              }}
+              keyboardType="numeric"
+              placeholder={t("price_placeholder")}
+            />
+          </View>
+          <View className='flex flex-col gap-1 flex-1'>
+            <Text type='defaultSemiBold'>{t("duration")} </Text>
+            <TextInput className='w-full'
+              value={duration.toString()}
+              onChangeText={text => {
+                // Opcional: filtrar solo dígitos
+                const numericText = text.replace(/[^0-9]/g, "")
+                setDuration(Number(numericText))
+              }}
+              keyboardType="numeric"
+              placeholder={t("duration_placeholder")}
+            />
+          </View>
+        </View>
+
 
         <View className="flex-row items-center justify-between mb-4">
           <Text className="font-semibold mb-1">{t("is_already_paid")}?</Text>
@@ -126,27 +144,21 @@ export function BaseClassForm({ initialValues, onSubmit, isLoading, canSubmit = 
           />
         </View>
 
-        <Text className="font-semibold mb-1">{t("duration")} </Text>
-        <TextInput
-          value={duration.toString()}
-          onChangeText={text => {
-            // Opcional: filtrar solo dígitos
-            const numericText = text.replace(/[^0-9]/g, "")
-            setDuration(Number(numericText))
-          }}
-          keyboardType="numeric"
-          placeholder={t("duration_placeholder")}
-        />
-        <DateInput
-          label={t("date_of_class")}
-          initialDate={new Date(date)}
-          onDateChange={(date) => setDate(date.toISOString())}
-        />
-        <TimeInput
-          label={t("starting_time")}
-          initialDate={new Date(startingTime)}
-          onDateChange={(date) => setStartingTime(date.toISOString())}
-        />
+        <View className="flex-row gap-4">
+
+          <DateInput
+            className='flex-1'
+            label={t("date_of_class")}
+            initialDate={new Date(date)}
+            onDateChange={(date) => setDate(date.toISOString())}
+          />
+          <TimeInput
+            className='flex-1'
+            label={t("starting_time")}
+            initialDate={new Date(startingTime)}
+            onDateChange={(date) => setStartingTime(date.toISOString())}
+          />
+        </View>
 
 
 
