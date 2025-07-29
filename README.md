@@ -62,7 +62,8 @@ Filterable list of all students with:
 - Email
 - Number of classes
 
-Includes a button to add a new student.
+Includes a button to add a new student. 
+New students can be prefilled with contact details from your device's address book.
 
 ![Students](./assets/images/create_student.webp)
 
