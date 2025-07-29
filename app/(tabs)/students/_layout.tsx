@@ -9,10 +9,19 @@ export default function Layout() {
       animation: "fade",
       headerShadowVisible: false,
     }}>
+      
       <Stack.Screen name="list" options={{
         headerTitle: t("students"),
       }} />
       <Stack.Screen name="[id]" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="modal"
+        options={{
+          presentation: 'modal',
+          animation: 'fade',
+          headerShown: false,
+        }}
+      />
     </Stack>
 
   );

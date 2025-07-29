@@ -15,9 +15,6 @@ export default function StudentsScreen() {
   const theme = useColorScheme();
 
 
-
-
-
   const isInitialLoading = status === 'loading' && students.length === 0
   const isRefreshing = status === 'loading' && students.length > 0
 

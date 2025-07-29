@@ -10,6 +10,10 @@
   "dashboard": "Dashboard",
   "date_of_class": "Datum der Klasse",
   "date": "Datum",
+  "all": "Alle",
+  "contacts": "Kontakte",
+  "prefill_with_contact": "Mit Kontakt vorausfüllen",
+  "select_contact": "Wähle einen Kontakt aus, um ihn als Schüler hinzuzufügen",
   "days_ago": "vor {{count}} Tagen",
   "delete_confirmation": "Sind Sie sicher, dass Sie diese Klasse löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
   "delete": "Löschen",
@@ -17,6 +21,7 @@
   "duration_placeholder": "Dauer der Klasse (in Minuten)",
   "duration": "Dauer (in Minuten)",
   "earnings": "Einnahmen",
+  "favorites": "Favoriten",
   "edit": "Bearbeiten",
   "email_placeholder": "E-Mail",
   "classes_done_amount": {
@@ -24,6 +29,7 @@
     "one": "{{count}} Klasse abgehalten",
     "other": "{{count}} Klassen abgehalten"
   },
+  "search_contact": "Kontakt suchen",
   "email": "E-Mail",
   "hours_taught": "Unterrichtsstunden",
   "in": "in",

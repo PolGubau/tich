@@ -33,6 +33,12 @@
     "plugins": [
       "expo-router",
       [
+        "expo-contacts",
+        {
+          "contactsPermission": "Allow $(PRODUCT_NAME) to access your contacts."
+        }
+      ],
+      [
         "expo-calendar",
         {
           "calendarPermission": "Can we add your classes to your calendar? This is optional, but it helps you keep track of your classes."
