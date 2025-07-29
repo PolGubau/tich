@@ -3,6 +3,7 @@ import { useClasses } from '~/features/class/model/useClasses';
 import { ClassList } from '~/features/class/ui/list/class-list';
 import { useStudents } from '~/features/student/model/use-students';
 import { Text } from '~/shared/components/Text';
+import FeedbackMessage from '~/shared/components/ui/feedback-message';
 import { t } from '~/shared/i18n/i18n';
 import { MainLayout } from '~/shared/layouts/main-layout';
 
@@ -27,6 +28,7 @@ export default function DashboardScreen() {
     <>
 
       <MainLayout className='px-0 h-full relative gap-6'>
+        <FeedbackMessage />
         <View className="flex-row flex-wrap -m-2 px-2">
           {dashboardItems.map((item, idx) => (
             <View key={idx} className="w-1/2 p-2">

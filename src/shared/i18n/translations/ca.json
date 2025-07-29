@@ -78,5 +78,6 @@
   "set_to_paid": "Marcar com pagat",
   "set_to_not_paid": "Marcar com no pagat",
   "authenticate_to_delete": "Verifica la teva identitat per eliminar",
-  "use_passcode": "Utilitza el codi d'accés"
+  "use_passcode": "Utilitza el codi d'accés",
+  "feedback_message": "¿Te gusta la app? Escríbenos a tactilweb@gmail.com"
 }

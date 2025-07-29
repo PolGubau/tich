@@ -78,5 +78,6 @@
   "set_to_paid": "Als bezahlt markieren",
   "set_to_not_paid": "Als nicht bezahlt markieren",
   "authenticate_to_delete": "Authentifizieren zum Löschen",
-  "use_passcode": "Verwende den Passcode"
+  "use_passcode": "Verwende den Passcode",
+  "feedback_message": "Gefällt Ihnen die App? Schreiben Sie uns an tactilweb@gmail.com"
 }
