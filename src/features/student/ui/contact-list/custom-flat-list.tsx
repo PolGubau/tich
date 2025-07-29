@@ -40,7 +40,7 @@ export function CustomFlatList<T>({
   ] = useCustomFlatList();
 
   return (
-    <SafeAreaView edges={["bottom"]} style={style} className="flex-1 overflow-hidden bg-neutral-300 dark:bg-neutral-700">
+    <SafeAreaView edges={["bottom"]} style={style} className="flex-1 overflow-hidden bg-neutral-200 dark:bg-neutral-700">
       <Animated.View  // <-- Sticky Component
         style={styles.stickyElement}
         onLayout={onLayoutStickyElement}

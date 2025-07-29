@@ -1,6 +1,6 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import * as ExpoImage from 'expo-image-picker';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Button,
@@ -24,10 +24,20 @@ interface Props {
 }
 
 export const StudentForm = ({ initialValues, onSubmit, isLoading }: Props) => {
+  
   const [name, setName] = useState(initialValues.name)
   const [email, setEmail] = useState(initialValues.email)
   const [notes, setNotes] = useState(initialValues.notes ?? "")
   const [avatarUrl, setAvatarUrl] = useState(initialValues.avatarUrl ?? "")
+
+  useEffect(() => {
+    setName(initialValues.name)
+    setEmail(initialValues.email)
+    setNotes(initialValues.notes ?? "")
+    setAvatarUrl(initialValues.avatarUrl ?? "")
+  }
+    , [initialValues])
+  
 
   const [error, setError] = useState<string | null>(null)
   const handleSubmit = () => {

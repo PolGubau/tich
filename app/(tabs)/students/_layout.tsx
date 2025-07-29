@@ -17,8 +17,7 @@ export default function Layout() {
       <Stack.Screen
         name="modal"
         options={{
-          presentation: 'modal',
-          animation: 'fade',
+          presentation: 'transparentModal',
           headerShown: false,
         }}
       />

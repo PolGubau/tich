@@ -11,7 +11,7 @@ import { CustomFlatList } from './custom-flat-list';
 
 
 
-const useGetContacts = () => {
+export const useGetContacts = () => {
   const [contacts, setContacts] = useState<Contacts.Contact[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -67,34 +67,34 @@ export default function ContactList() {
     indicatorStyle={theme === 'dark' ? 'white' : 'black'}
     refreshing={loading}
     data={filteredContacts} 
-    renderItem={({ item }) => <ContactListItem contact={item} />}
+    renderItem={({ item }) => <ContactListItem contact={item} onSelect={()=>{}} />}
 
     HeaderComponent={
-      <View className='p-4 pt-6 bg-neutral-200 dark:bg-neutral-800 flex flex-col gap-1'>
+      <View className='p-4 pt-6 bg-neutral-50 dark:bg-neutral-800 flex flex-col gap-1'>
         <Text type='subtitle'>{t("contacts")}</Text>
         <Text className='opacity-70' type='small'>{t("select_contact")}</Text>
       </View>
     }
 
     StickyElementComponent={
-      <View className='p-3 px-4 w-full flex flex-row gap-2 items-center bg-neutral-200 dark:bg-neutral-800 border-b border-neutral-500/50'>
+      <View className='p-3 px-4 w-full flex flex-row gap-2 items-center bg-neutral-50 dark:bg-neutral-800'>
       <MaterialIcons name="search" size={20} color={theme === 'dark' ? 'white' : 'black'} />
       <TextInput placeholder={t("search_contact")}  className='w-full placeholder:text-neutral-500 text-black dark:text-white' value={query} onChangeText={setQuery}  />
       </View>
     }
     
-    TopListElementComponent={<View className='p-2 flex flex-row gap-2 items-center bg-neutral-300 dark:bg-neutral-700 pt-20'>
+    TopListElementComponent={<View className='p-2 flex flex-row gap-2 items-center bg-neutral-200 dark:bg-neutral-700 pt-20'>
       
       <Pressable android_ripple={{ color: "#dddddd50" }} onPressIn={() => {
         setQuery('');
       }}>
-        <Text className='rounded-lg py-1 px-3 bg-neutral-500/50'>
+        <Text className='rounded-lg py-1 px-3 bg-neutral-500/20 dark:bg-neutral-500/50'>
           {t("all")}
         </Text>
       </Pressable>
       <Pressable android_ripple={{ color: "#dddddd50" }} onPressIn={() => {
         setOnlyFavs(!onlyFavs);
-      }} className='rounded-lg py-1 flex items-center gap-1 flex-row px-3 bg-neutral-500/50'>
+      }} className='rounded-lg py-1 flex items-center gap-1 flex-row px-3 bg-neutral-500/20 dark:bg-neutral-500/50'>
         <MaterialIcons name="star" size={16} color={onlyFavs ? "yellow" : "gray"} />
         <Text>{t("favorites")}</Text>
        </Pressable>

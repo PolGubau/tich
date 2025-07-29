@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 export function MainLayout({ children, className }: PropsWithChildren<{ className?: string }>) {
   return (
-    <View className={`flex-1 py-6 pb-16 ${className}`}>
+    <View className={`flex-1 py-6 ${className}`}>
       {children}
     </View>
   )
@@ -14,7 +14,7 @@ export function MainLayout({ children, className }: PropsWithChildren<{ classNam
 
 export function SafeMainLayout({ children }: PropsWithChildren) {
   return (
-    <SafeAreaView>
+    <SafeAreaView className='flex-1'>
       <MainLayout>{children}</MainLayout>
     </SafeAreaView>
   )
