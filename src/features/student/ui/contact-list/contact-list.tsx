@@ -33,7 +33,7 @@ export const useGetContacts = () => {
   return { contacts, loading };
 }
 
-const filterContacts = (contacts: Contacts.Contact[], query: string, onlyFavs: boolean) => {
+export const filterContacts = (contacts: Contacts.Contact[], query: string, onlyFavs: boolean) => {
   let filteredContacts = contacts;
 
   const lowerQuery = query.toLowerCase();
