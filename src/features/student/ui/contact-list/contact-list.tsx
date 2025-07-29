@@ -24,7 +24,8 @@ export const useGetContacts = () => {
         });
 
         if (response.data.length > 0) {
-          setContacts(response.data);
+          const contacts = response.data.sort((a, b) => a.name?.localeCompare(b.name ?? '') || 0);
+          setContacts(contacts);
         }
       }
       setLoading(false);
@@ -46,13 +47,13 @@ export const filterContacts = (contacts: Contacts.Contact[], query: string, only
   if (onlyFavs) {
     filteredContacts = filteredContacts.filter(contact => contact.isFavorite);
   }
- 
+
 
   return filteredContacts;
 }
 
 export default function ContactList() {
-  const theme  = useColorScheme();
+  const theme = useColorScheme();
   const { contacts, loading } = useGetContacts();
   const [filteredContacts, setFilteredContacts] = useState<Contacts.Contact[]>(contacts);
   const [query, setQuery] = useState('');
@@ -60,14 +61,14 @@ export default function ContactList() {
 
   useEffect(() => {
     setFilteredContacts(filterContacts(contacts, query, onlyFavs));
-   }
-  , [contacts, query, onlyFavs]);
+  }
+    , [contacts, query, onlyFavs]);
 
   return (<CustomFlatList
     indicatorStyle={theme === 'dark' ? 'white' : 'black'}
     refreshing={loading}
-    data={filteredContacts} 
-    renderItem={({ item }) => <ContactListItem contact={item} onSelect={()=>{}} />}
+    data={filteredContacts}
+    renderItem={({ item }) => <ContactListItem contact={item} onSelect={() => { }} />}
 
     HeaderComponent={
       <View className='p-4 pt-6 bg-neutral-50 dark:bg-neutral-800 flex flex-col gap-1'>
@@ -78,13 +79,13 @@ export default function ContactList() {
 
     StickyElementComponent={
       <View className='p-3 px-4 w-full flex flex-row gap-2 items-center bg-neutral-50 dark:bg-neutral-800'>
-      <MaterialIcons name="search" size={20} color={theme === 'dark' ? 'white' : 'black'} />
-      <TextInput placeholder={t("search_contact")}  className='w-full placeholder:text-neutral-500 text-black dark:text-white' value={query} onChangeText={setQuery}  />
+        <MaterialIcons name="search" size={20} color={theme === 'dark' ? 'white' : 'black'} />
+        <TextInput placeholder={t("search_contact")} className='w-full placeholder:text-neutral-500 text-black dark:text-white' value={query} onChangeText={setQuery} />
       </View>
     }
-    
+
     TopListElementComponent={<View className='p-2 flex flex-row gap-2 items-center bg-neutral-200 dark:bg-neutral-700 pt-20'>
-      
+
       <Pressable android_ripple={{ color: "#dddddd50" }} onPressIn={() => {
         setQuery('');
       }}>
@@ -97,10 +98,9 @@ export default function ContactList() {
       }} className='rounded-lg py-1 flex items-center gap-1 flex-row px-3 bg-neutral-500/20 dark:bg-neutral-500/50'>
         <MaterialIcons name="star" size={16} color={onlyFavs ? "yellow" : "gray"} />
         <Text>{t("favorites")}</Text>
-       </Pressable>
-      </View>
-      }
+      </Pressable>
+    </View>
+    }
   />
   );
 }
-      

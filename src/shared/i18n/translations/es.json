@@ -23,6 +23,7 @@
   "duration_placeholder": "Duración de la clase (en minutos)",
   "duration": "Duración (en minutos)",
   "earnings": "Ganancias",
+  "no_email": "No cuenta con email",
   "edit": "Editar",
   "classes_done_amount": {
     "zero": "No se han realizado clases",

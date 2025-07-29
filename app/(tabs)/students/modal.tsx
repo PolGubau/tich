@@ -21,9 +21,6 @@ export default function Modal() {
         <Link href="./create" className='absolute top-4 right-4 rounded-full p-2 z-10'>
           <MaterialIcons name="close" size={24} color={theme==="dark" ? "white" : "black"} />
         </Link>
-
-
-      
         <ContactList />
       </Animated.View>
      </Animated.View>

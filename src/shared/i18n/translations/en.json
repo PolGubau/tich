@@ -23,6 +23,7 @@
   "duration": "Duration (In minutes)",
   "favorites": "Favorites",
   "earnings": "Earnings",
+  "no_email": "No email provided",
   "error": "Error",
   "calendar_permission_denied": "Calendar permission denied. Please enable calendar permissions in your device settings to add classes to the calendar.",
   "calendar_not_found": "Calendar not found. Please ensure you have a calendar app installed on your device to add classes to the calendar.",
